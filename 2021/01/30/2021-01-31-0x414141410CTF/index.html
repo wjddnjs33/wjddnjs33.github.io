@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="2021년 1월 26일 저녁에 Ainsetin님이 씨텝 같이 하자고 하셔서 31일까지 참여를 했었는데 많은 도움이 되지 못 한 거 같아 스스로 반성을 많이 한 대회입니다. 여튼 이번 대회에는 버스를 타서 14등을 했고, 솔브수가 그나마 적은 웹 3 문제의 Write Up을 작성해보겠습니다.   (Web) Special Order pt2 [490 pts]">
+    <meta name="description" content="2021년 1월 26일 저녁에 Ainsetin님이 씨텝 같이 하자고 하셔서 31일까지 참여를 했었는데 많은 도움이 되지 못 한 거 같아 스스로 반성을 많이 한 대회입니다. 여튼 이번 대회에는 버스를 타서 14등을 했고, 솔브수가 그나마 적은 웹 3 문제의 Write Up을 작성해보겠습니다.  &amp;#35; (Web) Special Order pt2 [490">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0x41414141 CTF Write Up">
 <meta property="og:url" content="http://example.com/2021/01/30/2021-01-31-0x414141410CTF/index.html">
 <meta property="og:site_name" content="Home">
-<meta property="og:description" content="2021년 1월 26일 저녁에 Ainsetin님이 씨텝 같이 하자고 하셔서 31일까지 참여를 했었는데 많은 도움이 되지 못 한 거 같아 스스로 반성을 많이 한 대회입니다. 여튼 이번 대회에는 버스를 타서 14등을 했고, 솔브수가 그나마 적은 웹 3 문제의 Write Up을 작성해보겠습니다.   (Web) Special Order pt2 [490 pts]">
+<meta property="og:description" content="2021년 1월 26일 저녁에 Ainsetin님이 씨텝 같이 하자고 하셔서 31일까지 참여를 했었는데 많은 도움이 되지 못 한 거 같아 스스로 반성을 많이 한 대회입니다. 여튼 이번 대회에는 버스를 타서 14등을 했고, 솔브수가 그나마 적은 웹 3 문제의 Write Up을 작성해보겠습니다.  &amp;#35; (Web) Special Order pt2 [490">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/team.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/Special%20Order%20pt2/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%207.45.25.png?raw=true">
@@ -22,8 +22,15 @@
 <meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/firstapp/3.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/firstapp/4.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/firstapp/5.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.18.53.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.19.08.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.20.31.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.20.31.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.21.54.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.22.06.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.23.01.png?raw=true">
 <meta property="article:published_time" content="2021-01-30T00:00:10.000Z">
-<meta property="article:modified_time" content="2021-01-31T12:44:22.706Z">
+<meta property="article:modified_time" content="2021-01-31T13:47:31.233Z">
 <meta property="article:author" content="Jeongwon Jo">
 <meta property="article:tag" content="SSRF">
 <meta property="article:tag" content="XXE">
@@ -118,7 +125,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Special-Order-pt2-490-pts"><span class="toc-number">1.</span> <span class="toc-text"> (Web) Special Order pt2 [490 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-firstapp-496-pts"><span class="toc-number">2.</span> <span class="toc-text"> (Web) firstapp [496 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-waffed-496-pts"><span class="toc-number">3.</span> <span class="toc-text"> (Web) waffed [496 pts]</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#35-Web-Special-Order-pt2-490-pts"><span class="toc-number">1.</span> <span class="toc-text">&amp;#35; (Web) Special Order pt2 [490 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#35-Web-firstapp-496-pts"><span class="toc-number">2.</span> <span class="toc-text">&amp;#35; (Web) firstapp [496 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#35-Web-waffed-496-pts"><span class="toc-number">3.</span> <span class="toc-text">&amp;#35; (Web) waffed [496 pts]</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -170,7 +177,7 @@
     <p><img src="https://github.com/wjddnjs33/image2/blob/main/0x41414141/team.png?raw=true"></p>
 <p>2021년 1월 26일 저녁에 <code>Ainsetin</code>님이 씨텝 같이 하자고 하셔서 31일까지 참여를 했었는데 많은 도움이 되지 못 한 거 같아 스스로 반성을 많이 한 대회입니다. 여튼 이번 대회에는 버스를 타서 14등을 했고, 솔브수가 그나마 적은 웹 3 문제의 Write Up을 작성해보겠습니다.<br></p>
 <hr>
-<h2 id="Web-Special-Order-pt2-490-pts"><a href="#Web-Special-Order-pt2-490-pts" class="headerlink" title=" (Web) Special Order pt2 [490 pts]"></a><span style="color:#21C587"></span> (Web) Special Order pt2 [490 pts]</h2><blockquote>
+<h2 id="35-Web-Special-Order-pt2-490-pts"><a href="#35-Web-Special-Order-pt2-490-pts" class="headerlink" title="&#35; (Web) Special Order pt2 [490 pts]"></a><span style="color:#21C587">&#35;</span> (Web) Special Order pt2 [490 pts]</h2><blockquote>
 <p>Special Order pt2 문제는 웹 애플리케이션 취약점을 찾고, OOB XXE를 이용해서 flag를 긁어오는 문제입니다.</p>
 </blockquote>
 <p><img src="https://github.com/wjddnjs33/image2/blob/main/0x41414141/Special%20Order%20pt2/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%207.45.25.png?raw=true"></p>
@@ -193,7 +200,7 @@
 <p>FLAG : flag{i7_1s_n0t_s0_bl1nd3721}</p>
 </blockquote>
 <hr>
-<h2 id="Web-firstapp-496-pts"><a href="#Web-firstapp-496-pts" class="headerlink" title=" (Web) firstapp [496 pts]"></a><span style="color:#21C587"></span> (Web) firstapp [496 pts]</h2><blockquote>
+<h2 id="35-Web-firstapp-496-pts"><a href="#35-Web-firstapp-496-pts" class="headerlink" title="&#35; (Web) firstapp [496 pts]"></a><span style="color:#21C587">&#35;</span> (Web) firstapp [496 pts]</h2><blockquote>
 <p>firstapp 문제는 SSRF 취약점을 이용해서 내부 서버에 있는 파일을 릭하는 문제입니다.<br></p>
 </blockquote>
 <p><img src="https://github.com/wjddnjs33/image2/blob/main/0x41414141/firstapp/1.png?raw=true"></p>
@@ -216,8 +223,28 @@
 <p>FLAG : flag{h0p3_y0u_l1ked_my_@pp5613}</p>
 </blockquote>
 <hr>
-<h2 id="Web-waffed-496-pts"><a href="#Web-waffed-496-pts" class="headerlink" title=" (Web) waffed [496 pts]"></a><span style="color:#21C587"></span> (Web) waffed [496 pts]</h2><blockquote>
-<p>서버가 닫힘.</p>
+<h2 id="35-Web-waffed-496-pts"><a href="#35-Web-waffed-496-pts" class="headerlink" title="&#35; (Web) waffed [496 pts]"></a><span style="color:#21C587">&#35;</span> (Web) waffed [496 pts]</h2><blockquote>
+<p>waffed 문제는 Cookie 변조와 LFI 취약점을 이용해서 flag를 가져오는 문제입니다.</p>
+</blockquote>
+<p><img src="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.18.53.png?raw=true"></p>
+<p>문제로 들어오면 <code>waffed</code> 사이트가 뜨는 것을 볼 수 있습니다. 해당 사이트는 각 코인마다 퍼센트지를 보여지는 사이트입니다.<br></p>
+<p><img src="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.19.08.png?raw=true"></p>
+<p><code>LEARN MORE</code> 버튼을 눌러보면 현재 선택한 코인의 퍼센트지를 그래프를 보여주고 있는 것을 볼 수 있고, 현재 코인 이름은 <code>price_feed</code> 쿠키에 저장이 되어 있습니다. 그리고 다른 코인의 그래프를 볼 수 있게 설정하는 기능도 있습니다. 그럼 한 번 다른 코인으로 바꾸는 요청을 잡고, 헤더를 확인해보겠습니다.<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Request</span><br><span class="line">GET &#x2F;changeFeed&#x2F;DAI HTTP&#x2F;1.1</span><br><span class="line">Host: 207.180.200.166:9090</span><br><span class="line">Cookie: session&#x3D;eyJsb2dnZWRfaW4iOnRydWUsInVzZXJuYW1lIjoiYXNkZmUifQ.YBaKbw.aHQ999GYFVmDPqp_8r4y-rxraOw</span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Response</span><br><span class="line">HTTP&#x2F;1.1 302 FOUND</span><br><span class="line">Server: nginx&#x2F;1.18.0 (Ubuntu)</span><br><span class="line">Date: Sun, 31 Jan 2021 13:19:56 GMT</span><br><span class="line">Content-Type: text&#x2F;html; charset&#x3D;utf-8</span><br><span class="line">Content-Length: 219</span><br><span class="line">Location: http:&#x2F;&#x2F;207.180.200.166:9090&#x2F;trade</span><br><span class="line">Connection: close</span><br><span class="line">Set-Cookie: price_feed&#x3D;REFJ; Path&#x3D;&#x2F;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE HTML PUBLIC &quot;-&#x2F;&#x2F;W3C&#x2F;&#x2F;DTD HTML 3.2 Final&#x2F;&#x2F;EN&quot;&gt;</span><br><span class="line">&lt;title&gt;Redirecting...&lt;&#x2F;title&gt;</span><br><span class="line">&lt;h1&gt;Redirecting...&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;p&gt;You should be redirected automatically to target URL: &lt;a href&#x3D;&quot;&#x2F;trade&quot;&gt;&#x2F;trade&lt;&#x2F;a&gt;.  If not click the link.</span><br></pre></td></tr></table></figure>
+<p>헤더를 보면 요청을 하면 <code>DAI</code>라는 코인으로 바꾸고, 바로 그래프가 있는 곳으로 리다이렉션 시켜주는 것을 볼 수 있습니다. 여기서 중요한 부분은 응답에 <code>Set-Cookie</code> 헤더를 보면 <code>price_feed</code>의 값으로 <code>REFJ</code>가 들어있는 것을 볼 수 있습니다. <code>REFJ</code>는 우리가 바꾼 코인의 이름(DAI)이 b64로 인코딩되어 들어간 것 입니다.<br></p>
+<p><img src="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.20.31.png?raw=true"></p>
+<p>즉, 서버에서는 b64로 해당 쿠키 값을 디코딩해서 사용한다는 것 입니다. 그래서 일단 SQL Injection을 시도해보기 위해서 페이로드를 b64 인코딩을 해줘서 보내주니 <code>WOOPS</code>만 뜨고 아무 일도 일어나지 않았습니다.<br></p>
+<p>하지만 여기서 <code>price_feed</code> 값으로 코인 이름을 바꿔서 코인에 대한 파일을 조회하는 거라면?이라고 생각을 했습니다. 그 이유는 코인마다 그래프도 다 다르기 때문에 모든 데이터를 각 코인의 파일로 관리하고 있을 거라는 생각이 들었습니다. 그래서 바로 LFI를 진행했고, 일단 <code>/etc/passwd</code>를 긁어오기를 시도했습니다.<br></p>
+<p><img src="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.20.31.png?raw=true"></p>
+<p>그래서 <code>/etc/passwd</code>를 b64로 인코딩해서 쿠키 값으로 설정하고, 새로 고침을 해주니 SQL Injection과 마찬가지로 <code>WOOPS</code>라고 뜨는 것을 볼 수 있습니다.<br></p>
+<p><img src="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.21.54.png?raw=true"></p>
+<p>하지만 현재 경로에서 해당 파일이 없어 <code>WOOPS</code>가 출력되는 걸 수도 있기 때문에 상위로 한 번 한 번 올라가며 모두 시도 해보았는데, 총 4번 올라가서 <code>../../../../etc/passwd</code>를 읽어보니 <code>WOOPS</code>가 뜨지 않고, 그래프가 있는 창으로 리다이렉션이 되었습니다. 그런데 이상한 점은 그래프는 있는데 그래프에 데이터가 존재하지 않았습니다.<br></p>
+<p><img src="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.22.06.png?raw=true"></p>
+<p>그래서 그래프의 소스 코드를 확인해보니 그래프를 만드는 JS 코드가 있었고, 그래프의 data 값으로 <code>/etc/passwd</code>의 값이 들어가 있는 것을 볼 수 있었습니다. 예상대로 각 코인의 데이터를 파일로 관리하고 있었습니다.</p>
+<p><img src="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.23.01.png?raw=true"></p>
+<p>앞에 모든 문제도 FLAG는 <code>flag.txt</code>에 있었기 때문에 이번 문제도 상위로 4번 올라가 <code>../../../../flag.txt</code>를 읽어주니 그래프의 data에 FLAG가 있는 것을 볼 수 있었습니다.<br></p>
+<blockquote>
+<p>flag{w@fs_r3@lly_d0_Suck8245}</p>
 </blockquote>
 <hr>
 
@@ -245,7 +272,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Special-Order-pt2-490-pts"><span class="toc-number">1.</span> <span class="toc-text"> (Web) Special Order pt2 [490 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-firstapp-496-pts"><span class="toc-number">2.</span> <span class="toc-text"> (Web) firstapp [496 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-waffed-496-pts"><span class="toc-number">3.</span> <span class="toc-text"> (Web) waffed [496 pts]</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#35-Web-Special-Order-pt2-490-pts"><span class="toc-number">1.</span> <span class="toc-text">&amp;#35; (Web) Special Order pt2 [490 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#35-Web-firstapp-496-pts"><span class="toc-number">2.</span> <span class="toc-text">&amp;#35; (Web) firstapp [496 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#35-Web-waffed-496-pts"><span class="toc-number">3.</span> <span class="toc-text">&amp;#35; (Web) waffed [496 pts]</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
