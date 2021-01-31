@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="2021년 1월 26일 저녁에 Ainsetin님이 씨텝 같이 하자고, 31일까지 참여를 했었는데 많은 도움이 되지 못 한 거 같아 스스로 반성을 많이 한 대회입니다. 여튼 이번 대회에는 버스를 타서 14등을 했고, 솔브수가 그나마 적은 3 문제의 Write Up을 작성해보겠습니다.  (Web) Special Order pt2 [490 pts] Specia">
+    <meta name="description" content="2021년 1월 26일 저녁에 Ainsetin님이 씨텝 같이 하자고 하셔서 31일까지 참여를 했었는데 많은 도움이 되지 못 한 거 같아 스스로 반성을 많이 한 대회입니다. 여튼 이번 대회에는 버스를 타서 14등을 했고, 솔브수가 그나마 적은 웹 3 문제의 Write Up을 작성해보겠습니다.  &amp;#35; (Web) Special Order pt2 [490">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0x41414141 CTF Write Up">
 <meta property="og:url" content="http://example.com/2021/01/30/2021-01-31-0x414141410CTF/index.html">
 <meta property="og:site_name" content="Home">
-<meta property="og:description" content="2021년 1월 26일 저녁에 Ainsetin님이 씨텝 같이 하자고, 31일까지 참여를 했었는데 많은 도움이 되지 못 한 거 같아 스스로 반성을 많이 한 대회입니다. 여튼 이번 대회에는 버스를 타서 14등을 했고, 솔브수가 그나마 적은 3 문제의 Write Up을 작성해보겠습니다.  (Web) Special Order pt2 [490 pts] Specia">
+<meta property="og:description" content="2021년 1월 26일 저녁에 Ainsetin님이 씨텝 같이 하자고 하셔서 31일까지 참여를 했었는데 많은 도움이 되지 못 한 거 같아 스스로 반성을 많이 한 대회입니다. 여튼 이번 대회에는 버스를 타서 14등을 했고, 솔브수가 그나마 적은 웹 3 문제의 Write Up을 작성해보겠습니다.  &amp;#35; (Web) Special Order pt2 [490">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/team.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/Special%20Order%20pt2/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%207.45.25.png?raw=true">
@@ -22,8 +22,8 @@
 <meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/firstapp/3.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/firstapp/4.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/firstapp/5.png?raw=true">
-<meta property="article:published_time" content="2021-01-30T00:00:03.000Z">
-<meta property="article:modified_time" content="2021-01-31T12:25:20.776Z">
+<meta property="article:published_time" content="2021-01-30T00:00:10.000Z">
+<meta property="article:modified_time" content="2021-01-31T12:37:55.551Z">
 <meta property="article:author" content="Jeongwon Jo">
 <meta property="article:tag" content="SSRF">
 <meta property="article:tag" content="XXE">
@@ -89,10 +89,8 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2021/01/30/2021-01-30-dctf/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
-        
-        <li><a class="icon" href="/2021/01/25/2021-01-25-pwn/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2021/01/30/2021-01-30-dctf/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -120,7 +118,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-Special-Order-pt2-490-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) Special Order pt2 [490 pts]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-firstapp-496-pts"><span class="toc-number">2.</span> <span class="toc-text">(Web) firstapp [496 pts]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-waffed-496-pts"><span class="toc-number">3.</span> <span class="toc-text">(Web) waffed [496 pts]</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#35-Web-Special-Order-pt2-490-pts"><span class="toc-number">1.</span> <span class="toc-text">&amp;#35; (Web) Special Order pt2 [490 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#35-Web-firstapp-496-pts"><span class="toc-number">2.</span> <span class="toc-text">&amp;#35; (Web) firstapp [496 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#35-Web-waffed-496-pts"><span class="toc-number">3.</span> <span class="toc-text">&amp;#35; (Web) waffed [496 pts]</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -144,7 +142,7 @@
       
     <div class="postdate">
       
-        <time datetime="2021-01-30T00:00:03.000Z" itemprop="datePublished">2021-01-30</time>
+        <time datetime="2021-01-30T00:00:10.000Z" itemprop="datePublished">2021-01-30</time>
         
       
     </div>
@@ -170,9 +168,9 @@
 
   <div class="content" itemprop="articleBody">
     <p><img src="https://github.com/wjddnjs33/image2/blob/main/0x41414141/team.png?raw=true"></p>
-<p>2021년 1월 26일 저녁에 <code>Ainsetin</code>님이 씨텝 같이 하자고, 31일까지 참여를 했었는데 많은 도움이 되지 못 한 거 같아 스스로 반성을 많이 한 대회입니다. 여튼 이번 대회에는 버스를 타서 14등을 했고, 솔브수가 그나마 적은 3 문제의 Write Up을 작성해보겠습니다.<br></p>
+<p>2021년 1월 26일 저녁에 <code>Ainsetin</code>님이 씨텝 같이 하자고 하셔서 31일까지 참여를 했었는데 많은 도움이 되지 못 한 거 같아 스스로 반성을 많이 한 대회입니다. 여튼 이번 대회에는 버스를 타서 14등을 했고, 솔브수가 그나마 적은 웹 3 문제의 Write Up을 작성해보겠습니다.<br></p>
 <hr>
-<h3 id="Web-Special-Order-pt2-490-pts"><a href="#Web-Special-Order-pt2-490-pts" class="headerlink" title="(Web) Special Order pt2 [490 pts]"></a>(Web) Special Order pt2 [490 pts]</h3><blockquote>
+<h2 id="35-Web-Special-Order-pt2-490-pts"><a href="#35-Web-Special-Order-pt2-490-pts" class="headerlink" title="&#35; (Web) Special Order pt2 [490 pts]"></a><span style="color:#21C587">&#35;</span> (Web) Special Order pt2 [490 pts]</h2><blockquote>
 <p>Special Order pt2 문제는 웹 애플리케이션 취약점을 찾고, OOB XXE를 이용해서 flag를 긁어오는 문제입니다.</p>
 </blockquote>
 <p><img src="https://github.com/wjddnjs33/image2/blob/main/0x41414141/Special%20Order%20pt2/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%207.45.25.png?raw=true"></p>
@@ -195,7 +193,7 @@
 <p>FLAG : flag{i7_1s_n0t_s0_bl1nd3721}</p>
 </blockquote>
 <hr>
-<h3 id="Web-firstapp-496-pts"><a href="#Web-firstapp-496-pts" class="headerlink" title="(Web) firstapp [496 pts]"></a>(Web) firstapp [496 pts]</h3><blockquote>
+<h2 id="35-Web-firstapp-496-pts"><a href="#35-Web-firstapp-496-pts" class="headerlink" title="&#35; (Web) firstapp [496 pts]"></a><span style="color:#21C587">&#35;</span> (Web) firstapp [496 pts]</h2><blockquote>
 <p>firstapp 문제는 SSRF 취약점을 이용해서 내부 서버에 있는 파일을 릭하는 문제입니다.<br></p>
 </blockquote>
 <p><img src="https://github.com/wjddnjs33/image2/blob/main/0x41414141/firstapp/1.png?raw=true"></p>
@@ -218,10 +216,10 @@
 <p>FLAG : flag{h0p3_y0u_l1ked_my_@pp5613}</p>
 </blockquote>
 <hr>
-<h3 id="Web-waffed-496-pts"><a href="#Web-waffed-496-pts" class="headerlink" title="(Web) waffed [496 pts]"></a>(Web) waffed [496 pts]</h3><blockquote>
+<h2 id="35-Web-waffed-496-pts"><a href="#35-Web-waffed-496-pts" class="headerlink" title="&#35; (Web) waffed [496 pts]"></a><span style="color:#21C587">&#35;</span> (Web) waffed [496 pts]</h2><blockquote>
 <p>서버가 닫힘.</p>
 </blockquote>
-<p>–</p>
+<hr>
 
   </div>
 </article>
@@ -247,7 +245,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-Special-Order-pt2-490-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) Special Order pt2 [490 pts]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-firstapp-496-pts"><span class="toc-number">2.</span> <span class="toc-text">(Web) firstapp [496 pts]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-waffed-496-pts"><span class="toc-number">3.</span> <span class="toc-text">(Web) waffed [496 pts]</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#35-Web-Special-Order-pt2-490-pts"><span class="toc-number">1.</span> <span class="toc-text">&amp;#35; (Web) Special Order pt2 [490 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#35-Web-firstapp-496-pts"><span class="toc-number">2.</span> <span class="toc-text">&amp;#35; (Web) firstapp [496 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#35-Web-waffed-496-pts"><span class="toc-number">3.</span> <span class="toc-text">&amp;#35; (Web) waffed [496 pts]</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
