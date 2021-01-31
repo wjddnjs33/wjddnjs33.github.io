@@ -14,7 +14,7 @@
 <meta property="og:description" content="2021년 1월 30일 오전 9시부터 오후 6시까지 Theory에서 CTF를 주최하였습니다. 이번 대회는 전체적으로 난이도가 낮아 운이 좋게 10등을 할 수 있었고, 풀면서 그나마 공을 들였던 WEB_2021A_Medium라는 문제의 Write Up을 작성해보겠습니다. (Web) WEB_2021A_Medium [936 pts] WEB_2021A_Medium">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-30T00:00:03.000Z">
-<meta property="article:modified_time" content="2021-01-30T12:18:06.354Z">
+<meta property="article:modified_time" content="2021-01-31T12:47:25.990Z">
 <meta property="article:author" content="Jeongwon Jo">
 <meta property="article:tag" content="REDIS">
 <meta name="twitter:card" content="summary">
@@ -108,7 +108,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-WEB-2021A-Medium-936-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) WEB_2021A_Medium [936 pts]</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-WEB-2021A-Medium-936-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) WEB_2021A_Medium [936 pts]</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -158,7 +158,7 @@
 
   <div class="content" itemprop="articleBody">
     <p>2021년 1월 30일 오전 9시부터 오후 6시까지 Theory에서 CTF를 주최하였습니다. 이번 대회는 전체적으로 난이도가 낮아 운이 좋게 10등을 할 수 있었고, 풀면서 그나마 공을 들였던 <code>WEB_2021A_Medium</code>라는 문제의 Write Up을 작성해보겠습니다.<br></p>
-<h3 id="Web-WEB-2021A-Medium-936-pts"><a href="#Web-WEB-2021A-Medium-936-pts" class="headerlink" title="(Web) WEB_2021A_Medium [936 pts]"></a>(Web) WEB_2021A_Medium [936 pts]</h3><blockquote>
+<h2 id="Web-WEB-2021A-Medium-936-pts"><a href="#Web-WEB-2021A-Medium-936-pts" class="headerlink" title="(Web) WEB_2021A_Medium [936 pts]"></a>(Web) WEB_2021A_Medium [936 pts]</h2><blockquote>
 <p>WEB_2021A_Medium 문제는 관리자 계정으로 로그인하고, 관리자 계정을 활성화 한 후에 FLAG를 읽는 문제입니다.</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/flag&quot;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flag</span>():</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> is_login():</span><br><span class="line">        <span class="keyword">return</span> alert(<span class="string">&quot;No Signin!&quot;</span>)</span><br><span class="line">    myusr = User.query.filter_by(userid=get_userid()).first()</span><br><span class="line">    <span class="keyword">if</span> myusr.userid == <span class="string">&quot;admin&quot;</span> <span class="keyword">and</span> myusr.auth:</span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&quot;flag.html&quot;</span>, flag=FLAG)</span><br><span class="line">    <span class="keyword">return</span> alert(<span class="string">&quot;No Flag&quot;</span>)</span><br></pre></td></tr></table></figure>
@@ -210,7 +210,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-WEB-2021A-Medium-936-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) WEB_2021A_Medium [936 pts]</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-WEB-2021A-Medium-936-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) WEB_2021A_Medium [936 pts]</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
