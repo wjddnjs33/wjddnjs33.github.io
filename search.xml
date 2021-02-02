@@ -83,31 +83,6 @@
     
     
     <entry>
-      <title>Pwn Note</title>
-      <link href="2021/01/25/2021-01-25-npwn-note/"/>
-      <url>2021/01/25/2021-01-25-npwn-note/</url>
-      
-        <content type="html"><![CDATA[<p><strong>PWN 공부를 하면서 알게 된 것 들을 하나 하나 정리를 해보려 합니다.</strong><br></p><hr><p>undefined</p><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> Note </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> PWN </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>CVE-2021-3129 RCE in Laravel Debug mode</title>
       <link href="2021/01/25/2021-01-25-CVE-2021-3129/"/>
       <url>2021/01/25/2021-01-25-CVE-2021-3129/</url>
