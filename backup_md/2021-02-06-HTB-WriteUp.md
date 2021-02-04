@@ -110,7 +110,7 @@ if __name__ == '__main__':
 ---
 ## <span style="color:#21C587"></span> (Web) wafwaf [40 pts]
 
-> wafwaf 문제는 SQL Injection 취약점을 이용해서 FLAG를 긁어오는 문제입니다. 문제에서 SQL Injection 방화벽이 설정되어 있지만, 방화벽에서 `json_decode` 함수를 이용해서 디코디를 하고 값을 반환해준다. 이를 이용해서 Uncode Escape 문자를 이용해서 우회할 수 있습니다.
+> wafwaf 문제는 SQL Injection 취약점을 이용해서 FLAG를 긁어오는 문제입니다. 문제에서 SQL Injection 방화벽이 설정되어 있지만, 방화벽에서 `json_decode` 함수를 이용해서 디코딩을 하고 값을 반환해준다. 이를 이용해서 Unicode Escape 문자를 이용해서 우회할 수 있습니다.
 
 ```python
 from requests import post
