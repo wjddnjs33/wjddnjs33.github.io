@@ -291,31 +291,6 @@
     
     
     <entry>
-      <title>Web Project (flask)</title>
-      <link href="2021/01/03/2021-01-03-Project-4/"/>
-      <url>2021/01/03/2021-01-03-Project-4/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description "></a>Description <br></h1><p><strong>2020년에는 중국 우한에서 COVID-19라는 바이러스가 생겼습니다. 그래서 COVID-19 백신샵을 배경으로 서비스를 개발하고, 진단, 시큐어 코딩, 보고서 작성으로 진행하는 프로젝트입니다.</strong><br></p><hr><h2 id="Things-used"><a href="#Things-used" class="headerlink" title="Things used"></a>Things used<br></h2><p>Language&nbsp;&nbsp;&nbsp;<code>HTML</code>, <code>python</code>, <code>javascript</code><br><br>Database&nbsp;&nbsp;&nbsp;&nbsp;<code>MySQL</code><br><br>WF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>flask</code><br><br>OS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>Mac</code><br></p><hr><h2 id="Project-Member"><a href="#Project-Member" class="headerlink" title="Project Member"></a>Project Member<br></h2><p>Jeongwon Jo (Captain)</p><hr><h2 id="Project-period"><a href="#Project-period" class="headerlink" title="Project period"></a>Project period<br></h2><p>undefined<br></p><hr><h2 id="Web-Service-Source-Code"><a href="#Web-Service-Source-Code" class="headerlink" title="Web Service Source Code"></a>Web Service Source Code</h2><p><a href="https://github.com/wjddnjs33/Falsk_Project/tree/main/Flask_Porject">SOURCE</a></p><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> Project </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Project </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>SQL Injection Summary</title>
       <link href="2021/01/02/2021-01-02-SQL-Injection-Summary/"/>
       <url>2021/01/02/2021-01-02-SQL-Injection-Summary/</url>
@@ -333,31 +308,6 @@
         <tags>
             
             <tag> CheatSheet </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Web Project (Node)</title>
-      <link href="2020/12/28/2020-12-28-Project-3/"/>
-      <url>2020/12/28/2020-12-28-Project-3/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description "></a>Description <br></h1><blockquote><p>This project is to build a web service and perform a penetration test on the built web service. After successfully completing this project, your development ability using Node.js and penetration testing of web services will grow.</p></blockquote><hr><h2 id="Things-used"><a href="#Things-used" class="headerlink" title="Things used"></a>Things used<br></h2><blockquote><p>Language&nbsp;&nbsp;&nbsp;<code>HTML</code>, <code>Javascript</code><br><br>Database&nbsp;&nbsp;&nbsp;<code>MySQL</code>, <code>Mongo DB</code><br><br>OS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>Ubuntu</code><br><br>WF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>Node.js</code></p></blockquote><hr><h2 id="Project-Member"><a href="#Project-Member" class="headerlink" title="Project Member"></a>Project Member</h2><blockquote><p>Jeongwon Jo (Captain)</p></blockquote><hr><h2 id="Project-period"><a href="#Project-period" class="headerlink" title="Project period"></a>Project period<br></h2><blockquote><p>Undefined</p></blockquote><hr><h2 id="Project-summary"><a href="#Project-summary" class="headerlink" title="Project summary"></a>Project summary<br></h2><blockquote><ol><li>Web Service Development ( SNS, HomeShoping )<br></li><li><a href="https://owasp.org/www-project-top-ten/">OWASP Top 10</a>-based diagnostics<br></li><li>Secure Coding<br></li><li>Report writing<br></li></ol></blockquote><hr><h2 id="OWASP-TOP-10"><a href="#OWASP-TOP-10" class="headerlink" title="OWASP TOP 10"></a>OWASP TOP 10</h2><blockquote><ol><li>Injection</li><li>Broken Authentication</li><li>Sensitive Data Exposure</li><li>XXE</li><li>Broken Access Control</li><li>Security Misconfiguration</li><li>Cross-Site Scripting</li><li>Insecure Deserialization</li><li>Using Components with Known Vulnerabilities</li><li>Insufficient Logging &amp; Monitoring</li></ol></blockquote><hr><h2 id="Web-Service-Source-Code"><a href="#Web-Service-Source-Code" class="headerlink" title="Web Service Source Code"></a>Web Service Source Code<br></h2><blockquote><p>Undefined</p></blockquote><hr><h2 id="Project-Report"><a href="#Project-Report" class="headerlink" title="Project Report"></a>Project Report<br></h2><blockquote><p>Undefined</p></blockquote><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> Project </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Project </tag>
             
         </tags>
       
@@ -461,7 +411,7 @@
       <link href="2020/10/24/2020-10-24-Project-2/"/>
       <url>2020/10/24/2020-10-24-Project-2/</url>
       
-        <content type="html"><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description "></a>Description <br></h1><p><strong>N0named 팀을 활동할 때, dJango Project에 참여를 했었는데 그때 로그인, 회원가입, 비밀번호 찾기, 이메일 인증, 어드민 패널, 문제 관리 페이지 개발을 맡았었습니다. 이때 처음으로 dJango 웹 프레임워크를 이용해봤는데 에러 때문에 조금 애를 먹었지만 괜찮았던 거 같습니다. 하지만 갓 프레임워크는 flask, node인 거 같네요.</strong><br></p><hr><h2 id="Things-used"><a href="#Things-used" class="headerlink" title="Things used"></a>Things used<br></h2><p>Language&nbsp;&nbsp;&nbsp;<code>HTML</code>, <code>python</code>, <code>php</code>, <code>javascript</code><br><br>Database&nbsp;&nbsp;&nbsp;&nbsp;<code>PostgreSQL</code><br><br>WF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>dJango</code><br><br>OS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>Ubuntu</code><br></p><hr><h2 id="Project-Member"><a href="#Project-Member" class="headerlink" title="Project Member"></a>Project Member<br></h2><p>(생략)<br><br><code>Jeongwon Jo</code><br><br>(생략)</p><hr><h2 id="Project-period"><a href="#Project-period" class="headerlink" title="Project period"></a>Project period<br></h2><p>undefined<br></p><hr><h2 id="Web-Service-Source-Code"><a href="#Web-Service-Source-Code" class="headerlink" title="Web Service Source Code"></a>Web Service Source Code</h2><p><a href="https://github.com/wjddnjs33/dJango_Project/tree/main/source">SOURCE</a></p><hr>]]></content>
+        <content type="html"><![CDATA[<h1 id="Description"><a href="#Description" class="headerlink" title="Description "></a>Description <br></h1><p>N0named 팀을 활동할 때, dJango Project에 참여를 했었는데 그때 로그인, 회원가입, 비밀번호 찾기, 이메일 인증, 어드민 패널, 문제 관리 페이지 개발을 맡았었습니다. 이때 처음으로 dJango 웹 프레임워크를 이용해봤는데 에러 때문에 조금 애를 먹었지만 괜찮았던 거 같습니다. 하지만 갓 프레임워크는 flask, node인 거 같네요.<br></p><hr><h2 id="Things-used"><a href="#Things-used" class="headerlink" title="Things used"></a>Things used<br></h2><p>Language&nbsp;&nbsp;&nbsp;<code>HTML</code>, <code>python</code>, <code>php</code>, <code>javascript</code><br><br>Database&nbsp;&nbsp;&nbsp;&nbsp;<code>PostgreSQL</code><br><br>WF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>dJango</code><br><br>OS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>Ubuntu</code><br></p><hr><h2 id="Project-Member"><a href="#Project-Member" class="headerlink" title="Project Member"></a>Project Member<br></h2><p>(생략)<br><br><code>Jeongwon Jo</code><br><br>(생략)</p><hr><h2 id="Project-period"><a href="#Project-period" class="headerlink" title="Project period"></a>Project period<br></h2><p>undefined<br></p><hr><h2 id="Web-Service-Source-Code"><a href="#Web-Service-Source-Code" class="headerlink" title="Web Service Source Code"></a>Web Service Source Code</h2><p><a href="https://github.com/wjddnjs33/dJango_Project/tree/main/source">SOURCE</a></p><hr>]]></content>
       
       
       <categories>
