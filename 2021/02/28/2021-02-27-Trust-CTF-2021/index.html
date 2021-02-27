@@ -14,8 +14,9 @@
 <meta property="og:description" content="오늘은 디미고의 Trust라는 팀에서 CTF를 주최해서 참여를 했었습니다. 개인적인 일도 있고 해서 아침부터 참여하지 못 하고, 오후에 조금 참여를 했습니다.   (Web) babyxss [270 pts] babyxss 문제는 DOMPurify Bypass로 위장한 간단한 XSS 문제입니다.  12345678910111213&lt;?phprequire_o">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/TrustCTF/home.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/TrustCTF/jail.png?raw=true">
 <meta property="article:published_time" content="2021-02-28T00:00:10.000Z">
-<meta property="article:modified_time" content="2021-02-27T14:06:47.546Z">
+<meta property="article:modified_time" content="2021-02-27T14:18:04.751Z">
 <meta property="article:author" content="Jeongwon Jo">
 <meta property="article:tag" content="XSS">
 <meta property="article:tag" content="ReDos">
@@ -82,7 +83,7 @@
       <ul>
         
         
-        <li><a class="icon" href="/2021/02/25/2022-02-25-UnCrackable/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2021/02/25/2021-02-25-UnCrackable/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -110,7 +111,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-babyxss-270-pts"><span class="toc-number">1.</span> <span class="toc-text"> (Web) babyxss [270 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-FLAG-Checker-1000-pts"><span class="toc-number">2.</span> <span class="toc-text"> (Web) FLAG Checker [1000 pts]</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-babyxss-270-pts"><span class="toc-number">1.</span> <span class="toc-text"> (Web) babyxss [270 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-FLAG-Checker-1000-pts"><span class="toc-number">2.</span> <span class="toc-text"> (Web) FLAG Checker [1000 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-nodejail-Not-Solve-400-pts"><span class="toc-number">3.</span> <span class="toc-text"> (Web) nodejail (Not Solve) [400 pts]</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -184,6 +185,21 @@
 <p>FLAG : TRUST{2ef0c0b759425eed6d3932c109e0fe74}</p>
 </blockquote>
 <hr>
+<h2 id="Web-nodejail-Not-Solve-400-pts"><a href="#Web-nodejail-Not-Solve-400-pts" class="headerlink" title=" (Web) nodejail (Not Solve) [400 pts]"></a><span style="color:#21C587"></span> (Web) nodejail (Not Solve) [400 pts]</h2><blockquote>
+<p>nodejail 문제는 간단한 제일문제 입니다.</p>
+</blockquote>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/TrustCTF/jail.png?raw=true"></p>
+<p>문제로 들어오면 그냥 입력창 하나가 보입니다. Javasript 코드를 입력해주면 여러가지 문자가 필터링 걸린 것을 확인할 수 있습니다.<br></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">`child_process`</span>).execSync(<span class="string">`c?t<span class="subst">$&#123;IFS&#125;</span>~~`</span>).toString()</span><br></pre></td></tr></table></figure>
+<p>대회 당시에는 위와 같이 ${IFS}를 이용해서 공백을 우회하는 방식을 이용해서 진행하고 있었습니다. 하지만 위와 같이 아무리 해봐도 <code>err</code>만 반환할 분 아무 일도 일어나지 않아 그냥 포기 했었습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">`fs`</span>).readdirSync(<span class="string">`./`</span>)</span><br></pre></td></tr></table></figure>
+<p>대회가 끝나고 승주님에게 물어보니 <code>fs</code> 모듈을 이용해서 디텍터리 탐색을 하는 코드를 받을 수 있었다. 위 코드를 보고 한 참 어이가 없었다. <code>fs</code>를 모듈을 이용해서 파일을 읽고, 쓰고만 되는 줄 알았는데 알고 보니 디렉터리를 탐색할 수 있다는 것을 처음 알았기 때문이다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">`child_process`</span>).execSync(<span class="string">`\x63at\x20T\x2a`</span>).toString()</span><br></pre></td></tr></table></figure>
+<p>그리고 두 번째는 경준님은 어케 풀었나 궁금해서 물어보니 위와 같이 위와 같이 16진수를 이용해서 공백을 우회한 것을 보고, 또 어이가 없었다..</p>
+<blockquote>
+<p>TRUST{th1s_1s_3xtrem3_n0d3_j41l}</p>
+</blockquote>
+<hr>
 
   </div>
 </article>
@@ -209,7 +225,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-babyxss-270-pts"><span class="toc-number">1.</span> <span class="toc-text"> (Web) babyxss [270 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-FLAG-Checker-1000-pts"><span class="toc-number">2.</span> <span class="toc-text"> (Web) FLAG Checker [1000 pts]</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-babyxss-270-pts"><span class="toc-number">1.</span> <span class="toc-text"> (Web) babyxss [270 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-FLAG-Checker-1000-pts"><span class="toc-number">2.</span> <span class="toc-text"> (Web) FLAG Checker [1000 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-nodejail-Not-Solve-400-pts"><span class="toc-number">3.</span> <span class="toc-text"> (Web) nodejail (Not Solve) [400 pts]</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
