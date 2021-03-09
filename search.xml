@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Promise &amp; Async processing of javascript</title>
+      <link href="2021/03/09/2021-03-09-Promiseasync/"/>
+      <url>2021/03/09/2021-03-09-Promiseasync/</url>
+      
+        <content type="html"><![CDATA[<p>I studied about Promise and Async process today. Promise is object used for async processing and it is mainly used to display the data received from the server on screen.</p><p>First, We need to know <code>async processing</code> before studying <code>Promise</code>. <code>Async processing</code> is a feature of javascript that executed the next code without stopping before operation of a particular code finishes.</p><blockquote><p>First example code for Async Processing </p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result;</span><br><span class="line">  $.get(<span class="string">&#x27;http://burp.kr/product.html&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">    result = response;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a());</span><br></pre></td></tr></table></figure><p>You see code as above and what thinks output value?</p><p><img src="https://github.com/wjddnjs33/image/blob/main/async/async-1.png?raw=true"></p><p>Like picture as above, print the <code>&#39;undefined&#39;</code>. Why?? :) This is because execute next code(<code>return result</code>) before operation of a  <code>$.get()</code> method finishes</p><h2 id="Writing"><a href="#Writing" class="headerlink" title="Writing"></a>Writing</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> Development </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Javascript </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>zer0pts CTF 2021 Write Up</title>
       <link href="2021/03/08/2021-03-08-zer0pts-CTF-2021/"/>
       <url>2021/03/08/2021-03-08-zer0pts-CTF-2021/</url>
