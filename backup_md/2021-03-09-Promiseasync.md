@@ -182,7 +182,59 @@ a().then(function(result){
 
 As above, You can see printed well by recevied the value.
 
+Now let's see how to disopose error in Promise!
 
+Have a two dispose of error method. first method is using second argument in `then()`. second method is using `catch()`. But not recommend method the dispose of error use second argument in `then()` because, `then()` method is dont well catch a error.
 
+> Dispose of error using second argument in `then()`
+
+```javascript
+function a(){
+  return new Promise(function(resolve, reject){
+    $.get('http://burp.kr/product.html', function(res){
+      if(res){
+        resolve(res);
+      }
+      reject(new error("Error"));
+    });
+  });
+}
+
+a().then(function(result){
+  console.log(result);
+  throw new Error("Error in then()");
+}, function(err){
+  console.log("then error : ", err);
+});
+```
+![](https://github.com/wjddnjs33/image/blob/main/async/async-5.png?raw=true)
+
+First, an error occurred in the then() method, but when I caught the error using the second argument of `then()` method, I can see that it was not caught well :( So, Not recommand the dispose of error use second argument in `then()` method.
+
+```javascript
+function a(){
+  return new Promise(function(resolve, reject){
+    $.get('http://burp.kr/product.html', function(res){
+      if(res){
+        resolve(res);
+      }
+      reject(new error("Error"));
+    });
+  });
+}
+
+a().then(function(result){
+  console.log(result);
+}).catch(function(err){
+  console.log(err);
+});
+```
+![](https://github.com/wjddnjs33/image/blob/main/async/async-6.png?raw=true)
+
+And I catch the error using the `catch()` method, you can see that it is caught well. :) Now, we will learn about async/await.
+
+---
+I am go to the bed because tired now :(
+I will write about async/await tomorrow haha..
 
 ---
