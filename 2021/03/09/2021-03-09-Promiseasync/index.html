@@ -13,13 +13,16 @@
 <meta property="og:site_name" content="Home">
 <meta property="og:description" content="I studied about Promise and Async process today. Promise is object used for async processing and it is mainly used to display the data received from the server on screen. First, We need to know async">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/async/async-1.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/async-1.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/async/async-2.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/async/async-3.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/async/async-4.png?raw=true">
 <meta property="article:published_time" content="2021-03-09T00:00:10.000Z">
-<meta property="article:modified_time" content="2021-03-09T11:56:33.882Z">
+<meta property="article:modified_time" content="2021-03-09T16:02:02.957Z">
 <meta property="article:author" content="Jeongwon Jo">
 <meta property="article:tag" content="Javascript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/wjddnjs33/image/blob/main/async/async-1.png?raw=true">
+<meta name="twitter:image" content="https://github.com/wjddnjs33/image/blob/main/async-1.png?raw=true">
     
     
       
@@ -108,7 +111,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Writing"><span class="toc-number">1.</span> <span class="toc-text">Writing</span></a></li></ol>
+      
     </div>
   </span>
 </div>
@@ -164,9 +167,54 @@
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result;</span><br><span class="line">  $.get(<span class="string">&#x27;http://burp.kr/product.html&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">    result = response;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a());</span><br></pre></td></tr></table></figure>
 <p>You see code as above and what thinks output value?</p>
-<p><img src="https://github.com/wjddnjs33/image/blob/main/async/async-1.png?raw=true"></p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/async-1.png?raw=true"></p>
 <p>Like picture as above, print the <code>&#39;undefined&#39;</code>. Why?? :) This is because execute next code(<code>return result</code>) before operation of a  <code>$.get()</code> method finishes</p>
-<h2 id="Writing"><a href="#Writing" class="headerlink" title="Writing"></a>Writing</h2>
+<blockquote>
+<p>Second example code for Async Processing </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;Hello&#x27;</span>);</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;Bye&quot;</span>);</span><br><span class="line">&#125;, <span class="number">5000</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;Hello pocas&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>The code above executes the logic after a specific time used <code>setTimeout()</code> method. So how would the above code print it out?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">First, output</span><br><span class="line">Hello</span><br><span class="line">Bye</span><br><span class="line">Hello pocas</span><br><span class="line"></span><br><span class="line">Second, output</span><br><span class="line">Hello</span><br><span class="line">Hello pocas</span><br><span class="line">Bye</span><br></pre></td></tr></table></figure>
+<p>What do you thinks? First? Second?</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/async/async-2.png?raw=true"></p>
+<p>Second!! The <code>setTimeout()</code> method is also async, execute the next code before the operation finishes. So, let’s fix problem using the callback function in the First example.</p>
+<blockquote>
+<p>The sollution for first case</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">  $.get(<span class="string">&#x27;http://burp.kr/product.html&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">    callback(res);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">a(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>I wrote sollution code as above. Above code is send to callback function a return value of <code>$.get()</code> method.</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/async/async-3.png?raw=true"></p>
+<p>So, it doens’t print “undefined” and return value of <code>$.get()</code> method. Now, we know async and callback. So we will learn the <code>Promise</code></p>
+<hr>
+<p>I said about Promise from above. One more time, I will say. <code>Promise</code> is object used async processing. So we will learn about <code>Promise</code> from now on.</p>
+<blockquote>
+<p>Promise Code - First Example</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">as</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    $.get(<span class="string">&#x27;http://burp.kr/product.html&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(res)&#123;</span><br><span class="line">        resolve(res);</span><br><span class="line">      &#125;</span><br><span class="line">      reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;Request is failed&quot;</span>));</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">as</span>().then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.error(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>The code above code is a basic example using <code>Promise</code>. first send to request using <code>$.get()</code> and when the operation is finished of <code>$.get()</code>, I call the <code>resolve()</code> and pass argument a return value of <code>$.get()</code></p>
+<p>And when the <code>esolve()</code> method is called, the value is passed using the <code>then()</code> method.</p>
+<blockquote>
+<p>hmm.. So what are the resolve() and reject() methods?</p>
+</blockquote>
+<p>When Promise works, there are three states. states is pending, fulfilled, rejected! peding is async processing logic has not complete, fulfilled is async processing logic is completed and returns the result value, rejectd is async processing has failed or an error has occurred.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// ~~~</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>As above, The moment the <code>Promoise()</code> it, it will be in Pending state. And you can define a callback. callback have two method. first is <code>resolve()</code> and second is <code>reject()</code>. <code>resolve()</code> is called when it is done request well and <code>reject()</code> is called when ti is return error.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  resolve();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>Here, When well execute <code>resolve()</code> method of callback it, It will be in fulfilled state.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    $.get(<span class="string">&#x27;http://burp.kr/product.html&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">      resolve(res);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a().then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(result); <span class="comment">// 100</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>And as above, it becomes fulfilled state and receive data using <code>then()</code>.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  reject();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>And as above, When execute <code>reject()</code> method of callback it, It will be in rejected state :)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>)</span>&#123;</span><br><span class="line">    $.get(<span class="string">&#x27;htt://burp.kr/product.html&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">      reject(<span class="keyword">new</span> error(res));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a().then.catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>As above, Can print error using the <code>reject()</code></p>
+<blockquote>
+<p>Promise Example</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>)</span>&#123;</span><br><span class="line">    $.get(<span class="string">&#x27;http://burp.kr/product.html&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(res)&#123;</span><br><span class="line">        resolve(res);</span><br><span class="line">      &#125;</span><br><span class="line">      reject(<span class="keyword">new</span> error(<span class="string">&quot;Error&quot;</span>));</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a().then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/async/async-4.png?raw=true"></p>
+<p>As above, You can see printed well by recevied the value.</p>
+<hr>
+
   </div>
 </article>
 
@@ -191,7 +239,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Writing"><span class="toc-number">1.</span> <span class="toc-text">Writing</span></a></li></ol>
+      
     </div>
 
     <div id="share-footer" style="display: none">
