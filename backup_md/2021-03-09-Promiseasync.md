@@ -234,7 +234,42 @@ a().then(function(result){
 And I catch the error using the `catch()` method, you can see that it is caught well. :) Now, we will learn about async/await.
 
 ---
-I am go to the bed because tired now :(
-I will write about async/await tomorrow haha..
+async and await is one async processing pattern.
+
+```javascript
+function a(){
+  return new Promise(function(resolve, reject){
+    $.get('http://burp.kr/product.html', function(res){
+      resolve(res);
+    });
+  });
+}
+
+(async function(){
+  const result = await a();
+  console.log(result);
+});
+```
+async and await, use as above. If you don't use async and await, you can use a callback or then() method to handle the request. but it's very annoying, so you have to use async/await. :)
+
+```javascript
+function a(){
+  return new Promise(function(resolve, reject){
+    $.get('http://burp.kr/product.html', function(res){
+      resolve(res);
+    });
+  });
+}
+
+(async function(){
+  try{
+    const result = await a();
+    console.log(result);
+  }catch(err){
+    console.log(err);
+  }
+});
+```
+And when usine async/await as above, you can handle errors using try/catch statements
 
 ---
