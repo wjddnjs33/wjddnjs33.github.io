@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="2021년 1월 26일 저녁에 Ainsetin님이 씨텝 같이 하자고 하셔서 31일까지 참여를 했었는데 많은 도움이 되지 못 한 거 같아 스스로 반성을 많이 한 대회입니다. 여튼 이번 대회에는 버스를 타서 14등을 했고, 솔브수가 그나마 적은 웹 3 문제의 Write Up을 작성해보겠습니다.   (Web) Special Order pt2 [490 pts]">
 <meta property="og:type" content="article">
-<meta property="og:title" content="0x41414141 CTF Write Up">
+<meta property="og:title" content="0x41414141 CTF 2021 Write Up">
 <meta property="og:url" content="http://example.com/2021/01/30/2021-01-31-0x414141410CTF/index.html">
 <meta property="og:site_name" content="Home">
 <meta property="og:description" content="2021년 1월 26일 저녁에 Ainsetin님이 씨텝 같이 하자고 하셔서 31일까지 참여를 했었는데 많은 도움이 되지 못 한 거 같아 스스로 반성을 많이 한 대회입니다. 여튼 이번 대회에는 버스를 타서 14등을 했고, 솔브수가 그나마 적은 웹 3 문제의 Write Up을 작성해보겠습니다.   (Web) Special Order pt2 [490 pts]">
@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.22.06.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image2/blob/main/0x41414141/waffed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-01-31%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.23.01.png?raw=true">
 <meta property="article:published_time" content="2021-01-30T00:00:10.000Z">
-<meta property="article:modified_time" content="2021-02-18T08:29:58.737Z">
+<meta property="article:modified_time" content="2021-03-14T18:19:43.904Z">
 <meta property="article:author" content="Jeongwon Jo">
 <meta property="article:tag" content="SSRF">
 <meta property="article:tag" content="XXE">
@@ -56,7 +56,7 @@
       
     
     <!-- title -->
-    <title>0x41414141 CTF Write Up</title>
+    <title>0x41414141 CTF 2021 Write Up</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -113,16 +113,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&text=0x41414141 CTF Write Up"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF Write Up"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&is_video=false&description=0x41414141 CTF Write Up"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=0x41414141 CTF Write Up&body=Check out this article: http://example.com/2021/01/30/2021-01-31-0x414141410CTF/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF Write Up"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF Write Up"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF Write Up"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF Write Up"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&name=0x41414141 CTF Write Up&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&t=0x41414141 CTF Write Up"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&text=0x41414141 CTF 2021 Write Up"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF 2021 Write Up"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&is_video=false&description=0x41414141 CTF 2021 Write Up"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=0x41414141 CTF 2021 Write Up&body=Check out this article: http://example.com/2021/01/30/2021-01-31-0x414141410CTF/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF 2021 Write Up"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF 2021 Write Up"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF 2021 Write Up"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF 2021 Write Up"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&name=0x41414141 CTF 2021 Write Up&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&t=0x41414141 CTF 2021 Write Up"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -139,7 +139,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        0x41414141 CTF Write Up
+        0x41414141 CTF 2021 Write Up
     </h1>
 
 
@@ -280,16 +280,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&text=0x41414141 CTF Write Up"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF Write Up"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&is_video=false&description=0x41414141 CTF Write Up"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=0x41414141 CTF Write Up&body=Check out this article: http://example.com/2021/01/30/2021-01-31-0x414141410CTF/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF Write Up"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF Write Up"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF Write Up"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF Write Up"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&name=0x41414141 CTF Write Up&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&t=0x41414141 CTF Write Up"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&text=0x41414141 CTF 2021 Write Up"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF 2021 Write Up"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&is_video=false&description=0x41414141 CTF 2021 Write Up"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=0x41414141 CTF 2021 Write Up&body=Check out this article: http://example.com/2021/01/30/2021-01-31-0x414141410CTF/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF 2021 Write Up"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF 2021 Write Up"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF 2021 Write Up"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&title=0x41414141 CTF 2021 Write Up"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&name=0x41414141 CTF 2021 Write Up&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/01/30/2021-01-31-0x414141410CTF/&t=0x41414141 CTF 2021 Write Up"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
