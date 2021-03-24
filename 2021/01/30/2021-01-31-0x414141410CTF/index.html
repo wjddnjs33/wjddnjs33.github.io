@@ -25,12 +25,12 @@
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/1.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/2.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/3.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/3.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/4.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/5.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/6.png?raw=true">
-<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/7.png?raw=true">
 <meta property="article:published_time" content="2021-01-30T00:00:10.000Z">
-<meta property="article:modified_time" content="2021-03-24T02:33:55.694Z">
+<meta property="article:modified_time" content="2021-03-24T02:51:51.554Z">
 <meta property="article:author" content="Jeongwon Jo">
 <meta property="article:tag" content="SSRF">
 <meta property="article:tag" content="XXE">
@@ -237,13 +237,13 @@
 <p><img src="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/3.png?raw=true"></p>
 <p>즉, 서버에서는 b64로 해당 쿠키 값을 디코딩해서 사용한다는 것 입니다. 그래서 일단 SQL Injection을 시도해보기 위해서 페이로드를 b64 인코딩을 해줘서 보내주니 <code>WOOPS</code>만 뜨고 아무 일도 일어나지 않았습니다.<br></p>
 <p>하지만 여기서 <code>price_feed</code> 값으로 코인 이름을 바꿔서 코인에 대한 파일을 조회하는 거라면?이라고 생각을 했습니다. 그 이유는 코인마다 그래프도 다 다르기 때문에 모든 데이터를 각 코인의 파일로 관리하고 있을 거라는 생각이 들었습니다. 그래서 바로 LFI를 진행했고, 일단 <code>/etc/passwd</code>를 긁어오기를 시도했습니다.<br></p>
-<p><img src="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/4.png?raw=true"></p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/3.png?raw=true"></p>
 <p>그래서 <code>/etc/passwd</code>를 b64로 인코딩해서 쿠키 값으로 설정하고, 새로 고침을 해주니 SQL Injection과 마찬가지로 <code>WOOPS</code>라고 뜨는 것을 볼 수 있습니다.<br></p>
-<p><img src="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/5.png?raw=true"></p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/4.png?raw=true"></p>
 <p>하지만 현재 경로에서 해당 파일이 없어 <code>WOOPS</code>가 출력되는 걸 수도 있기 때문에 상위로 한 번 한 번 올라가며 모두 시도 해보았는데, 총 4번 올라가서 <code>../../../../etc/passwd</code>를 읽어보니 <code>WOOPS</code>가 뜨지 않고, 그래프가 있는 창으로 리다이렉션이 되었습니다. 그런데 이상한 점은 그래프는 있는데 그래프에 데이터가 존재하지 않았습니다.<br></p>
-<p><img src="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/6.png?raw=true"></p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/5.png?raw=true"></p>
 <p>그래서 그래프의 소스 코드를 확인해보니 그래프를 만드는 JS 코드가 있었고, 그래프의 data 값으로 <code>/etc/passwd</code>의 값이 들어가 있는 것을 볼 수 있었습니다. 예상대로 각 코인의 데이터를 파일로 관리하고 있었습니다.</p>
-<p><img src="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/7.png?raw=true"></p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/0x41414141/waffed/6.png?raw=true"></p>
 <p>앞에 모든 문제도 FLAG는 <code>flag.txt</code>에 있었기 때문에 이번 문제도 상위로 4번 올라가 <code>../../../../flag.txt</code>를 읽어주니 그래프의 data에 FLAG가 있는 것을 볼 수 있었습니다.<br></p>
 <blockquote>
 <p>flag{w@fs_r3@lly_d0_Suck8245}</p>
