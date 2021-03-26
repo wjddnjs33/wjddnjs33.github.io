@@ -483,7 +483,9 @@
       
         <tags>
             
-            <tag> SSRF </tag>
+            <tag> PHP Object Injection </tag>
+            
+            <tag> SQL Injection </tag>
             
         </tags>
       
