@@ -2,7 +2,7 @@
 layout: post
 date: 2021-01-20 00:00:00
 title: "0-day RCE in vBulletin"
-categories: 0-day
+categories: CVE
 tags: [0-day, RCE]
 author:
   - Jeongwon Jo
