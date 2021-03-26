@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/dM1n0b/btqF14WbTVh/Qeyb3vKTTNeUkMqlYvjcg0/img.png">
 <meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/cjKZw3/btqF1R3Rj1N/Hb6WOZDU2bFMqO0Djo4K40/img.png">
 <meta property="article:published_time" content="2020-07-26T00:00:11.000Z">
-<meta property="article:modified_time" content="2021-03-26T03:07:47.688Z">
+<meta property="article:modified_time" content="2021-03-26T10:26:24.097Z">
 <meta property="article:author" content="Jeongwon Jo">
 <meta property="article:tag" content="XSS">
 <meta property="article:tag" content="LFI">
@@ -185,9 +185,9 @@
 <p><code>phpinfo</code> 카테고리로 들어와 보니 php 버전이 <code>7.2~</code>인 것을 볼 수 있습니다. 저번에 제가 CVE 취약점들을 둘러보다가 <code>php 7.2.24</code>에서 터지는 취약점을 한 번 본 적이 있는데 해당 취약점은 php 7.3.11과 7.2.24에서 RCE가 터지는 취약점 <code>CVE 2019-11043</code>였습니다. 하지만 이번 문제는 이를 이용해서는 풀 수 없을 거 같아 좋다 말았는데 2시간정도 <code>phpinfo</code>의 값을 기준으로 구글링을 하다가 <code>OPcache</code>란 것을 알게 되었습니다.  </p>
 <p><code>OPcache</code>는  <code>PHP 7.0</code>에 내장된 새로운 캐시 엔진이라고 합니다. 이 엔진은 php 코드를 <code>컴파일</code>하여 나온 결과를 <code>바이트 코드 형태로 메모리에 저장</code>해줍니다.</p>
 <p>또 php.ini 설정 파일 내에 <code>캐시 정보의 해당 폴더</code>를 지정해준다고 합니다. 즉, 파일이 저장될 경로가 정해지는 것 입니다. 그럼 캐시 정보의 해당 폴더가 <code>/admin/</code>이라고 가정하에 <code>flag.php</code> 파일을 저장한다고 해봅시다.</p>
-<p>제일 먼저 <code>flag.ph</code>p 파일이 <code>OPcache</code>에 의해 컴파일되어 그 결과를 <code>바이트 코드 형태로 메모리에 저장</code>을 할 것인데 저장은 <code>/admin/[system_id]/flag.php.bin</code> &lt;= 이렇게 저장이 될 것입니다. 경로 뒤에는 <code>system_id</code>가 붙은 후에 뒤에 파일이 붙는 거 같습니다.</p>
+<p>제일 먼저 <code>flag.php</code> 파일이 <code>OPcache</code>에 의해 컴파일되어 그 결과를 <code>바이트 코드 형태로 메모리에 저장</code>을 할 것인데 저장은 <code>/admin/[system_id]/flag.php.bin</code>와 같이 이렇게 저장이 될 것입니다. 경로 뒤에는 <code>system_id</code>가 붙은 후에 뒤에 파일이 붙는 거 같습니다.</p>
 <p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/DxsFr/btqF1AVeB5A/jjPw9Nilk6wZQGDgd1GxrK/img.png"></p>
-<p>혹시나 이 취약점을 이용해서 풀 수 있을 거 같아서 <code>phpinfo</code>에서 <code>opcach</code>e를 검색해 보니 file_cache를 사용하는 것을 볼 수 있습니다. 보면 해당 폴더가 <code>/var/www/cache/</code>로 되어 있는 것을 볼 수 있습니다. 그러니 만약에 flag.php라는 파일을 저장한다고 하면 OPcache에 의해 컴파일된 후에 <code>/var/www/cache/[system_id]/flag.php.bin</code>으로 저장이 될 것입니다.</p>
+<p>혹시나 이 취약점을 이용해서 풀 수 있을 거 같아서 <code>phpinfo</code>에서 <code>opcache</code>를 검색해 보니 <code>file_cache</code>를 사용하는 것을 볼 수 있습니다. 보면 해당 폴더가 <code>/var/www/cache/</code>로 되어 있는 것을 볼 수 있습니다. 그러니 만약에 flag.php라는 파일을 저장한다고 하면 OPcache에 의해 컴파일된 후에 <code>/var/www/cache/[system_id]/flag.php.bin</code>으로 저장이 될 것입니다.</p>
 <p>생각해 보면 <code>flag.php</code>라는 파일이 실제로 존재하고 해당 파일이 <code>/var/www/cache/[system_id]/flag.php.bin</code>에 저장되어 있다고 생각 들어 이 시나리오를 이용해 해결하기로 했습니다.</p>
 <p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/BCg5P/btqF1CepJ02/LN0FckJWxn1Sdi6nusjAF1/img.png"></p>
 <p>하지만 <code>system_id</code>를 구하는 방법을 몰라 구글링을 해보았는데, <code>system_id</code>를 찾아주는 코드가 <code>Gitbub</code>에 올라와 있는 것을 발견했습니다.</p>
@@ -197,9 +197,9 @@
 <p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/045Wy/btqF3cy7QQC/UKVTYm12XzJkAP4ndxu4B0/img.png"></p>
 <p>문제에서 소스 코드를 보니 일단 <code>js</code> 코드들이 많이 있었습니다. 하나 하나 다 접속해보니 <code>path traversal</code>이 터질 거 같은 부분은 나오지 않았습니다. 그러다가 마지막에 <code>/js/main.js</code> 부분에서 상위로 올라가 /js로 접근을 해보니 이상한 것을 발견했습니다.</p>
 <p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/4K7Ds/btqF3csnyxG/jpp2di3Rc8fFnGIeEo8zw1/img.png"></p>
-<p>분명 <code>/js</code>로 접근을 했는데 <code>&quot;?eba1b61134bf5818771b8c3203a16dc9=js&quot;</code> 이렇게 Parameter가 js로 접근을 해주고 있었습니다. 뭔가 저 파라미터를 이용해서 <code>LFI</code>가 터질 거 같았습니다. 그래서 <code>LIF</code> 취약점의 유무를 확인하기 위해  <code>/etc/passwd</code>로 접근을 해보았습니다.</p>
+<p>분명 <code>/js</code>로 접근을 했는데 <code>?eba1b61134bf5818771b8c3203a16dc9=js</code> 이렇게 Parameter가 js로 접근을 해주고 있었습니다. 뭔가 저 파라미터를 이용해서 <code>LFI</code>가 터질 거 같았습니다. 그래서 <code>LFI</code> 취약점의 유무를 확인하기 위해  <code>/etc/passwd</code>로 접근을 해보았습니다.</p>
 <p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/KqV2C/btqF1oAIjo1/JcbZGWoNFwcUQSkHhh2OlK/img.png"></p>
-<p>처음에는 <code>&quot;http://carthagods.3k.ctf.to:8039/js/?eba1b61134bf5818771b8c3203a16dc9=../../../../../etc/passwd</code> 이렇게 요청을 보내주었는데 계속 <code>40</code>3 에러가 발생했습니다. 그래서 그냥 경로 없이 <code>http://carthagods.3k.ctf.to:8039/?eba1b61134bf5818771b8c3203a16dc9=../../../../../etc/passwd</code> 이렇게 바로 보내주니 <code>LFI</code>가 잘 터지는 것을 볼 수 있었습니다. </p>
+<p>처음에는 <code>http://carthagods.3k.ctf.to:8039/js/?eba1b61134bf5818771b8c3203a16dc9=../../../../../etc/passwd</code> 이렇게 요청을 보내주었는데 계속 <code>403</code> 에러가 발생했습니다. 그래서 그냥 경로 없이 <code>http://carthagods.3k.ctf.to:8039/?eba1b61134bf5818771b8c3203a16dc9=../../../../../etc/passwd</code> 이렇게 바로 보내주니 <code>LFI</code>가 잘 터지는 것을 볼 수 있었습니다. </p>
 <p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/bF0Dvp/btqF1RWL5xt/ZVfG3qz4EjnesJIRUgOVD1/img.png"></p>
 <p>그래서 바로 <code>flag.php</code>가 저장되어 있는 경로<code>http://carthagods.3k.ctf.to:8039/eba1b61134bf5818771b8c3203a16dc9=../../../../../../../var/www/cache/e2c6579e4df1d9e77e36d2f4ff8c92b3/var/www/html/flag.php.bin</code>로 접근을 해주니 <code>flag.php.bin</code> 파일이 출력되는 것을 볼 수 있었습니다. 이번 문제를 풀면서 <code>opcache</code> 엔진에 대해 알아가 매우 좋은 문제였다고 개인적으로 생각합니다.</p>
 <blockquote>
