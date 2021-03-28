@@ -79,31 +79,6 @@
     
     
     <entry>
-      <title>Volga CTF 2021 Write Up</title>
-      <link href="2021/03/14/2021-03-28-Volga-CTF-2021/"/>
-      <url>2021/03/14/2021-03-28-Volga-CTF-2021/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Web-Static-Site-pts"><a href="#Web-Static-Site-pts" class="headerlink" title="(Web) Static Site [ pts]"></a>(Web) Static Site [ pts]</h2><hr><h2 id="Web-Online-Wallet-Part-2-pts"><a href="#Web-Online-Wallet-Part-2-pts" class="headerlink" title="(Web) Online Wallet (Part 2) [ pts]"></a>(Web) Online Wallet (Part 2) [ pts]</h2><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> CTF </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> XSS </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>NahamCon CTF 2021 Write Up</title>
       <link href="2021/03/14/2021-03-14-NahamCon-CTF-2021/"/>
       <url>2021/03/14/2021-03-14-NahamCon-CTF-2021/</url>
