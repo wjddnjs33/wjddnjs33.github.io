@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/UTCTF%202021/2.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/UTCTF%202021/3.png?raw=true">
 <meta property="article:published_time" content="2021-03-14T00:00:11.000Z">
-<meta property="article:modified_time" content="2021-03-18T19:39:27.292Z">
+<meta property="article:modified_time" content="2021-03-30T12:41:32.056Z">
 <meta property="article:author" content="Jeongwon Jo">
 <meta property="article:tag" content="RCE">
 <meta name="twitter:card" content="summary">
@@ -164,7 +164,7 @@
     <h2 id="Web-Tar-Inspector-994-pts"><a href="#Web-Tar-Inspector-994-pts" class="headerlink" title=" (Web) Tar Inspector [994 pts]"></a><span style="color:#21C587"></span> (Web) Tar Inspector [994 pts]</h2><blockquote>
 <p>Tar Inspector challenge is get the shell using RCE and read the flag</p>
 </blockquote>
-<p>Many people asked for a hint and the contest provided the code for the secure_filename() function. And first, I’ll see <code>secure_filename()</code>.</p>
+<p>Many people asked for a hint and the contest provided the code for the secure_filename() function. So first, I’ll see <code>secure_filename()</code>.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># creates a secured version of the filename</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">secure_filename</span>(<span class="params">filename</span>):</span></span><br><span class="line">    <span class="comment"># strip extension and any sneaky path traversal stuff</span></span><br><span class="line">    filename = filename[:-<span class="number">4</span>]</span><br><span class="line">    filename = os.path.basename(filename)</span><br><span class="line">    <span class="comment"># escape shell metacharacters</span></span><br><span class="line">    filename = re.sub(<span class="string">&quot;(!|\$|#|&amp;|\&quot;|\&#x27;|\(|\)|\||&lt;|&gt;|`|\\\|;)&quot;</span>, <span class="string">r&quot;\\\1&quot;</span>, filename)</span><br><span class="line">    filename = re.sub(<span class="string">&quot;\n&quot;</span>, <span class="string">&quot;&quot;</span>, filename)</span><br><span class="line">    <span class="comment"># add extension</span></span><br><span class="line">    filename += <span class="string">&#x27;__&#x27;</span>+<span class="built_in">hex</span>(randrange(<span class="number">10000000</span>))[<span class="number">2</span>:]+<span class="string">&#x27;.tar&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> filename</span><br></pre></td></tr></table></figure>
 <p>You can see that the secure_filename() function gets the file name excluding the extension, escapes all special characters, and creates a new file name by including a random value between the file names.</p>
 <p><img src="https://github.com/wjddnjs33/image/blob/main/UTCTF%202021/1.png?raw=true"></p>
