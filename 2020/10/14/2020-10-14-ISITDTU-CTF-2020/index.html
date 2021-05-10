@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/cqno3T/btqKTG3qpro/jncPfrlLytMkGCkoyKjuWk/img.png">
 <meta property="og:image" content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/dneNEx/btqKROgS2KF/PCkQfbI9xsTU4Nxo1k1knK/img.png">
 <meta property="article:published_time" content="2020-10-14T00:00:11.000Z">
-<meta property="article:modified_time" content="2021-05-10T20:27:09.497Z">
+<meta property="article:modified_time" content="2021-05-10T20:31:28.092Z">
 <meta property="article:author" content="Jeongwon Jo">
 <meta property="article:tag" content="PHP Object Injection">
 <meta property="article:tag" content="Command Injection">
@@ -117,7 +117,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Unexploitable-984-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) Unexploitable [984 pts]</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-Warmup-XXX-pts"><span class="toc-number"></span> <span class="toc-text">(Web) Warmup [XXX pts]</span></a>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Unexploitable-984-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) Unexploitable [984 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Warmup-XXX-pts"><span class="toc-number">2.</span> <span class="toc-text">(Web) Warmup [XXX pts]</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -189,7 +189,7 @@
 <p>FLAG : ISITDTU{6d77c41b70c235d1b077ad65e274a3c948bf56eb}</p>
 </blockquote>
 <hr>
-<h1 id="Web-Warmup-XXX-pts"><a href="#Web-Warmup-XXX-pts" class="headerlink" title="(Web) Warmup [XXX pts]"></a>(Web) Warmup [XXX pts]</h1><blockquote>
+<h2 id="Web-Warmup-XXX-pts"><a href="#Web-Warmup-XXX-pts" class="headerlink" title="(Web) Warmup [XXX pts]"></a>(Web) Warmup [XXX pts]</h2><blockquote>
 <p>Warmup 문제는 간단한 PHP Object Injection 였는데 엄청난 실수로 풀지 못 했습니다.</p>
 </blockquote>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Read</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$flag</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> file_get_contents(<span class="keyword">$this</span>-&gt;flag);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;username&#x27;</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;password&#x27;</span>]))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$password</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;password&#x27;</span>];</span><br><span class="line">        unserialize(<span class="variable">$password</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
@@ -236,7 +236,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Unexploitable-984-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) Unexploitable [984 pts]</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-Warmup-XXX-pts"><span class="toc-number"></span> <span class="toc-text">(Web) Warmup [XXX pts]</span></a>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Unexploitable-984-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) Unexploitable [984 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Warmup-XXX-pts"><span class="toc-number">2.</span> <span class="toc-text">(Web) Warmup [XXX pts]</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
