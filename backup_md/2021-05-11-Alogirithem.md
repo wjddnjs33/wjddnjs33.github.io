@@ -11,7 +11,7 @@ author:
 요즘 롤, 넷플릭스, 웹해킹 공부만 순환으로 돌리다 보니 조금 지루해서 처음으로 백준을 풀어보기로 했다. 알고리즘 공부를 한 적이 없어 매우 화가 난다. 시간 복잡도와 같은 것들을 깐깐하게 맥이는 거 같아서 맞는 알고리즘을 짜도 정답 처리를 잘 해주지 않는다. 재미는 웹 해킹 미만 잡이다.
 
 ---
-# Input and Output and arithmetic operations
+## Input and Output and arithmetic operations
 
 > Stage 1<br>
  ```python
@@ -88,7 +88,7 @@ print(result[0] + (result[1]*10) + (result[2]*100))
 ```
 
 ---
-# If Statement
+## If Statement
 
 > Stage 1<br>
 ```python
@@ -159,7 +159,7 @@ else:
 ```
 
 ---
-# For Statement
+## For Statement
 
 > Stage 1<br>
 ```python
@@ -265,7 +265,7 @@ for i in A:
 ```
 
 ---
-# While Statement
+## While Statement
 
 > Stage 1<br>
 ```python
@@ -315,7 +315,7 @@ elif 0 <= int(n) < 10:
 ```
 
 ---
-# 1-dimensional array
+## 1-dimensional array
 
 > Stage 1<br>
 ```python
@@ -441,7 +441,7 @@ for i in range(test_count):
 ```
 
 ---
-# Function
+## Function
 
 > Stage 1<br>
 ```python
@@ -463,19 +463,19 @@ print(solve(10))
 ```
 
 ---
-# String
+## String
 
 ---
-# Basic math 1
+## Basic math 1
 
 ---
-# Basic math 2
+## Basic math 2
 
 ---
-# Recursion
+## Recursion
 
 ---
-# Brute force
+## Brute force
 
 ---
 > 순서대로 풀거임
