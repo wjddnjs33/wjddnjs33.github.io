@@ -454,7 +454,19 @@ print(solve(10))
 
 > Stage 2<br>
 ```python
-# 알고리즘이 헷갈려서 고민 중
+generatenumber_list, selfnumber_list = set(), set(range(1, 10001))
+def get_the_self_number():
+    global generatenumber_list
+    for i in range(1, 10001):
+        result = i
+        for j in range(len(str(i))):
+            result += int(str(i)[j])
+        generatenumber_list.add(result)
+get_the_self_number()
+
+final_value = sorted(selfnumber_list.difference(generatenumber_list))
+for value in final_value:
+    print(value)
 ```
 
 > Stage 3<br>
