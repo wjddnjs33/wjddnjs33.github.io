@@ -4,9 +4,9 @@
   
     
     <entry>
-      <title>CVE-2021-2109 LDAP RCE in webLogic server</title>
-      <link href="2021/05/27/2021-05-27-cve-2021-2109/"/>
-      <url>2021/05/27/2021-05-27-cve-2021-2109/</url>
+      <title>CVE-2020-9402 GIS SQL Injection in dJango</title>
+      <link href="2021/05/27/2021-05-27-CVE-2020-9402/"/>
+      <url>2021/05/27/2021-05-27-CVE-2020-9402/</url>
       
         <content type="html"><![CDATA[<p>Writing</p><hr>]]></content>
       
@@ -22,7 +22,7 @@
             
             <tag> CVE </tag>
             
-            <tag> RCE </tag>
+            <tag> SQL Injection </tag>
             
         </tags>
       
