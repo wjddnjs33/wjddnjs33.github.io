@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>CVE-2019-2890 LDAP RCE in webLogic server</title>
+      <link href="2021/05/27/2021-05-27-cve-2021-2109/"/>
+      <url>2021/05/27/2021-05-27-cve-2021-2109/</url>
+      
+        <content type="html"><![CDATA[<p>Writing</p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> CVE </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CVE </tag>
+            
+            <tag> RCE </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>3k CTF 2021 Write Up</title>
       <link href="2021/05/17/2021-05-17-3kCTF-2021/"/>
       <url>2021/05/17/2021-05-17-3kCTF-2021/</url>
