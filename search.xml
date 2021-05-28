@@ -4,33 +4,6 @@
   
     
     <entry>
-      <title>CVE-2020-9402 GIS SQL Injection in dJango</title>
-      <link href="2021/05/27/2021-05-27-CVE-2020-9402/"/>
-      <url>2021/05/27/2021-05-27-CVE-2020-9402/</url>
-      
-        <content type="html"><![CDATA[<p>Writing</p><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> CVE </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> CVE </tag>
-            
-            <tag> SQL Injection </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>3k CTF 2021 Write Up</title>
       <link href="2021/05/17/2021-05-17-3kCTF-2021/"/>
       <url>2021/05/17/2021-05-17-3kCTF-2021/</url>
