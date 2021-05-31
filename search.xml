@@ -15,6 +15,8 @@
           
           <category> Analysis </category>
           
+          <category> Prototype Pollution </category>
+          
       </categories>
       
       
@@ -302,9 +304,9 @@
       
       <categories>
           
-          <category> CVE </category>
-          
           <category> Analysis </category>
+          
+          <category> CVE </category>
           
       </categories>
       
@@ -387,9 +389,9 @@
       
       <categories>
           
-          <category> CVE </category>
-          
           <category> Analysis </category>
+          
+          <category> CVE </category>
           
       </categories>
       
@@ -416,9 +418,9 @@
       
       <categories>
           
-          <category> CVE </category>
-          
           <category> Analysis </category>
+          
+          <category> CVE </category>
           
       </categories>
       
