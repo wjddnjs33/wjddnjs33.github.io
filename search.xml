@@ -302,7 +302,9 @@
       
       <categories>
           
-          <category> CVE, Analysis </category>
+          <category> CVE </category>
+          
+          <category> Analysis </category>
           
       </categories>
       
@@ -385,7 +387,9 @@
       
       <categories>
           
-          <category> CVE, Analysis </category>
+          <category> CVE </category>
+          
+          <category> Analysis </category>
           
       </categories>
       
@@ -412,7 +416,9 @@
       
       <categories>
           
-          <category> CVE, Analysis </category>
+          <category> CVE </category>
+          
+          <category> Analysis </category>
           
       </categories>
       
