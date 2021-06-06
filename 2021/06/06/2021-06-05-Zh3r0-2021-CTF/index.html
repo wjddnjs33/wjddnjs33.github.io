@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="This weekend, Peter and I participated in the Zh3r0 CTF V2 as icypete team. I only solved the many web challenge and He solved the web and misc. I had fun and finally got X th place.  (Web) sparta [1">
+    <meta name="description" content="This weekend, Peter and I participated in the Zh3r0 CTF V2 as icypete team. I only solved the many web challenge and He solved the web and misc. I had fun and finally got 31st place.  (Web) sparta [1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Zh3r0 CTF V2 Write Up">
 <meta property="og:url" content="http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/index.html">
 <meta property="og:site_name" content="Home">
-<meta property="og:description" content="This weekend, Peter and I participated in the Zh3r0 CTF V2 as icypete team. I only solved the many web challenge and He solved the web and misc. I had fun and finally got X th place.  (Web) sparta [1">
+<meta property="og:description" content="This weekend, Peter and I participated in the Zh3r0 CTF V2 as icypete team. I only solved the many web challenge and He solved the web and misc. I had fun and finally got 31st place.  (Web) sparta [1">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-06-06%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%207.29.44.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/sparta/poc.png?raw=true">
@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Baby%20SSRF/waf.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Baby%20SSRF/1.png?raw=true">
 <meta property="article:published_time" content="2021-06-06T19:10:02.000Z">
-<meta property="article:modified_time" content="2021-06-06T10:32:18.169Z">
+<meta property="article:modified_time" content="2021-06-06T10:38:32.943Z">
 <meta property="article:author" content="Jeongwon Jo">
 <meta property="article:tag" content="SSRF">
 <meta property="article:tag" content="RCE">
@@ -125,7 +125,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-sparta-100-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) sparta [100 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-bxss-100-pts"><span class="toc-number">2.</span> <span class="toc-text">(Web) bxss [100 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-strpos-and-substr-xxx-pts"><span class="toc-number">3.</span> <span class="toc-text">(Web) strpos and substr [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Original-Store-xxx-pts"><span class="toc-number">4.</span> <span class="toc-text">(Web) Original Store [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Original-Store-v2-xxx-pts"><span class="toc-number">5.</span> <span class="toc-text">(Web) Original Store v2 [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Baby-SSRF-xxx-pts"><span class="toc-number">6.</span> <span class="toc-text">(Web) Baby SSRF [xxx pts]</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-sparta-100-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) sparta [100 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-bxss-100-pts"><span class="toc-number">2.</span> <span class="toc-text">(Web) bxss [100 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-strpos-and-substr-395-pts"><span class="toc-number">3.</span> <span class="toc-text">(Web) strpos and substr [395 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Original-Store-842-pts"><span class="toc-number">4.</span> <span class="toc-text">(Web) Original Store [842 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Original-Store-v2-871-pts"><span class="toc-number">5.</span> <span class="toc-text">(Web) Original Store v2 [871 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Baby-SSRF-453-pts"><span class="toc-number">6.</span> <span class="toc-text">(Web) Baby SSRF [453 pts]</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -175,7 +175,7 @@
 
   <div class="content" itemprop="articleBody">
     <p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-06-06%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%207.29.44.png?raw=true"></p>
-<p>This weekend, <a target="_blank" rel="noopener" href="http://reteps.github.io/">Peter</a> and I participated in the Zh3r0 CTF V2 as <code>icypete</code> team. I only solved the many web challenge and He solved the web and misc. I had fun and finally got X th place.</p>
+<p>This weekend, <a target="_blank" rel="noopener" href="http://reteps.github.io/">Peter</a> and I participated in the Zh3r0 CTF V2 as <code>icypete</code> team. I only solved the many web challenge and He solved the web and misc. I had fun and finally got 31st place.</p>
 <hr>
 <h2 id="Web-sparta-100-pts"><a href="#Web-sparta-100-pts" class="headerlink" title="(Web) sparta [100 pts]"></a>(Web) sparta [100 pts]</h2><blockquote>
 <p>The sparta challenge is using the simple deserialization RCE vulnerability in node.js</p>
@@ -207,7 +207,7 @@
 <p>FLAG : zh3r0</p>
 </blockquote>
 <hr>
-<h2 id="Web-strpos-and-substr-xxx-pts"><a href="#Web-strpos-and-substr-xxx-pts" class="headerlink" title="(Web) strpos and substr [xxx pts]"></a>(Web) strpos and substr [xxx pts]</h2><blockquote>
+<h2 id="Web-strpos-and-substr-395-pts"><a href="#Web-strpos-and-substr-395-pts" class="headerlink" title="(Web) strpos and substr [395 pts]"></a>(Web) strpos and substr [395 pts]</h2><blockquote>
 <p>The strpos and substr challenge is get flag usint the simplel RCE. But a lot of filtering.</p>
 </blockquote>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">eval</span>(<span class="string">&quot;echo &#x27;hello&#x27;;`ls`&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">eval</span>(<span class="string">&quot;echo &#x27;hello&#x27;,`ls`&quot;</span>);</span><br></pre></td></tr></table></figure>
@@ -218,7 +218,7 @@
 <p>FLAG : zh3r0{W4RmUp_4_Fun_13333333337}</p>
 </blockquote>
 <hr>
-<h2 id="Web-Original-Store-xxx-pts"><a href="#Web-Original-Store-xxx-pts" class="headerlink" title="(Web) Original Store [xxx pts]"></a>(Web) Original Store [xxx pts]</h2><blockquote>
+<h2 id="Web-Original-Store-842-pts"><a href="#Web-Original-Store-842-pts" class="headerlink" title="(Web) Original Store [842 pts]"></a>(Web) Original Store [842 pts]</h2><blockquote>
 <p>The Original Store challenge is steal admin cookie using the Reflected XSS. I solved using the unintended exploit</p>
 </blockquote>
 <p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Original%20Store/1.png?raw=true"></p>
@@ -240,7 +240,7 @@
 <p>FLAG : zh3r0{4dm1n_l0ves_0nly_0r1g1n4ls_br0}</p>
 </blockquote>
 <hr>
-<h2 id="Web-Original-Store-v2-xxx-pts"><a href="#Web-Original-Store-v2-xxx-pts" class="headerlink" title="(Web) Original Store v2 [xxx pts]"></a>(Web) Original Store v2 [xxx pts]</h2><blockquote>
+<h2 id="Web-Original-Store-v2-871-pts"><a href="#Web-Original-Store-v2-871-pts" class="headerlink" title="(Web) Original Store v2 [871 pts]"></a>(Web) Original Store v2 [871 pts]</h2><blockquote>
 <p>The Original Store v2 challenge is steal document, not admin cookie on the user page /account.php using the Reflected XSS because set the httponly option on the cookie. I solved using the unintended exploit</p>
 </blockquote>
 <p>Original Store v2 is the same as Original Store. The difference is can not steal the admin cookie. Maybe Was set the <code>httponly</code> options..</p>
@@ -250,7 +250,7 @@
 <p>FLAG : zh3r0{4dm1n_h4tes_car_st34l3rs_br0}</p>
 </blockquote>
 <hr>
-<h2 id="Web-Baby-SSRF-xxx-pts"><a href="#Web-Baby-SSRF-xxx-pts" class="headerlink" title="(Web) Baby SSRF [xxx pts]"></a>(Web) Baby SSRF [xxx pts]</h2><blockquote>
+<h2 id="Web-Baby-SSRF-453-pts"><a href="#Web-Baby-SSRF-453-pts" class="headerlink" title="(Web) Baby SSRF [453 pts]"></a>(Web) Baby SSRF [453 pts]</h2><blockquote>
 <p>The Baby SSRF challenge is find a port using the brute forcing and enter the internal server ip:port</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i in range(5000,10000)</span><br><span class="line"></span><br><span class="line">xD</span><br></pre></td></tr></table></figure>
@@ -296,7 +296,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-sparta-100-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) sparta [100 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-bxss-100-pts"><span class="toc-number">2.</span> <span class="toc-text">(Web) bxss [100 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-strpos-and-substr-xxx-pts"><span class="toc-number">3.</span> <span class="toc-text">(Web) strpos and substr [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Original-Store-xxx-pts"><span class="toc-number">4.</span> <span class="toc-text">(Web) Original Store [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Original-Store-v2-xxx-pts"><span class="toc-number">5.</span> <span class="toc-text">(Web) Original Store v2 [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Baby-SSRF-xxx-pts"><span class="toc-number">6.</span> <span class="toc-text">(Web) Baby SSRF [xxx pts]</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-sparta-100-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) sparta [100 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-bxss-100-pts"><span class="toc-number">2.</span> <span class="toc-text">(Web) bxss [100 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-strpos-and-substr-395-pts"><span class="toc-number">3.</span> <span class="toc-text">(Web) strpos and substr [395 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Original-Store-842-pts"><span class="toc-number">4.</span> <span class="toc-text">(Web) Original Store [842 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Original-Store-v2-871-pts"><span class="toc-number">5.</span> <span class="toc-text">(Web) Original Store v2 [871 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Baby-SSRF-453-pts"><span class="toc-number">6.</span> <span class="toc-text">(Web) Baby SSRF [453 pts]</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
