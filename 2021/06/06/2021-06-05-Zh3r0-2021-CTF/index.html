@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Baby%20SSRF/waf.png?raw=true">
 <meta property="og:image" content="https://github.com/wjddnjs33/image/blob/main/Zh3r0%20CTF%202021/Baby%20SSRF/1.png?raw=true">
 <meta property="article:published_time" content="2021-06-06T19:10:02.000Z">
-<meta property="article:modified_time" content="2021-06-06T10:44:24.410Z">
+<meta property="article:modified_time" content="2021-06-06T14:08:00.676Z">
 <meta property="article:author" content="Jeongwon Jo">
 <meta property="article:tag" content="SSRF">
 <meta property="article:tag" content="RCE">
@@ -208,7 +208,7 @@
 </blockquote>
 <hr>
 <h2 id="Web-strpos-and-substr-395-pts"><a href="#Web-strpos-and-substr-395-pts" class="headerlink" title="(Web) strpos and substr [395 pts]"></a>(Web) strpos and substr [395 pts]</h2><blockquote>
-<p>The strpos and substr challenge is get flag usint the simplel RCE. But a lot of filtering.</p>
+<p>The strpos and substr challenge is get flag using the simple RCE. But a lot of filtering.</p>
 </blockquote>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">eval</span>(<span class="string">&quot;echo &#x27;hello&#x27;;`ls`&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">eval</span>(<span class="string">&quot;echo &#x27;hello&#x27;,`ls`&quot;</span>);</span><br></pre></td></tr></table></figure>
 <p>Above two payloads are same. So, I bypassed the <code>;</code> to <code>,</code></p>
