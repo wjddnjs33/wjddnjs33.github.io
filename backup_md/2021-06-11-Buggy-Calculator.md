@@ -134,7 +134,12 @@ if (!/^http:\/\/calc.buggywebsite.com/.test("http://calc.buggywebsite.com.exampl
 
 ![](https://github.com/wjddnjs33/Poc/blob/main/wargame/xss%20challenge/Buggy%20Calculator/images/5.png?raw=true)
 
-이제 앵귤러 표현식으로 가젯을 이용해서 alert() 함수를 실행 시켜 주면 된다. 가젯을 이용한 XSS Poc 코드는 [Owasp](https://owasp.org/www-chapter-london/assets/slides/OWASPLondon20170727_AngularJS.pdf)에서 확인할 수 있었다. 위 사진을 보면 `{{x = {'y':''.constructor.prototype}; x['y'].charAt=[].join;$eval('x=alert(1)');}}`가 있는 것을 볼 수 있고 해당 Poc를 이용하면 XSS를 트리거 할 수 있다.
+이제 앵귤러 표현식으로 가젯을 이용해서 alert() 함수를 실행 시켜 주면 된다. 가젯을 이용한 XSS Poc 코드는 [Owasp](https://owasp.org/www-chapter-london/assets/slides/OWASPLondon20170727_AngularJS.pdf)에서 확인할 수 있었다. 
+
+```
+{{x = {'y':''.constructor.prototype}; x['y'].charAt=[].join;$eval('x=alert(1)');}}
+```
+위 사진을 보면 위와 같은 페이로드가 있는 것을 볼 수 있다.
 
 ---
 ## Exploit
